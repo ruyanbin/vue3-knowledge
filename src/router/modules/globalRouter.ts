@@ -18,6 +18,33 @@ export const globalRouter: RouteRecordRaw[] = [
         },
       },
       {
+        path: "/sys/Account/index",
+        name: "Account",
+        component: () => import("@/views/sys/Account/index.vue"),
+        meta: {
+          title: "账号管理",
+          icon: "Menu",
+        },
+      },
+      {
+        path: "/sys/Role/index",
+        name: "Role",
+        component: () => import("@/views/sys/Role/index.vue"),
+        meta: {
+          title: "角色管理",
+          icon: "Menu",
+        },
+      },
+      {
+        path: "/sys/Menu/index",
+        name: "Menu",
+        component: () => import("@/views/sys/Menu/index.vue"),
+        meta: {
+          title: "菜单管理",
+          icon: "Menu",
+        },
+      },
+      {
         path: "/proTable/useTreeFilter/index",
         name: "useTreeFilter",
         component: () => import("@/views/proTable/useTreeFilter/index.vue"),

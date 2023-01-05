@@ -1,22 +1,20 @@
 <template>
-  <div class="main">
-    <Tabs v-if="themeConfig.tabs" />
-    <el-main>
-      <router-view v-slot="{ Component, route }">
-        <transition appear name="fade-transform" mode="out-in">
-          <keep-alive
-            :include="authStore.keepAliveRouterGet"
-            v-if="isRouterRefresh"
-          >
-            <component :is="Component" :key="route.path" />
-          </keep-alive>
-        </transition>
-      </router-view>
-    </el-main>
-    <el-footer v-if="themeConfig.footer">
-      <Footer />
-    </el-footer>
-  </div>
+  <Tabs v-if="themeConfig.tabs" />
+  <el-main>
+    <router-view v-slot="{ Component, route }">
+      <transition appear name="fade-transform" mode="out-in">
+        <keep-alive
+          :include="authStore.keepAliveRouterGet"
+          v-if="isRouterRefresh"
+        >
+          <component :is="Component" :key="route.path" />
+        </keep-alive>
+      </transition>
+    </router-view>
+  </el-main>
+  <el-footer v-if="themeConfig.footer">
+    <Footer />
+  </el-footer>
 </template>
 
 <script lang="ts" setup>

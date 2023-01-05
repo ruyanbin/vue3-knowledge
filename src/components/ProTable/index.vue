@@ -1,3 +1,5 @@
+<!-- 📚📚📚 Pro-Table 文档: https://juejin.cn/post/7166068828202336263 -->
+
 <template>
   <!-- 查询表单 card -->
   <SearchForm
@@ -8,6 +10,7 @@
     :searchCol="searchCol"
     v-show="isShowSearch"
   />
+
   <!-- 表格内容 card -->
   <div class="card table">
     <!-- 表格头部 操作按钮 -->
@@ -86,8 +89,18 @@
           </template>
         </TableColumn>
       </template>
+      <!-- 插入表格最后一行之后的插槽 -->
+      <template #append>
+        <slot name="append"> </slot>
+      </template>
+      <!-- 无数据 -->
       <template #empty>
-        <el-empty description="暂无数据" />
+        <div class="table-empty">
+          <slot name="empty">
+            <img src="@/assets/images/notData.png" alt="notData" />
+            <div>暂无数据</div>
+          </slot>
+        </div>
       </template>
     </el-table>
     <!-- 分页组件 -->
@@ -97,36 +110,31 @@
       :handleSizeChange="handleSizeChange"
       :handleCurrentChange="handleCurrentChange"
     />
-    <!-- 列设置 -->
-    <ColSetting
-      v-if="toolButton"
-      ref="colRef"
-      v-model:colSetting="colSetting"
-    />
   </div>
+  <!-- 列设置 -->
+  <ColSetting v-if="toolButton" ref="colRef" v-model:colSetting="colSetting" />
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts" name="ProTable">
 import { ref, watch, computed, provide } from "vue";
 import { useTable } from "@/hooks/useTable";
 import { useSelection } from "@/hooks/useSelection";
 import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
-
 import { ElTable, TableProps } from "element-plus";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
-
 import {
   filterEnum,
   formatValue,
   handleProp,
   handleRowAccordingToProp,
 } from "@/utils/util";
-import printJS from "print-js"; // 打印
 import SearchForm from "@/components/SearchForm/index.vue";
-import TableColumn from "./components/TableColumn.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
+import TableColumn from "./components/TableColumn.vue";
+import printJS from "print-js";
+
 interface ProTableProps extends Partial<Omit<TableProps<any>, "data">> {
   columns: ColumnProps[]; // 列配置项
   requestApi: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
@@ -150,7 +158,23 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   selectId: "id",
   searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
 });
-// / 表格操作 Hooks
+
+// 是否显示搜索模块
+const isShowSearch = ref(true);
+
+// 表格 DOM 元素
+const tableRef = ref<InstanceType<typeof ElTable>>();
+
+// 表格多选 Hooks
+const {
+  selectionChange,
+  getRowKeys,
+  selectedList,
+  selectedListIds,
+  isSelected,
+} = useSelection(props.selectId);
+
+// 表格操作 Hooks
 const {
   tableData,
   pageable,
@@ -167,37 +191,21 @@ const {
   props.pagination,
   props.dataCallback
 );
-// / 表格多选 Hooks
-const {
-  selectionChange,
-  getRowKeys,
-  selectedList,
-  selectedListIds,
-  isSelected,
-} = useSelection(props.selectId);
+console.log(searchParam, "searchParam");
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
 
 // 监听页面 initParam 改化，重新获取表格数据
-watch(
-  () => props.initParam,
-  () => {
-    getTableList();
-  },
-  { deep: true }
-);
-// 表格 DOM 元素 InstanceType该函数返回（构造） 由某个构造函数构造出来的实例类型组成的类型
-const tableRef = ref<InstanceType<typeof ElTable>>();
-
-// 是否显示搜索模块
-const isShowSearch = ref<boolean>(true);
+watch(() => props.initParam, getTableList, { deep: true });
 
 // 接收 columns 并设置为响应式
 const tableColumns = ref<ColumnProps[]>(props.columns);
+
 // 定义 enumMap 存储 enum 值（避免异步请求无法格式化单元格内容 || 无法填充搜索下拉选择）
 const enumMap = ref(new Map<string, { [key: string]: any }[]>());
 provide("enumMap", enumMap);
-// 扁平化 columns && 处理 tableColumns 数据
+
+// 扁平化 columns
 const flatColumnsFunc = (
   columns: ColumnProps[],
   flatArr: ColumnProps[] = []
@@ -206,12 +214,12 @@ const flatColumnsFunc = (
     if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
     flatArr.push(col);
 
-    // 给每一项 column 添加 isShow && isFilterEnum 属性
+    // 给每一项 column 添加 isShow && isFilterEnum 默认属性
     col.isShow = col.isShow ?? true;
     col.isFilterEnum = col.isFilterEnum ?? true;
 
-    if (!col.enum) return;
     // 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
+    if (!col.enum) return;
     if (typeof col.enum !== "function")
       return enumMap.value.set(col.prop!, col.enum);
     const { data } = await col.enum();
@@ -219,11 +227,11 @@ const flatColumnsFunc = (
   });
   return flatArr.filter((item) => !item._children?.length);
 };
-// 扁平 columns
-const flatColumns = ref<ColumnProps[]>();
-flatColumns.value = flatColumnsFunc(tableColumns.value as any);
 
-// -----------------------------------搜索条件
+// flat columns
+const flatColumns = ref<ColumnProps[]>();
+flatColumns.value = flatColumnsFunc(tableColumns.value);
+
 // 过滤需要搜索的配置项 && 处理搜索排序
 const searchColumns = flatColumns.value
   .filter((item) => item.search?.el)
@@ -239,22 +247,19 @@ searchColumns.forEach((column) => {
       column.search?.defaultValue;
   }
 });
-//-------------------------------------------- 列设置
+console.log(searchColumns, "searchColumns");
 // 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
 const colSetting = tableColumns.value!.filter((item) => {
   return (
-    item.isShow &&
     item.type !== "selection" &&
     item.type !== "index" &&
     item.type !== "expand" &&
     item.prop !== "operation"
   );
 });
-const openColSetting = () => {
-  colRef.value.openColSetting();
-};
-//--------------------------打印
+const openColSetting = () => colRef.value.openColSetting();
+
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
   let printDataList = JSON.parse(
@@ -262,10 +267,13 @@ const printData = computed(() => {
       selectedList.value.length ? selectedList.value : tableData.value
     )
   );
-  let colEnumList = flatColumns.value!.filter(
-    (item) => item.enum || (item.prop && item.prop.split(".").length > 1)
+  // 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
+  let needTransformCol = flatColumns.value!.filter(
+    (item) =>
+      (item.enum || (item.prop && item.prop.split(".").length > 1)) &&
+      item.isFilterEnum
   );
-  colEnumList.forEach((colItem) => {
+  needTransformCol.forEach((colItem) => {
     printDataList.forEach((tableItem: { [key: string]: any }) => {
       tableItem[handleProp(colItem.prop!)] =
         colItem.prop!.split(".").length > 1 && !colItem.enum
@@ -280,7 +288,7 @@ const printData = computed(() => {
   return printDataList;
 });
 
-// 打印时间
+// 打印表格数据（💥 多级表头数据打印时，只能扁平化成一维数组，printJs 不支持多级表头打印）
 const handlePrint = () => {
   printJS({
     printable: printData.value,
@@ -309,6 +317,7 @@ const handlePrint = () => {
       "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center",
   });
 };
+
 // 暴露给父组件的参数和方法(外部需要什么，都可以从这里暴露出去)
 defineExpose({
   element: tableRef,
@@ -317,6 +326,6 @@ defineExpose({
   pageable,
   getTableList,
   clearSelection,
+  enumMap,
 });
 </script>
-<style lang="scss" scoped></style>

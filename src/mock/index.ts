@@ -19,5 +19,5 @@ configArray.forEach((item) => {
     Mock.mock(new RegExp("^" + protocol[1]), protocol[0], target);
   }
 });
-console.log(configArray, "configArray");
+console.log(configArray, "mock-------configArray");
 export default configArray;

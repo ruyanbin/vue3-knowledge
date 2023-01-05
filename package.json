@@ -84,6 +84,7 @@
         "ignore-params",
         "ignore-properties"
       ],
+      "no-extra-boolean-cast": "error",
       "vue/multi-word-component-names": [
         "error",
         {

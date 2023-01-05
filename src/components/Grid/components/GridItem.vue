@@ -3,8 +3,7 @@
     <slot></slot>
   </div>
 </template>
-
-<script lang="ts" setup>
+<script setup lang="ts" name="GridItem">
 import { computed, inject, Ref, ref, useAttrs, watch } from "vue";
 import { BreakPoint, Responsive } from "../interface/index";
 
@@ -18,6 +17,7 @@ type Props = {
   lg?: Responsive;
   xl?: Responsive;
 };
+
 const props = withDefaults(defineProps<Props>(), {
   offset: 0,
   span: 1,
@@ -28,6 +28,7 @@ const props = withDefaults(defineProps<Props>(), {
   lg: undefined,
   xl: undefined,
 });
+
 const attrs = useAttrs() as any;
 const isShow = ref(true);
 
@@ -43,9 +44,9 @@ watch(
   },
   { immediate: true }
 );
+
 const gap = inject("gap", 0);
 const cols = inject<Ref<number>>("cols", ref(4));
-//双问号后面接的是默认值
 const style = computed(() => {
   let span = props[breakPoint.value]?.span ?? props.span;
   let offset = props[breakPoint.value]?.offset ?? props.offset;
@@ -71,4 +72,3 @@ const style = computed(() => {
   }
 });
 </script>
-<style lang="scss" scoped></style>

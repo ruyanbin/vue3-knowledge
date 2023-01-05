@@ -44,6 +44,8 @@ export interface AuthState {
       [key: string]: boolean;
     };
   };
-  authMenuList: Menu.MenuOptions[];
+  // authMenuList: Menu.MenuOptions[];
+  authMenuList: any[];
+
   routeName: string;
 }

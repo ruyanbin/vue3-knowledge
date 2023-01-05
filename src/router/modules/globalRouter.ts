@@ -8,15 +8,15 @@ export const globalRouter: RouteRecordRaw[] = [
     // component: () => import("@/layouts/indexAsync.vue"),
     redirect: HOME_URL,
     children: [
-      {
-        path: "/home/index",
-        name: "Home",
-        component: () => import("@/views/Home/index.vue"),
-        meta: {
-          title: "首页",
-          icon: "HomeFilled",
-        },
-      },
+      // {
+      //   path: "/home/index",
+      //   name: "Home",
+      //   component: () => import("@/views/Home/index.vue"),
+      //   meta: {
+      //     title: "首页",
+      //     icon: "HomeFilled",
+      //   },
+      // },
       {
         path: "/sys/Account/index",
         name: "Account",

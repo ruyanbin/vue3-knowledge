@@ -8,7 +8,7 @@ const login = {
       message: "success",
       data: {
         code: 200,
-        datalist: list,
+        datalist: list.splice(0, 10),
         pageNum: 1,
         pageSize: 10,
         total: list.length,

@@ -3,10 +3,12 @@
 .el-notification {
 	z-index: 99999 !important;
 }
-// * 解决 popup 弹出时宽度会 100%-8px 问题，在浏览器缩放 特定的情况下才会出现
-.el-popup-parent--hidden {
-	width: 100% !important;
+
+// * 设置 el-alert 边框
+.el-alert {
+	border: 1px solid;
 }
+
 // * 当前页面最大化 css
 .main-maximize {
 	.aside-split,
@@ -17,6 +19,7 @@
 		display: none !important;
 	}
 }
+
 // * card 卡片样式
 .card {
 	box-sizing: border-box;
@@ -27,6 +30,7 @@
 	border-radius: 4px;
 	box-shadow: 0 0 12px rgb(0 0 0 / 5%);
 }
+
 // * 不需要 card 卡片样式（在组件内使用 proTable 会使用到）
 .no-card {
 	.card {
@@ -37,6 +41,7 @@
 		box-shadow: none;
 	}
 }
+
 // * content-box (常用内容盒子)
 .content-box {
 	display: flex;
@@ -60,6 +65,7 @@
 		}
 	}
 }
+
 // * main-box (树形表格 treeFilter 页面会使用，左右布局 flex)
 .main-box {
 	display: flex;
@@ -86,6 +92,7 @@
 		.el-form {
 			.el-input,
 			.el-select,
+			.el-cascader,
 			.el-date-editor--timerange,
 			.el-date-editor--datetimerange,
 			.el-date-editor--daterange {

@@ -41,6 +41,7 @@ import { useRouter } from "vue-router";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
 import { loginApi } from "@/api/modules/login";
+import { initDynamicRouter } from "@/router/modules/dynamicRouter";
 const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
@@ -72,9 +73,8 @@ const login = async () => {
   const res = await loginApi(ruleForm);
   if (res.data?.token) {
     globalStore.setToken(res.data?.token);
+    await initDynamicRouter();
     globalStore.setUserInfo(JSON.stringify(ruleForm));
-
-    console.log("res", res);
     ElNotification({
       title: getTimeState(),
       message: "欢迎登录 vue3-Admin",

@@ -13,6 +13,14 @@ export const staticRouter: RouteRecordRaw[] = [
       title: "登录页",
     },
   },
+  {
+    path: "/layout",
+    name: "layout",
+    component: () => import("@/layouts/index.vue"),
+    // component: () => import("@/layouts/indexAsync.vue"),
+    redirect: HOME_URL,
+    children: [],
+  },
 ];
 // * errorRouter(错误页面路由)
 // */

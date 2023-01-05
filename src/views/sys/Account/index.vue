@@ -98,18 +98,22 @@
         >
       </template>
     </ProTable>
+    <!-- <UserDrawer ref="drawerRef" />
+		<ImportExcel ref="dialogRef" /> -->
   </div>
 </template>
 
-<script lang="tsx" setup>
+<script setup lang="tsx">
 import { ref, reactive } from "vue";
 import { ElMessage } from "element-plus";
-
 import { User } from "@/api/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { useHandleData } from "@/hooks/useHandleData";
 import { useDownload } from "@/hooks/useDownload";
 import { useAuthButtons } from "@/hooks/useAuthButtons";
+import ProTable from "@/components/ProTable/index.vue";
+// import ImportExcel from "@/components/ImportExcel/index.vue";
+// import UserDrawer from "@/views/proTable/components/UserDrawer.vue";
 import {
   CirclePlus,
   Delete,
@@ -131,9 +135,10 @@ import {
   getUserStatus,
   getUserGender,
 } from "@/api/modules/user";
-import ProTable from "@/components/ProTable/index.vue";
-// 获取 ProTable DOM
+
+// 获取 ProTable 元素，调用其获取刷新数据方法（还能获取到当前查询参数，方便导出携带参数）
 const proTable = ref();
+
 // 如果表格需要初始化请求参数，直接定义传给 ProTable(之后每次请求都会自动带上该参数，此参数更改之后也会一直带上，改变此参数会自动刷新表格数据)
 const initParam = reactive({
   type: 1,
@@ -148,6 +153,7 @@ const dataCallback = (data: any) => {
     pageSize: data.pageSize,
   };
 };
+
 // 如果你想在请求之前对当前请求参数做一些操作，可以自定义如下函数：params 为当前所有的请求参数（包括分页），最后返回请求列表接口
 // 默认不做操作就直接在 ProTable 组件上绑定	:requestApi="getUserList"
 const getTableList = (params: any) => {
@@ -155,8 +161,10 @@ const getTableList = (params: any) => {
   newParams.username && (newParams.username = "custom-" + newParams.username);
   return getUserList(newParams);
 };
+
 // 页面按钮权限（按钮权限既可以使用 hooks，也可以直接使用 v-auth 指令，指令适合直接绑定在按钮上，hooks 适合根据按钮权限显示不同的内容）
 const { BUTTONS } = useAuthButtons();
+
 // 自定义渲染表头（使用tsx语法）
 const headerRender = (row: ColumnProps) => {
   return (
@@ -170,6 +178,7 @@ const headerRender = (row: ColumnProps) => {
     </el-button>
   );
 };
+
 // 表格配置项
 const columns: ColumnProps[] = [
   { type: "selection", fixed: "left", width: 80 },
@@ -194,19 +203,19 @@ const columns: ColumnProps[] = [
   {
     prop: "gender",
     label: "性别",
-    // enum: getUserGender,
+    enum: getUserGender,
     fieldNames: { label: "genderLabel", value: "genderValue" },
     search: { el: "select" },
   },
   // 多级 prop
-  { prop: "user.detail.age", label: "年龄", search: { el: "input" } },
+  // { prop: "user.detail.age", label: "年龄", search: { el: "input" } },
   { prop: "idCard", label: "身份证号", search: { el: "input" } },
   { prop: "email", label: "邮箱" },
   { prop: "address", label: "居住地址" },
   {
     prop: "status",
     label: "用户状态",
-    // enum: getUserStatus,
+    enum: getUserStatus,
     fieldNames: { label: "userLabel", value: "userStatus" },
     search: {
       el: "tree-select",
@@ -246,6 +255,7 @@ const columns: ColumnProps[] = [
   },
   { prop: "operation", label: "操作", fixed: "right", width: 330 },
 ];
+
 // 删除用户信息
 const deleteAccount = async (params: User.ResUserList) => {
   await useHandleData(
@@ -255,12 +265,14 @@ const deleteAccount = async (params: User.ResUserList) => {
   );
   proTable.value.getTableList();
 };
+
 // 批量删除用户信息
 const batchDelete = async (id: string[]) => {
   await useHandleData(deleteUser, { id }, "删除所选用户信息");
   proTable.value.clearSelection();
   proTable.value.getTableList();
 };
+
 // 重置用户密码
 const resetPass = async (params: User.ResUserList) => {
   await useHandleData(
@@ -270,6 +282,7 @@ const resetPass = async (params: User.ResUserList) => {
   );
   proTable.value.getTableList();
 };
+
 // 切换用户状态
 const changeStatus = async (row: User.ResUserList) => {
   await useHandleData(
@@ -279,10 +292,12 @@ const changeStatus = async (row: User.ResUserList) => {
   );
   proTable.value.getTableList();
 };
+
 // 导出用户列表
 const downloadFile = async () => {
   useDownload(exportUserInfo, "用户列表", proTable.value.searchParam);
 };
+
 // 批量添加用户
 const dialogRef = ref();
 const batchAdd = () => {
@@ -308,4 +323,3 @@ const openDrawer = (title: string, rowData: Partial<User.ResUserList> = {}) => {
   drawerRef.value.acceptParams(params);
 };
 </script>
-<style lang="scss" scoped></style>

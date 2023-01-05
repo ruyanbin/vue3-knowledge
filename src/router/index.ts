@@ -6,7 +6,7 @@ import { LOGIN_URL } from "@/config/config";
 import { getFlatArr } from "@/utils/util";
 import { staticRouter, errorRouter } from "@/router/modules/staticRouter";
 import { globalRouter } from "@/router/modules/globalRouter";
-
+import { initDynamicRouter } from "@/router/modules/dynamicRouter";
 import NProgress from "@/config/nprogress";
 
 /**
@@ -27,7 +27,7 @@ import NProgress from "@/config/nprogress";
 const routes: RouteRecordRaw[] = [
   ...staticRouter,
   ...errorRouter,
-  ...globalRouter,
+  // ...globalRouter,
 ];
 console.log(routes, "routes");
 const router = createRouter({
@@ -51,12 +51,12 @@ router.beforeEach(async (to, from, next) => {
   if (!globalStore.token) return next({ path: LOGIN_URL, replace: true });
 
   // // 4.如果没有菜单列表，就重新请求菜单列表并添加动态路由
-  // const authStore = AuthStore();
-  // authStore.setRouteName(to.name as string);
-  // if (!authStore.authMenuListGet.length) {
-  //   // await initDynamicRouter();
-  //   return next({ ...to, replace: true });
-  // }
+  const authStore = AuthStore();
+  authStore.setRouteName(to.name as string);
+  if (!authStore.authMenuListGet.length) {
+    await initDynamicRouter();
+    return next({ ...to, replace: true });
+  }
 
   // 5.正常访问页面
   next();

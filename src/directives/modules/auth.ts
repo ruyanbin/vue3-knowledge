@@ -4,14 +4,13 @@ const auth: Directive = {
   mounted(el: HTMLElement, binding: DirectiveBinding) {
     const { value } = binding;
     const authStore = AuthStore();
-    const currentPageRoles =
-      authStore.authButtonListGet[authStore.routeName] ?? {};
+    const currentPageRoles = authStore.authButtonListGet[authStore.routeName] ?? {};
     if (value && value instanceof Array && value.length) {
-      const hasPermission = value.every((item) => {
+      const hasPermission = value.every(item => {
         return Object.keys(currentPageRoles).includes(item);
       });
       if (!hasPermission) el.remove();
     }
-  },
+  }
 };
 export default auth;

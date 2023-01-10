@@ -1,9 +1,5 @@
 <template>
-  <el-config-provider
-    :locale="i18nLocale"
-    :button="config"
-    :size="assemblySize"
-  >
+  <el-config-provider :locale="i18nLocale" :button="config" :size="assemblySize">
     <router-view />
   </el-config-provider>
 </template>
@@ -16,7 +12,7 @@ import en from "element-plus/es/locale/lang/en";
 const globalStore = GlobalStore();
 // 配置element按钮文字中间是否有空格
 const config = reactive({
-  autoInsertSpace: false,
+  autoInsertSpace: false
 });
 // element 语言配置
 const i18nLocale = computed(() => {

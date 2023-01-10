@@ -1,9 +1,4 @@
-import {
-  InputProps,
-  ElSelect,
-  SwitchProps,
-  TimePickerDefaultProps,
-} from "element-plus";
+import { InputProps, ElSelect, SwitchProps, TimePickerDefaultProps } from "element-plus";
 import { TableColumnCtx } from "element-plus/es/components/table/src/table-column/defaults";
 import { TimeSelectProps } from "element-plus/es/components/time-select/src/time-select";
 import { BreakPoint, Responsive } from "@/components/Grid/interface";
@@ -62,13 +57,9 @@ export type BaseSearch = {
   defaultValue?: string | number | boolean | any[]; // 搜索项默认值
 } & Partial<Record<BreakPoint, Responsive>>;
 
-export type SearchProps = BaseSearch &
-  (Input | Select | DatePicker | TimePicker | TimeSelect | Switch | TreeSelect);
+export type SearchProps = BaseSearch & (Input | Select | DatePicker | TimePicker | TimeSelect | Switch | TreeSelect);
 
-export interface ColumnProps<T = any>
-  extends Partial<
-    Omit<TableColumnCtx<T>, "children" | "renderHeader" | "renderCell">
-  > {
+export interface ColumnProps<T = any> extends Partial<Omit<TableColumnCtx<T>, "children" | "renderHeader" | "renderCell">> {
   tag?: boolean; // 是否是标签展示
   isShow?: boolean; // 是否显示在表格当中
   search?: SearchProps | undefined; // 搜索项配置

@@ -7,14 +7,14 @@ import router from "@/router/index";
 export const TabsStore = defineStore({
   id: "TabsState",
   state: (): TabsState => ({
-    tabsMenuList: [],
+    tabsMenuList: []
   }),
   actions: {
     // Add Tabs
     async addTabs(tabItem: TabsMenuProps) {
       // not add tabs white list
       if (TABS_WHITE_LIST.includes(tabItem.path)) return;
-      if (this.tabsMenuList.every((item) => item.path !== tabItem.path)) {
+      if (this.tabsMenuList.every(item => item.path !== tabItem.path)) {
         this.tabsMenuList.push(tabItem);
       }
     },
@@ -31,14 +31,14 @@ export const TabsStore = defineStore({
           router.push(nextTab.path);
         });
       }
-      this.tabsMenuList = tabsMenuList.filter((item) => item.path !== tabPath);
+      this.tabsMenuList = tabsMenuList.filter(item => item.path !== tabPath);
     },
     // Close MultipleTab
     async closeMultipleTab(tabsMenuValue?: string) {
-      this.tabsMenuList = this.tabsMenuList.filter((item) => {
+      this.tabsMenuList = this.tabsMenuList.filter(item => {
         return item.path === tabsMenuValue || !item.close;
       });
-    },
+    }
   },
-  persist: piniaPersistConfig("TabsState"),
+  persist: piniaPersistConfig("TabsState")
 });

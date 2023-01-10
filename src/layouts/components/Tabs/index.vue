@@ -1,19 +1,8 @@
 <template>
   <div class="tabs-box">
     <div class="tabs-menu">
-      <el-tabs
-        v-model="tabsMenuValue"
-        type="card"
-        @tab-click="tabClick"
-        @tab-remove="tabRemove"
-      >
-        <el-tab-pane
-          v-for="item in tabsMenuList"
-          :key="item.path"
-          :label="item.title"
-          :name="item.path"
-          :closable="item.close"
-        >
+      <el-tabs v-model="tabsMenuValue" type="card" @tab-click="tabClick" @tab-remove="tabRemove">
+        <el-tab-pane v-for="item in tabsMenuList" :key="item.path" :label="item.title" :name="item.path" :closable="item.close">
           <template #label>
             <el-icon class="tabs-icon" v-if="item.icon && themeConfig.tabsIcon">
               <component :is="item.icon"></component>
@@ -52,12 +41,12 @@ watch(
       icon: route.meta.icon as string,
       title: route.meta.title as string,
       path: route.path,
-      close: !route.meta.isAffix,
+      close: !route.meta.isAffix
     };
     tabStore.addTabs(tabsParams);
   },
   {
-    immediate: true,
+    immediate: true
   }
 );
 // Tab Click

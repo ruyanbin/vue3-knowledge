@@ -15,7 +15,7 @@ const LayoutComponents: { [key: string]: any } = {
   vertical: LayoutVertical,
   classic: LayoutClassic,
   transverse: LayoutTransverse,
-  columns: LayoutColumns,
+  columns: LayoutColumns
 };
 
 const globalStore = GlobalStore();

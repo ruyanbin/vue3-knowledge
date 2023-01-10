@@ -14,7 +14,7 @@ const themeConfig = computed(() => globalStore.themeConfig);
 const collapse = () => {
   globalStore.setThemeConfig({
     ...themeConfig.value,
-    isCollapse: !themeConfig.value.isCollapse,
+    isCollapse: !themeConfig.value.isCollapse
   });
 };
 </script>

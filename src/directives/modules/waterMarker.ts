@@ -9,12 +9,7 @@
   <div v-waterMarker="{text:'版权所有',textColor:'rgba(180, 180, 180, 0.4)'}"></div>
 */
 import type { Directive, DirectiveBinding } from "vue";
-const addWaterMarker: Directive = (
-  str: string,
-  parentNode: any,
-  font: any,
-  textColor: string
-) => {
+const addWaterMarker: Directive = (str: string, parentNode: any, font: any, textColor: string) => {
   let can: HTMLCanvasElement = document.createElement("canvas");
   parentNode.appendChild(can);
   can.width = 205;
@@ -31,13 +26,8 @@ const addWaterMarker: Directive = (
 };
 const waterMarker = {
   mounted(el: DirectiveBinding, binding: DirectiveBinding) {
-    addWaterMarker(
-      binding.value.text,
-      el,
-      binding.value.font,
-      binding.value.textColor
-    );
-  },
+    addWaterMarker(binding.value.text, el, binding.value.font, binding.value.textColor);
+  }
 };
 
 export default waterMarker;

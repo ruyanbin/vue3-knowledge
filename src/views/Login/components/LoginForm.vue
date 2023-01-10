@@ -1,32 +1,12 @@
 <template>
-  <el-form
-    ref="ruleFormRef"
-    :model="ruleForm"
-    :rules="rules"
-    class="demo-ruleForm"
-    :size="formSize"
-    status-icon
-  >
+  <el-form ref="ruleFormRef" :model="ruleForm" :rules="rules" class="demo-ruleForm" :size="formSize" status-icon>
     <el-form-item prop="username">
-      <el-input
-        :prefix-icon="User"
-        v-model="ruleForm.username"
-        placeholder="请输入账号"
-      >
-      </el-input>
+      <el-input :prefix-icon="User" v-model="ruleForm.username" placeholder="请输入账号"> </el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input
-        v-model="ruleForm.password"
-        type="password"
-        placeholder="请输入密码"
-        show-password
-        :prefix-icon="Lock"
-      />
+      <el-input v-model="ruleForm.password" type="password" placeholder="请输入密码" show-password :prefix-icon="Lock" />
     </el-form-item>
-    <el-button type="primary" @click="submitForm(ruleFormRef)"
-      >Submit</el-button
-    >
+    <el-button type="primary" @click="submitForm(ruleFormRef)">Submit</el-button>
     <el-button @click="resetForm(ruleFormRef)">Reset</el-button>
   </el-form>
 </template>
@@ -46,11 +26,11 @@ const formSize = ref("default");
 const ruleFormRef = ref<FormInstance>();
 const ruleForm = reactive({
   username: "",
-  password: "",
+  password: ""
 });
 const rules = reactive<FormRules>({
   username: [{ required: true, message: "请输入用户名", trigger: "blur" }],
-  password: [{ required: true, message: "请输入密码", trigger: "blur" }],
+  password: [{ required: true, message: "请输入密码", trigger: "blur" }]
 });
 //
 const router = useRouter();
@@ -58,10 +38,9 @@ const tabsStore = TabsStore();
 const globalStore = GlobalStore();
 const submitForm = async (formEl: FormInstance | undefined) => {
   if (!formEl) return;
-  formEl.validate((valid) => {
+  formEl.validate(valid => {
     if (valid) {
       login();
-      console.log(12123);
     } else {
       console.log("error submit!");
       return false;
@@ -71,6 +50,7 @@ const submitForm = async (formEl: FormInstance | undefined) => {
 // 登录
 const login = async () => {
   const res = await loginApi(ruleForm);
+  console.log(res, "res");
   if (res.data?.token) {
     globalStore.setToken(res.data?.token);
     await initDynamicRouter();
@@ -79,7 +59,7 @@ const login = async () => {
       title: getTimeState(),
       message: "欢迎登录 vue3-Admin",
       type: "success",
-      duration: 3000,
+      duration: 3000
     });
     // 3.清除上个账号的 tab 信息
     tabsStore.closeMultipleTab();

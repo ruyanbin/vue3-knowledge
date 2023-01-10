@@ -22,6 +22,6 @@ export const useAuthButtons = () => {
 
   return {
     nowKey,
-    BUTTONS,
+    BUTTONS
   };
 };

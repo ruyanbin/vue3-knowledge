@@ -47,24 +47,17 @@ const columnEnum = computed(() => {
 const fieldNames = () => {
   return {
     label: props.column.fieldNames?.label ?? "label",
-    value: props.column.fieldNames?.value ?? "value",
+    value: props.column.fieldNames?.value ?? "value"
   };
 };
 
 // 判断 placeholder
 const placeholder = (column: ColumnProps) => {
-  return (
-    column.search?.props?.placeholder ??
-    (column.search?.el === "input" ? "请输入" : "请选择")
-  );
+  return column.search?.props?.placeholder ?? (column.search?.el === "input" ? "请输入" : "请选择");
 };
 
 // 是否有清除按钮 (当搜索项有默认值时，清除按钮不显示)
 const clearable = (column: ColumnProps) => {
-  return (
-    column.search?.props?.clearable ??
-    (column.search?.defaultValue == null ||
-      column.search?.defaultValue == undefined)
-  );
+  return column.search?.props?.clearable ?? (column.search?.defaultValue == null || column.search?.defaultValue == undefined);
 };
 </script>

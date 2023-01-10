@@ -19,7 +19,7 @@ const copy: Directive = {
   },
   beforeUnmount(el: ElType) {
     el.removeEventListener("click", el.__handleClick__);
-  },
+  }
 };
 function handleClick(this: any) {
   const input = document.createElement("input");
@@ -30,7 +30,7 @@ function handleClick(this: any) {
   document.body.removeChild(input);
   ElMessage({
     type: "success",
-    message: "复制成功",
+    message: "复制成功"
   });
 }
 export default copy;

@@ -26,7 +26,7 @@ import NProgress from "@/config/nprogress";
  * */
 const routes: RouteRecordRaw[] = [
   ...staticRouter,
-  ...errorRouter,
+  ...errorRouter
   // ...globalRouter,
 ];
 console.log(routes, "routes");
@@ -34,7 +34,7 @@ const router = createRouter({
   history: createWebHashHistory(),
   routes,
   strict: false,
-  scrollBehavior: () => ({ left: 0, top: 0 }),
+  scrollBehavior: () => ({ left: 0, top: 0 })
 });
 /**
  * @description 路由拦截 beforeEach
@@ -66,10 +66,8 @@ router.beforeEach(async (to, from, next) => {
  * */
 export const resetRouter = () => {
   const authStore = AuthStore();
-  const dynamicRouter = getFlatArr(
-    JSON.parse(JSON.stringify(authStore.authMenuListGet))
-  );
-  dynamicRouter.forEach((route) => {
+  const dynamicRouter = getFlatArr(JSON.parse(JSON.stringify(authStore.authMenuListGet)));
+  dynamicRouter.forEach(route => {
     const { name } = route;
     if (name && router.hasRoute(name)) router.removeRoute(name);
   });
@@ -84,7 +82,7 @@ router.afterEach(() => {
 /**
  * @description 路由跳转错误
  * */
-router.onError((error) => {
+router.onError(error => {
   NProgress.done();
   console.warn("路由错误", error.message);
 });

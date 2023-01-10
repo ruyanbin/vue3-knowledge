@@ -1,13 +1,5 @@
-import axios, {
-  AxiosInstance,
-  AxiosError,
-  AxiosRequestConfig,
-  AxiosResponse,
-} from "axios";
-import {
-  showFullScreenLoading,
-  tryHideFullScreenLoading,
-} from "@/config/serviceLoading";
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import { showFullScreenLoading, tryHideFullScreenLoading } from "@/config/serviceLoading";
 import { ResultData } from "@/api/interface";
 import { ResultEnum } from "@/enums/httpEnum";
 import { checkStatus } from "./helper/checkStatus";
@@ -29,7 +21,7 @@ const config = {
   // 设置超时时间（10s）
   timeout: ResultEnum.TIMEOUT as number,
   // 跨域时候允许携带凭证
-  withCredentials: true,
+  withCredentials: true
 };
 
 class RequestHttp {
@@ -44,14 +36,16 @@ class RequestHttp {
      * token校验(JWT) : 接受服务器返回的token,存储到vuex/pinia/本地储存当中
      */
     this.service.interceptors.request.use(
+      // (config: AxiosRequestConfig) => {
       (config: any) => {
         const globalStore = GlobalStore();
         // * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
-        config.headers!.noLoading || showFullScreenLoading();
+        // config.headers!.noLoading || showFullScreenLoading();
+        showFullScreenLoading();
         const token: string = globalStore.token;
         return {
           ...config,
-          headers: { ...config.headers, "x-access-token": token },
+          headers: { ...config.headers, "x-access-token": token }
         };
       },
       (error: AxiosError) => {
@@ -88,8 +82,7 @@ class RequestHttp {
         const { response } = error;
         tryHideFullScreenLoading();
         // 请求超时单独判断，因为请求超时没有 response
-        if (error.message.indexOf("timeout") !== -1)
-          ElMessage.error("请求超时！请您稍后重试");
+        if (error.message.indexOf("timeout") !== -1) ElMessage.error("请求超时！请您稍后重试");
         // 根据响应的错误状态码，做不同的处理
         if (response) checkStatus(response.status);
         // 服务器结果都没有返回(可能服务器错误可能客户端断网)，断网处理:可以跳转到断网页面
@@ -111,6 +104,9 @@ class RequestHttp {
   }
   delete<T>(url: string, params?: any, _object = {}): Promise<ResultData<T>> {
     return this.service.delete(url, { params, ..._object });
+  }
+  download(url: string, params?: object, _object = {}): Promise<BlobPart> {
+    return this.service.post(url, params, _object);
   }
 }
 

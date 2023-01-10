@@ -16,11 +16,7 @@
       >
         <!-- 只有在这里写 submenu 才能触发 menu 三个点省略 -->
         <template v-for="subItem in menuList" :key="subItem.path">
-          <el-sub-menu
-            v-if="subItem.children?.length"
-            :index="subItem.path"
-            :key="subItem.path + 'el-sub-menu'"
-          >
+          <el-sub-menu v-if="subItem.children?.length" :index="subItem.path" :key="subItem.path + 'el-sub-menu'">
             <template #title>
               <el-icon>
                 <component :is="subItem.meta.icon"></component>
@@ -29,12 +25,7 @@
             </template>
             <SubMenu :menuList="subItem.children" />
           </el-sub-menu>
-          <el-menu-item
-            v-else
-            :index="subItem.path"
-            :key="subItem.path + 'el-menu-item'"
-            @click="handleClickMenu(subItem)"
-          >
+          <el-menu-item v-else :index="subItem.path" :key="subItem.path + 'el-menu-item'" @click="handleClickMenu(subItem)">
             <el-icon>
               <component :is="subItem.meta.icon"></component>
             </el-icon>

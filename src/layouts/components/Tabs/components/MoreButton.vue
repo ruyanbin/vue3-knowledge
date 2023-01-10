@@ -33,14 +33,7 @@ import { HOME_URL } from "@/config/config";
 import { GlobalStore } from "@/stores";
 import { TabsStore } from "@/stores/modules/tabs";
 import { useRoute, useRouter } from "vue-router";
-import {
-  Refresh,
-  FullScreen,
-  CircleClose,
-  Remove,
-  FolderDelete,
-  ArrowDown,
-} from "@element-plus/icons-vue";
+import { Refresh, FullScreen, CircleClose, Remove, FolderDelete, ArrowDown } from "@element-plus/icons-vue";
 const route = useRoute();
 const router = useRouter();
 const tabStore = TabsStore();

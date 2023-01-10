@@ -16,36 +16,13 @@
     <!-- 表格头部 操作按钮 -->
     <div class="table-header">
       <div class="header-button-lf">
-        <slot
-          name="tableHeader"
-          :selectedListIds="selectedListIds"
-          :selectList="selectedList"
-          :isSelected="isSelected"
-        ></slot>
+        <slot name="tableHeader" :selectedListIds="selectedListIds" :selectList="selectedList" :isSelected="isSelected"></slot>
       </div>
       <div class="header-button-ri" v-if="toolButton">
         <el-button :icon="Refresh" circle @click="getTableList"> </el-button>
-        <el-button
-          :icon="Printer"
-          circle
-          v-if="columns.length"
-          @click="handlePrint"
-        >
-        </el-button>
-        <el-button
-          :icon="Operation"
-          circle
-          v-if="columns.length"
-          @click="openColSetting"
-        >
-        </el-button>
-        <el-button
-          :icon="Search"
-          circle
-          v-if="searchColumns.length"
-          @click="isShowSearch = !isShowSearch"
-        >
-        </el-button>
+        <el-button :icon="Printer" circle v-if="columns.length" @click="handlePrint"> </el-button>
+        <el-button :icon="Operation" circle v-if="columns.length" @click="openColSetting"> </el-button>
+        <el-button :icon="Search" circle v-if="searchColumns.length" @click="isShowSearch = !isShowSearch"> </el-button>
       </div>
     </div>
     <!-- 表格主体 -->
@@ -69,21 +46,12 @@
         >
         </el-table-column>
         <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
-        <el-table-column
-          v-bind="item"
-          :align="item.align ?? 'center'"
-          v-if="item.type == 'expand'"
-          v-slot="scope"
-        >
-          <component :is="item.render" :row="scope.row" v-if="item.render">
-          </component>
+        <el-table-column v-bind="item" :align="item.align ?? 'center'" min-width="10%" show-overflow-tooltip v-if="item.type == 'expand'" v-slot="scope">
+          <component :is="item.render" :row="scope.row" v-if="item.render"> </component>
           <slot :name="item.type" :row="scope.row" v-else></slot>
         </el-table-column>
         <!-- other 循环递归 -->
-        <TableColumn
-          v-if="!item.type && item.prop && item.isShow"
-          :column="item"
-        >
+        <TableColumn v-if="!item.type && item.prop && item.isShow" :column="item">
           <template v-for="slot in Object.keys($slots)" #[slot]="scope">
             <slot :name="slot" :row="scope.row"></slot>
           </template>
@@ -123,12 +91,7 @@ import { BreakPoint } from "@/components/Grid/interface";
 import { ColumnProps } from "@/components/ProTable/interface";
 import { ElTable, TableProps } from "element-plus";
 import { Refresh, Printer, Operation, Search } from "@element-plus/icons-vue";
-import {
-  filterEnum,
-  formatValue,
-  handleProp,
-  handleRowAccordingToProp,
-} from "@/utils/util";
+import { filterEnum, formatValue, handleProp, handleRowAccordingToProp } from "@/utils/util";
 import SearchForm from "@/components/SearchForm/index.vue";
 import Pagination from "./components/Pagination.vue";
 import ColSetting from "./components/ColSetting.vue";
@@ -156,7 +119,7 @@ const props = withDefaults(defineProps<ProTableProps>(), {
   border: true,
   toolButton: true,
   selectId: "id",
-  searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
+  searchCol: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 })
 });
 
 // 是否显示搜索模块
@@ -166,31 +129,11 @@ const isShowSearch = ref(true);
 const tableRef = ref<InstanceType<typeof ElTable>>();
 
 // 表格多选 Hooks
-const {
-  selectionChange,
-  getRowKeys,
-  selectedList,
-  selectedListIds,
-  isSelected,
-} = useSelection(props.selectId);
+const { selectionChange, getRowKeys, selectedList, selectedListIds, isSelected } = useSelection(props.selectId);
 
 // 表格操作 Hooks
-const {
-  tableData,
-  pageable,
-  searchParam,
-  searchInitParam,
-  getTableList,
-  search,
-  reset,
-  handleSizeChange,
-  handleCurrentChange,
-} = useTable(
-  props.requestApi,
-  props.initParam,
-  props.pagination,
-  props.dataCallback
-);
+const { tableData, pageable, searchParam, searchInitParam, getTableList, search, reset, handleSizeChange, handleCurrentChange } =
+  useTable(props.requestApi, props.initParam, props.pagination, props.dataCallback);
 console.log(searchParam, "searchParam");
 // 清空选中数据列表
 const clearSelection = () => tableRef.value!.clearSelection();
@@ -206,11 +149,8 @@ const enumMap = ref(new Map<string, { [key: string]: any }[]>());
 provide("enumMap", enumMap);
 
 // 扁平化 columns
-const flatColumnsFunc = (
-  columns: ColumnProps[],
-  flatArr: ColumnProps[] = []
-) => {
-  columns.forEach(async (col) => {
+const flatColumnsFunc = (columns: ColumnProps[], flatArr: ColumnProps[] = []) => {
+  columns.forEach(async col => {
     if (col._children?.length) flatArr.push(...flatColumnsFunc(col._children));
     flatArr.push(col);
 
@@ -220,12 +160,11 @@ const flatColumnsFunc = (
 
     // 如果当前 enum 为后台数据需要请求数据，则调用该请求接口，并存储到 enumMap
     if (!col.enum) return;
-    if (typeof col.enum !== "function")
-      return enumMap.value.set(col.prop!, col.enum);
+    if (typeof col.enum !== "function") return enumMap.value.set(col.prop!, col.enum);
     const { data } = await col.enum();
     enumMap.value.set(col.prop!, data);
   });
-  return flatArr.filter((item) => !item._children?.length);
+  return flatArr.filter(item => !item._children?.length);
 };
 
 // flat columns
@@ -234,55 +173,36 @@ flatColumns.value = flatColumnsFunc(tableColumns.value);
 
 // 过滤需要搜索的配置项 && 处理搜索排序
 const searchColumns = flatColumns.value
-  .filter((item) => item.search?.el)
+  .filter(item => item.search?.el)
   .sort((a, b) => (b.search?.order ?? 0) - (a.search?.order ?? 0));
 
 // 设置搜索表单的默认值
-searchColumns.forEach((column) => {
-  if (
-    column.search?.defaultValue !== undefined &&
-    column.search?.defaultValue !== null
-  ) {
-    searchInitParam.value[column.search.key ?? handleProp(column.prop!)] =
-      column.search?.defaultValue;
+searchColumns.forEach(column => {
+  if (column.search?.defaultValue !== undefined && column.search?.defaultValue !== null) {
+    searchInitParam.value[column.search.key ?? handleProp(column.prop!)] = column.search?.defaultValue;
   }
 });
 console.log(searchColumns, "searchColumns");
 // 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
-const colSetting = tableColumns.value!.filter((item) => {
-  return (
-    item.type !== "selection" &&
-    item.type !== "index" &&
-    item.type !== "expand" &&
-    item.prop !== "operation"
-  );
+const colSetting = tableColumns.value!.filter(item => {
+  return item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation";
 });
 const openColSetting = () => colRef.value.openColSetting();
 
 // 处理打印数据（把后台返回的值根据 enum 做转换）
 const printData = computed(() => {
-  let printDataList = JSON.parse(
-    JSON.stringify(
-      selectedList.value.length ? selectedList.value : tableData.value
-    )
-  );
+  let printDataList = JSON.parse(JSON.stringify(selectedList.value.length ? selectedList.value : tableData.value));
   // 找出需要转换数据的列（有 enum || 多级 prop && 需要根据 enum 格式化）
   let needTransformCol = flatColumns.value!.filter(
-    (item) =>
-      (item.enum || (item.prop && item.prop.split(".").length > 1)) &&
-      item.isFilterEnum
+    item => (item.enum || (item.prop && item.prop.split(".").length > 1)) && item.isFilterEnum
   );
-  needTransformCol.forEach((colItem) => {
+  needTransformCol.forEach(colItem => {
     printDataList.forEach((tableItem: { [key: string]: any }) => {
       tableItem[handleProp(colItem.prop!)] =
         colItem.prop!.split(".").length > 1 && !colItem.enum
           ? formatValue(handleRowAccordingToProp(tableItem, colItem.prop!))
-          : filterEnum(
-              handleRowAccordingToProp(tableItem, colItem.prop!),
-              enumMap.value.get(colItem.prop!),
-              colItem.fieldNames
-            );
+          : filterEnum(handleRowAccordingToProp(tableItem, colItem.prop!), enumMap.value.get(colItem.prop!), colItem.fieldNames);
     });
   });
   return printDataList;
@@ -292,29 +212,22 @@ const printData = computed(() => {
 const handlePrint = () => {
   printJS({
     printable: printData.value,
-    header:
-      props.title &&
-      `<div style="display: flex;flex-direction: column;text-align: center"><h2>${props.title}</h2></div>`,
+    header: props.title && `<div style="display: flex;flex-direction: column;text-align: center"><h2>${props.title}</h2></div>`,
     properties: flatColumns
       .value!.filter(
-        (item) =>
-          item.isShow &&
-          item.type !== "selection" &&
-          item.type !== "index" &&
-          item.type !== "expand" &&
-          item.prop !== "operation"
+        item =>
+          item.isShow && item.type !== "selection" && item.type !== "index" && item.type !== "expand" && item.prop !== "operation"
       )
       .map((item: ColumnProps) => {
         return {
           field: handleProp(item.prop!),
-          displayName: item.label,
+          displayName: item.label
         };
       }),
     type: "json",
     gridHeaderStyle:
       "border: 1px solid #ebeef5;height: 45px;font-size: 14px;color: #232425;text-align: center;background-color: #fafafa;",
-    gridStyle:
-      "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center",
+    gridStyle: "border: 1px solid #ebeef5;height: 40px;font-size: 14px;color: #494b4e;text-align: center"
   });
 };
 
@@ -326,6 +239,6 @@ defineExpose({
   pageable,
   getTableList,
   clearSelection,
-  enumMap,
+  enumMap
 });
 </script>

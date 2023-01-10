@@ -18,7 +18,7 @@ import "@/assets/style/element.scss";
 import "@/assets/style/global.scss";
 import "@/assets/style/common.scss";
 // mock
-import "./mock/index";
+import "../mock/index";
 // custom directives
 import directives from "@/directives/index";
 

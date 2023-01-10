@@ -5,11 +5,7 @@
 <script lang="tsx" setup>
 import { inject, ref, useSlots } from "vue";
 import { ElTableColumn, ElTag } from "element-plus";
-import {
-  filterEnum,
-  formatValue,
-  handleRowAccordingToProp,
-} from "@/utils/util";
+import { filterEnum, formatValue, handleRowAccordingToProp } from "@/utils/util";
 import { ColumnProps } from "@/components/ProTable/interface";
 
 const slots = useSlots();
@@ -19,21 +15,12 @@ const enumMap = inject("enumMap", ref(new Map()));
 // 渲染表格数据
 const renderCellData = (item: ColumnProps, scope: { [key: string]: any }) => {
   return enumMap.value.get(item.prop) && item.isFilterEnum
-    ? filterEnum(
-        handleRowAccordingToProp(scope.row, item.prop!),
-        enumMap.value.get(item.prop)!,
-        item.fieldNames
-      )
+    ? filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop)!, item.fieldNames)
     : formatValue(handleRowAccordingToProp(scope.row, item.prop!));
 };
 // 获取 tag 类型
 const getTagType = (item: ColumnProps, scope: { [key: string]: any }) => {
-  return filterEnum(
-    handleRowAccordingToProp(scope.row, item.prop!),
-    enumMap.value.get(item.prop),
-    item.fieldNames,
-    "tag"
-  ) as any;
+  return filterEnum(handleRowAccordingToProp(scope.row, item.prop!), enumMap.value.get(item.prop), item.fieldNames, "tag") as any;
 };
 const renderLoop = (item: ColumnProps) => {
   return (
@@ -42,30 +29,21 @@ const renderLoop = (item: ColumnProps) => {
         <ElTableColumn
           {...item}
           align={item.align ?? "center"}
-          showOverflowTooltip={
-            item.showOverflowTooltip ?? item.prop !== "operation"
-          }
+          showOverflowTooltip={item.showOverflowTooltip ?? item.prop !== "operation"}
         >
           {{
             default: (scope: any) => {
-              if (item._children)
-                return item._children.map((child) => renderLoop(child));
+              if (item._children) return item._children.map(child => renderLoop(child));
               if (item.render) return item.render(scope);
               if (slots[item.prop!]) return slots[item.prop!]!(scope);
-              if (item.tag)
-                return (
-                  <ElTag type={getTagType(item, scope)}>
-                    {renderCellData(item, scope)}
-                  </ElTag>
-                );
+              if (item.tag) return <ElTag type={getTagType(item, scope)}>{renderCellData(item, scope)}</ElTag>;
               return renderCellData(item, scope);
             },
             header: () => {
               if (item.headerRender) return item.headerRender(item);
-              if (slots[`${item.prop}Header`])
-                return slots[`${item.prop}Header`]!({ row: item });
+              if (slots[`${item.prop}Header`]) return slots[`${item.prop}Header`]!({ row: item });
               return item.label;
-            },
+            }
           }}
         </ElTableColumn>
       )}

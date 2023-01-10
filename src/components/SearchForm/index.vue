@@ -1,35 +1,17 @@
 <template>
   <div class="card table-search" v-if="columns.length">
     <el-form ref="formRef" :model="searchParam" label-width="auto">
-      <Grid
-        ref="gridRef"
-        :collapsed="collapsed"
-        :gap="[20, 0]"
-        :cols="searchCol"
-      >
-        <GridItem
-          v-for="(item, index) in columns"
-          :key="item.prop"
-          v-bind="getResponsive(item)"
-          :index="index"
-        >
+      <Grid ref="gridRef" :collapsed="collapsed" :gap="[20, 0]" :cols="searchCol">
+        <GridItem v-for="(item, index) in columns" :key="item.prop" v-bind="getResponsive(item)" :index="index">
           <el-form-item :label="`${item.label} :`">
             <SearchFormItem :column="item" :searchParam="searchParam" />
           </el-form-item>
         </GridItem>
         <GridItem suffix>
           <div class="operation">
-            <el-button type="primary" :icon="Search" @click="search"
-              >搜索</el-button
-            >
+            <el-button type="primary" :icon="Search" @click="search">搜索</el-button>
             <el-button :icon="Delete" @click="reset">重置</el-button>
-            <el-button
-              v-if="showCollapse"
-              type="primary"
-              link
-              class="search-isOpen"
-              @click="collapsed = !collapsed"
-            >
+            <el-button v-if="showCollapse" type="primary" link class="search-isOpen" @click="collapsed = !collapsed">
               {{ collapsed ? "展开" : "合并" }}
               <el-icon class="el-icon--right">
                 <component :is="collapsed ? ArrowDown : ArrowUp"></component>
@@ -61,7 +43,7 @@ interface ProTableProps {
 // 默认值
 const props = withDefaults(defineProps<ProTableProps>(), {
   columns: () => [],
-  searchParam: () => ({}),
+  searchParam: () => ({})
 });
 // 获取响应式设置
 const getResponsive = (item: ColumnProps) => {
@@ -72,7 +54,7 @@ const getResponsive = (item: ColumnProps) => {
     sm: item.search?.sm,
     md: item.search?.md,
     lg: item.search?.lg,
-    xl: item.search?.xl,
+    xl: item.search?.xl
   };
 };
 
@@ -88,9 +70,7 @@ const showCollapse = computed(() => {
   props.columns.reduce((prev, current) => {
     prev +=
       (current.search![breakPoint.value]?.span ?? current.search?.span ?? 1) +
-      (current.search![breakPoint.value]?.offset ??
-        current.search?.offset ??
-        0);
+      (current.search![breakPoint.value]?.offset ?? current.search?.offset ?? 0);
     if (typeof props.searchCol !== "number") {
       if (prev >= props.searchCol[breakPoint.value]) show = true;
     } else {

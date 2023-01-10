@@ -25,6 +25,6 @@ const debounce: Directive = {
   },
   beforeUnmount(el: ElType) {
     el.removeEventListener("click", el.__handleClick__);
-  },
+  }
 };
 export default debounce;

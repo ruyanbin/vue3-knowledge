@@ -44,8 +44,7 @@ export function localClear() {
 export function isType(val: any) {
   if (val === null) return "null";
   if (typeof val !== "object") return typeof val;
-  else
-    return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
+  else return Object.prototype.toString.call(val).slice(8, -1).toLocaleLowerCase();
 }
 /**
  * 判断两个对象是否相同
@@ -53,10 +52,7 @@ export function isType(val: any) {
  * @param b 要比较的对象二
  * @returns 相同返回 true，反之则反
  */
-export function isObjectValueEqual(
-  a: { [key: string]: any },
-  b: { [key: string]: any }
-) {
+export function isObjectValueEqual(a: { [key: string]: any }, b: { [key: string]: any }) {
   if (!a || !b) return false;
   const aProps = Object.getOwnPropertyNames(a);
   const bProps = Object.getOwnPropertyNames(b);
@@ -82,14 +78,10 @@ export function isObjectValueEqual(
  * @param {Array} cacheArr 缓存的路由菜单 name ['**','**']
  * @return array
  * */
-export function getKeepAliveRouterName(
-  menuList: Menu.MenuOptions[],
-  keepAliveArr: string[] = []
-) {
-  menuList.forEach((item) => {
+export function getKeepAliveRouterName(menuList: Menu.MenuOptions[], keepAliveArr: string[] = []) {
+  menuList.forEach(item => {
     item.meta.isKeepAlive && item.name && keepAliveArr.push(item.name);
-    item.children?.length &&
-      getKeepAliveRouterName(item.children, keepAliveArr);
+    item.children?.length && getKeepAliveRouterName(item.children, keepAliveArr);
   });
   return keepAliveArr;
 }
@@ -100,7 +92,7 @@ export function getKeepAliveRouterName(
  * */
 export function getShowMenuList(menuList: Menu.MenuOptions[]) {
   const newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
-  return newMenuList.filter((item) => {
+  return newMenuList.filter(item => {
     item.children?.length && (item.children = getShowMenuList(item.children));
     return !item.meta?.isHide;
   });
@@ -113,15 +105,10 @@ export function getShowMenuList(menuList: Menu.MenuOptions[]) {
 export function getAllBreadcrumbList(menuList: Menu.MenuOptions[]) {
   const handleBreadcrumbList: { [key: string]: any } = {};
   const loop = (menuItem: Menu.MenuOptions) => {
-    if (menuItem?.children?.length)
-      menuItem.children.forEach((item) => loop(item));
-    else
-      handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(
-        menuItem.path,
-        menuList
-      );
+    if (menuItem?.children?.length) menuItem.children.forEach(item => loop(item));
+    else handleBreadcrumbList[menuItem.path] = getCurrentBreadcrumb(menuItem.path, menuList);
   };
-  menuList.forEach((item) => loop(item));
+  menuList.forEach(item => loop(item));
   return handleBreadcrumbList;
 }
 /**
@@ -130,20 +117,16 @@ export function getAllBreadcrumbList(menuList: Menu.MenuOptions[]) {
  * @param {Array} menuList 所有菜单列表
  * @returns array
  */
-export function getCurrentBreadcrumb(
-  path: string,
-  menuList: Menu.MenuOptions[]
-) {
+export function getCurrentBreadcrumb(path: string, menuList: Menu.MenuOptions[]) {
   const tempPath: Menu.MenuOptions[] = [];
   try {
     const getNodePath = (node: Menu.MenuOptions) => {
       tempPath.push(node);
       if (node.path === path) throw new Error("Find IT!");
-      if (node.children?.length)
-        node.children.forEach((item) => getNodePath(item));
+      if (node.children?.length) node.children.forEach(item => getNodePath(item));
       tempPath.pop();
     };
-    menuList.forEach((item) => getNodePath(item));
+    menuList.forEach(item => getNodePath(item));
   } catch (e) {
     return tempPath;
   }
@@ -155,15 +138,11 @@ export function getCurrentBreadcrumb(
  */
 export function getFlatArr(menuList: Menu.MenuOptions[]) {
   const newMenuList: Menu.MenuOptions[] = JSON.parse(JSON.stringify(menuList));
-  return newMenuList.reduce(
-    (pre: Menu.MenuOptions[], current: Menu.MenuOptions) => {
-      let flatArr = [...pre, current];
-      if (current.children)
-        flatArr = [...flatArr, ...getFlatArr(current.children)];
-      return flatArr;
-    },
-    []
-  );
+  return newMenuList.reduce((pre: Menu.MenuOptions[], current: Menu.MenuOptions) => {
+    let flatArr = [...pre, current];
+    if (current.children) flatArr = [...flatArr, ...getFlatArr(current.children)];
+    return flatArr;
+  }, []);
 }
 
 /**
@@ -205,11 +184,7 @@ export function getTimeState() {
 export function getBrowserLang() {
   const browserLang = navigator.language.toLowerCase();
   let defaultBrowserLang = "";
-  if (
-    browserLang.toLowerCase() === "cn" ||
-    browserLang.toLowerCase() === "zh" ||
-    browserLang.toLowerCase() === "zh-cn"
-  ) {
+  if (browserLang.toLowerCase() === "cn" || browserLang.toLowerCase() === "zh" || browserLang.toLowerCase() === "zh-cn") {
     defaultBrowserLang = "zh";
   } else {
     defaultBrowserLang = "en";
@@ -225,14 +200,11 @@ export function generateUUID() {
   if (window.performance && typeof window.performance.now === "function") {
     d += performance.now(); //use high-precision timer if available
   }
-  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(
-    /[xy]/g,
-    function (c) {
-      const r = (d + Math.random() * 16) % 16 | 0;
-      d = Math.floor(d / 16);
-      return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
-    }
-  );
+  const uuid = "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx".replace(/[xy]/g, function (c) {
+    const r = (d + Math.random() * 16) % 16 | 0;
+    d = Math.floor(d / 16);
+    return (c == "x" ? r : (r & 0x3) | 0x8).toString(16);
+  });
   return uuid;
 }
 
@@ -252,8 +224,7 @@ export function filterEnum(
   const value = searchProps?.value ?? "value";
   const label = searchProps?.label ?? "label";
   let filterData: any = {};
-  if (Array.isArray(enumData))
-    filterData = enumData.find((item: any) => item[value] === callValue);
+  if (Array.isArray(enumData)) filterData = enumData.find((item: any) => item[value] === callValue);
   if (type == "tag") return filterData?.tagType ? filterData.tagType : "";
   return filterData ? filterData[label] : "--";
 }
@@ -264,8 +235,7 @@ export function filterEnum(
  * */
 export function formatValue(callValue: any) {
   // 如果当前值为数组,使用 / 拼接（根据需求自定义）
-  if (isArray(callValue))
-    return callValue.length ? callValue.join(" / ") : "--";
+  if (isArray(callValue)) return callValue.length ? callValue.join(" / ") : "--";
   return callValue ?? "--";
 }
 /**
@@ -274,12 +244,9 @@ export function formatValue(callValue: any) {
  * @param {String} prop 当前 prop
  * @return any
  * */
-export function handleRowAccordingToProp(
-  row: { [key: string]: any },
-  prop: string
-) {
+export function handleRowAccordingToProp(row: { [key: string]: any }, prop: string) {
   if (!prop.includes(".")) return row[prop];
-  prop.split(".").forEach((item) => {
+  prop.split(".").forEach(item => {
     row = row[item] ?? "--";
   });
   return row;

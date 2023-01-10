@@ -3,10 +3,7 @@
   <el-main>
     <router-view v-slot="{ Component, route }">
       <transition appear name="fade-transform" mode="out-in">
-        <keep-alive
-          :include="authStore.keepAliveRouterGet"
-          v-if="isRouterRefresh"
-        >
+        <keep-alive :include="authStore.keepAliveRouterGet" v-if="isRouterRefresh">
           <component :is="Component" :key="route.path" />
         </keep-alive>
       </transition>
@@ -42,10 +39,8 @@ provide("refresh", refreshCurrentPage);
 const screenWidth = ref<number>(0);
 const listeningWindow = () => {
   screenWidth.value = document.body.clientWidth;
-  if (!isCollapse.value && screenWidth.value < 1200)
-    globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
-  if (isCollapse.value && screenWidth.value > 1200)
-    globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
+  if (!isCollapse.value && screenWidth.value < 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: true });
+  if (isCollapse.value && screenWidth.value > 1200) globalStore.setThemeConfig({ ...themeConfig.value, isCollapse: false });
 };
 window.addEventListener("resize", listeningWindow);
 onBeforeUnmount(() => {

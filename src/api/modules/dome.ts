@@ -5,7 +5,7 @@ export const loginApi = () => {
     `/api/parameter/query`,
     {},
     {
-      headers: { noLoading: true },
+      headers: { noLoading: true }
     }
   ); // 正常 post json 请求  ==>  application/json
 };

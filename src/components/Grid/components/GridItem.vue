@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
   sm: undefined,
   md: undefined,
   lg: undefined,
-  xl: undefined,
+  xl: undefined
 });
 
 const attrs = useAttrs() as any;
@@ -37,7 +37,7 @@ const breakPoint = inject<Ref<BreakPoint>>("breakPoint", ref("xl"));
 const shouldHiddenIndex = inject<Ref<number>>("shouldHiddenIndex", ref(-1));
 watch(
   () => [shouldHiddenIndex.value, breakPoint.value],
-  (n) => {
+  n => {
     if (!!attrs.index) {
       isShow.value = !(n[0] !== -1 && parseInt(attrs.index) >= n[0]);
     }
@@ -54,20 +54,14 @@ const style = computed(() => {
     return {
       gridColumnStart: cols.value - span - offset + 1,
       gridColumnEnd: `span ${span + offset}`,
-      marginLeft:
-        offset !== 0
-          ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})`
-          : "unset",
+      marginLeft: offset !== 0 ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})` : "unset"
     };
   } else {
     return {
-      gridColumn: `span ${
+      gridColumn: `span ${span + offset > cols.value ? cols.value : span + offset}/span ${
         span + offset > cols.value ? cols.value : span + offset
-      }/span ${span + offset > cols.value ? cols.value : span + offset}`,
-      marginLeft:
-        offset !== 0
-          ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})`
-          : "unset",
+      }`,
+      marginLeft: offset !== 0 ? `calc(((100% + ${gap}px) / ${span + offset}) * ${offset})` : "unset"
     };
   }
 });

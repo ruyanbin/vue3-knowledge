@@ -9,9 +9,7 @@
           <div
             class="split-item"
             :class="{
-              'split-active':
-                splitActive == item.path ||
-                `/${splitActive.split('/')[1]}` == item.path,
+              'split-active': splitActive == item.path || `/${splitActive.split('/')[1]}` == item.path
             }"
             v-for="item in menuList"
             :key="item.path"
@@ -25,10 +23,7 @@
         </div>
       </el-scrollbar>
     </div>
-    <el-aside
-      :class="{ 'not-aside': !subMenu.length }"
-      :style="{ width: isCollapse ? '65px' : '210px' }"
-    >
+    <el-aside :class="{ 'not-aside': !subMenu.length }" :style="{ width: isCollapse ? '65px' : '210px' }">
       <div class="logo flx-center">
         <span v-show="subMenu.length">{{ isCollapse ? "v" : title }}</span>
       </div>
@@ -65,7 +60,6 @@ import Main from "@/layouts/components/Main/index.vue";
 import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
 import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
 import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
-import { ignorableWatch } from "@vueuse/shared";
 const route = useRoute();
 const router = useRouter();
 const authStore = AuthStore();
@@ -82,18 +76,15 @@ watch(
     // 当前路由存在 tabs 白名单中 || 当前菜单没有数据直接 return
     if (TABS_WHITE_LIST.includes(route.path) || !menuList.value.length) return;
     splitActive.value = route.path;
-    const menuItem = menuList.value.filter((item: Menu.MenuOptions) =>
-      route.path.includes(item.path)
-    );
+    const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path));
     if (menuItem.length) {
-      if (menuItem[0].children?.length)
-        return (subMenu.value = menuItem[0].children);
+      if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children);
       subMenu.value = [];
     }
   },
   {
     deep: true,
-    immediate: true,
+    immediate: true
   }
 );
 // 切换 SubMenu

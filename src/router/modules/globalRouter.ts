@@ -23,8 +23,8 @@ export const globalRouter: RouteRecordRaw[] = [
         component: () => import("@/views/sys/Account/index.vue"),
         meta: {
           title: "账号管理",
-          icon: "Menu",
-        },
+          icon: "Menu"
+        }
       },
       {
         path: "/sys/Role/index",
@@ -32,8 +32,8 @@ export const globalRouter: RouteRecordRaw[] = [
         component: () => import("@/views/sys/Role/index.vue"),
         meta: {
           title: "角色管理",
-          icon: "Menu",
-        },
+          icon: "Menu"
+        }
       },
       {
         path: "/sys/Menu/index",
@@ -41,8 +41,8 @@ export const globalRouter: RouteRecordRaw[] = [
         component: () => import("@/views/sys/Menu/index.vue"),
         meta: {
           title: "菜单管理",
-          icon: "Menu",
-        },
+          icon: "Menu"
+        }
       },
       {
         path: "/proTable/useTreeFilter/index",
@@ -50,9 +50,9 @@ export const globalRouter: RouteRecordRaw[] = [
         component: () => import("@/views/proTable/useTreeFilter/index.vue"),
         meta: {
           title: "使用 TreeFilter",
-          icon: "Menu",
-        },
-      },
-    ],
-  },
+          icon: "Menu"
+        }
+      }
+    ]
+  }
 ];

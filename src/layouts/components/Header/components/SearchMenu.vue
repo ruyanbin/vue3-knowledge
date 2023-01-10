@@ -3,14 +3,7 @@
     <el-icon size="22" @click="handleOpen">
       <fangdajing />
     </el-icon>
-    <el-dialog
-      @click="closeSearch"
-      v-model="isShowSearch"
-      width="300px"
-      destroy-on-close
-      :modal="false"
-      fullscreen
-    >
+    <el-dialog @click="closeSearch" v-model="isShowSearch" width="300px" destroy-on-close :modal="false" fullscreen>
       <!-- :show-close="false" -->
       <el-autocomplete
         v-model="searchMenu"
@@ -54,17 +47,14 @@ const menuList = computed(() => getFlatArr(authStore.authMenuList));
 // const searchMenuList = ref([]);
 const menuInputRef = ref();
 const searchMenuList = (queryString: string, cb: any) => {
-  const results = queryString
-    ? menuList.value.filter(filterNodeMethod(queryString))
-    : menuList.value;
+  const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value;
   cb(results);
 };
 const filterNodeMethod = (queryString: string) => {
   return (restaurant: Menu.MenuOptions) => {
     return (
       restaurant.path.toLowerCase().indexOf(queryString.toLowerCase()) > -1 ||
-      restaurant.meta.title.toLowerCase().indexOf(queryString.toLowerCase()) >
-        -1
+      restaurant.meta.title.toLowerCase().indexOf(queryString.toLowerCase()) > -1
     );
   };
 };

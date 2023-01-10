@@ -14,7 +14,7 @@ export const useSelection = (selectId: string = "id") => {
   // 当前选中的所有ids(数组)，可根据项目自行配置id字段
   const selectedListIds = computed((): string[] => {
     let ids: string[] = [];
-    selectedList.value.forEach((item) => {
+    selectedList.value.forEach(item => {
       ids.push(item[selectId]);
     });
     return ids;
@@ -31,9 +31,7 @@ export const useSelection = (selectId: string = "id") => {
    * @return void
    */
   const selectionChange = (rowArr: any) => {
-    rowArr.length === 0
-      ? (isSelected.value = false)
-      : (isSelected.value = true);
+    rowArr.length === 0 ? (isSelected.value = false) : (isSelected.value = true);
     selectedList.value = rowArr;
   };
 
@@ -42,6 +40,6 @@ export const useSelection = (selectId: string = "id") => {
     selectedList,
     selectedListIds,
     selectionChange,
-    getRowKeys,
+    getRowKeys
   };
 };

@@ -6,12 +6,7 @@
 
     <template #dropdown>
       <el-dropdown-menu>
-        <el-dropdown-item
-          v-for="item in assemblySizeList"
-          :key="item"
-          :disabled="assemblySize === item"
-          :command="item"
-        >
+        <el-dropdown-item v-for="item in assemblySizeList" :key="item" :disabled="assemblySize === item" :command="item">
           {{ assemblySizeListCh[item] }}
         </el-dropdown-item>
       </el-dropdown-menu>
@@ -29,7 +24,7 @@ const assemblySize = computed((): string => globalStore.assemblySize);
 const assemblySizeListCh = reactive<{ [key: string]: any }>({
   default: "默认",
   large: "大型",
-  small: "小型",
+  small: "小型"
 });
 
 const assemblySizeList = reactive<string[]>(["default", "large", "small"]);

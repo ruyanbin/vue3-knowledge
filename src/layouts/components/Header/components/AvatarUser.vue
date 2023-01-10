@@ -40,14 +40,14 @@ const logout = () => {
   ElMessageBox.confirm("您是否确认退出登录?", "温馨提示", {
     confirmButtonText: "确定",
     cancelButtonText: "取消",
-    type: "warning",
+    type: "warning"
   }).then(() => {
     resetRouter();
     globalStore.setToken("");
     router.replace(LOGIN_URL);
     ElMessage({
       type: "success",
-      message: "退出登录成功！",
+      message: "退出登录成功！"
     });
   });
 };

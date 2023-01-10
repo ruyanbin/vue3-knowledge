@@ -1,15 +1,14 @@
-
 .el-main {
-	box-sizing: border-box;
-	padding: 10px 12px;
-	overflow-x: hidden;
-	background-color: #f0f2f5;
-	overflow: hidden;
-	&::-webkit-scrollbar {
-		background-color: #f0f2f5;
-	}
+  box-sizing: border-box;
+  padding: 10px 12px;
+  overflow-x: hidden;
+  background-color: #f0f2f5;
+  overflow: hidden;
+  &::-webkit-scrollbar {
+    background-color: #f0f2f5;
+  }
 }
 .el-footer {
-	height: auto;
-	padding: 0;
+  height: auto;
+  padding: 0;
 }

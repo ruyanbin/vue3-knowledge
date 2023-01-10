@@ -44,8 +44,8 @@ export const GlobalStore = defineStore({
       // 页脚
       footer: true,
       // 当前页面是否全屏
-      maximize: false,
-    },
+      maximize: false
+    }
   }),
   getters: {},
   actions: {
@@ -69,9 +69,9 @@ export const GlobalStore = defineStore({
     // setThemeConfig
     setThemeConfig(themeConfig: ThemeConfigProps) {
       this.themeConfig = themeConfig;
-    },
+    }
   },
-  persist: piniaPersistConfig("GlobalState"),
+  persist: piniaPersistConfig("GlobalState")
 });
 // piniaPersist(持久化)
 const pinia = createPinia();

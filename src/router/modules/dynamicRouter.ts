@@ -7,7 +7,7 @@ import { AuthStore } from "@/stores/modules/auth";
 import { notFoundRouter } from "@/router/modules/staticRouter";
 const contextInfo = require.context("@/views", true, /.vue$/);
 const routerAry: { path: string; component: any }[] = [];
-contextInfo.keys().forEach((fileName) => {
+contextInfo.keys().forEach(fileName => {
   const pathConfig = contextInfo(fileName);
   const path = "/" + fileName.substring(2, fileName.length - 4);
   routerAry[path] = pathConfig.default;
@@ -27,7 +27,7 @@ export const initDynamicRouter = async () => {
         title: "无权限访问",
         message: "当前账号无任何菜单权限，请联系系统管理员！",
         type: "warning",
-        duration: 3000,
+        duration: 3000
       });
       globalStore.setToken("");
       router.replace(LOGIN_URL);

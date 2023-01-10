@@ -2,11 +2,7 @@
   <el-breadcrumb :separator-icon="ArrowRight">
     <transition-group name="breadcrumb" mode="out-in">
       <!-- 首页面包屑不要可以直接删除 🙅‍♀️ -->
-      <el-breadcrumb-item
-        :to="{ path: HOME_URL }"
-        :key="HOME_URL"
-        v-if="breadcrumbList[0].meta.title !== '首页'"
-      >
+      <el-breadcrumb-item :to="{ path: HOME_URL }" :key="HOME_URL" v-if="breadcrumbList[0].meta.title !== '首页'">
         <div class="breadcrumb-item">
           <el-icon class="breadcrumb-icon" v-if="themeConfig.breadcrumbIcon">
             <HomeFilled />
@@ -15,16 +11,9 @@
         </div>
       </el-breadcrumb-item>
       <!-- other -->
-      <el-breadcrumb-item
-        v-for="item in breadcrumbList"
-        :key="item.path"
-        :to="{ path: item.path }"
-      >
+      <el-breadcrumb-item v-for="item in breadcrumbList" :key="item.path" :to="{ path: item.path }">
         <div class="breadcrumb-item">
-          <el-icon
-            class="breadcrumb-icon"
-            v-if="item.meta.icon && themeConfig.breadcrumbIcon"
-          >
+          <el-icon class="breadcrumb-icon" v-if="item.meta.icon && themeConfig.breadcrumbIcon">
             <component :is="item.meta.icon"></component>
           </el-icon>
           <span class="breadcrumb-title">{{ item.meta.title }}</span>

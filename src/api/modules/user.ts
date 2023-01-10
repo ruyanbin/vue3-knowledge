@@ -8,7 +8,7 @@ export const getUserList = (params: User.ReqGetUserParams) => {
   return http.post<ResPage<User.ResUserList>>(`/api/user/list`, params);
 };
 // * 新增用户
-export const addUser = (params: { id: string }) => {
+export const addUser = (params: any) => {
   return http.post(`/api/user/add`, params);
 };
 // * 编辑用户
@@ -38,7 +38,7 @@ export const changeUserStatus = (params: { id: string; status: number }) => {
 // * 导出用户数据
 export const exportUserInfo = (params: User.ReqGetUserParams) => {
   return http.post<BlobPart>(`/api/user/export`, params, {
-    responseType: "blob",
+    responseType: "blob"
   });
 };
 // * 批量添加用户

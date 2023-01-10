@@ -48,12 +48,7 @@ export function isAsyncFunction<T = any>(val: unknown): val is Promise<T> {
  * @description:  是否为promise
  */
 export function isPromise<T = any>(val: unknown): val is Promise<T> {
-  return (
-    is(val, "Promise") &&
-    isObject(val) &&
-    isFunction(val.then) &&
-    isFunction(val.catch)
-  );
+  return is(val, "Promise") && isObject(val) && isFunction(val.then) && isFunction(val.catch);
 }
 /**
  * @description:  是否为字符串

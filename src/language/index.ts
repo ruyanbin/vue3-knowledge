@@ -7,8 +7,8 @@ const i18n = createI18n({
   globalInjection: true, // 全局注册$t方法
   messages: {
     zh,
-    en,
-  },
+    en
+  }
 });
 
 export default i18n;

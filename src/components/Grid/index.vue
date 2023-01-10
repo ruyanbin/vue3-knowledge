@@ -17,7 +17,7 @@ import {
   onDeactivated,
   onActivated,
   VNodeArrayChildren,
-  VNode,
+  VNode
 } from "vue";
 //useSlots useAttrs useSlots 和 useAttrs 是真实的运行时函数，它的返回与 setupContext.slots 和 setupContext.attrs 等价。
 import type { BreakPoint } from "./interface/index";
@@ -34,7 +34,7 @@ const props = withDefaults(defineProps<Props>(), {
   cols: () => ({ xs: 1, sm: 2, md: 2, lg: 3, xl: 4 }),
   collapsed: false,
   collapsedRows: 1,
-  gap: 0,
+  gap: 0
 });
 // 生命周期
 onBeforeMount(() => props.collapsed && findIndex());
@@ -86,8 +86,7 @@ const hiddenIndex = ref(-1);
 provide("shouldHiddenIndex", hiddenIndex);
 // 注入 cols
 const cols = computed(() => {
-  if (typeof props.cols === "object")
-    return props.cols[breakPoint.value] ?? props.cols;
+  if (typeof props.cols === "object") return props.cols[breakPoint.value] ?? props.cols;
   return props.cols;
 });
 provide("cols", cols);
@@ -98,14 +97,8 @@ const findIndex = () => {
   let fields: VNodeArrayChildren = [];
   let suffix: any = null;
   slots.forEach((slot: any) => {
-    if (
-      typeof slot.type === "object" &&
-      slot.type.name === "GridItem" &&
-      slot.props?.suffix !== undefined
-    )
-      suffix = slot;
-    if (typeof slot.type === "symbol" && Array.isArray(slot.children))
-      slot.children.forEach((child: any) => fields.push(child));
+    if (typeof slot.type === "object" && slot.type.name === "GridItem" && slot.props?.suffix !== undefined) suffix = slot;
+    if (typeof slot.type === "symbol" && Array.isArray(slot.children)) slot.children.forEach((child: any) => fields.push(child));
   });
   // 计算 suffix 所占用的列
   let suffixCols = 0;
@@ -118,12 +111,8 @@ const findIndex = () => {
     let find = false;
     fields.reduce((prev = 0, current, index) => {
       prev +=
-        ((current as VNode)!.props![breakPoint.value]?.span ??
-          (current as VNode)!.props?.span ??
-          1) +
-        ((current as VNode)!.props![breakPoint.value]?.offset ??
-          (current as VNode)!.props?.offset ??
-          0);
+        ((current as VNode)!.props![breakPoint.value]?.span ?? (current as VNode)!.props?.span ?? 1) +
+        ((current as VNode)!.props![breakPoint.value]?.offset ?? (current as VNode)!.props?.offset ?? 0);
       if ((prev as number) > props.collapsedRows * cols.value - suffixCols) {
         hiddenIndex.value = index;
         find = true;
@@ -147,7 +136,7 @@ watch(
 // 监听 collapsed
 watch(
   () => props.collapsed,
-  (value) => {
+  value => {
     if (value) return findIndex();
     hiddenIndex.value = -1;
   }
@@ -163,7 +152,7 @@ const style = computed(() => {
   return {
     display: "grid",
     gridGap: gap.value,
-    gridTemplateColumns: `repeat(${cols.value}, minmax(0, 1fr))`,
+    gridTemplateColumns: `repeat(${cols.value}, minmax(0, 1fr))`
   };
 });
 

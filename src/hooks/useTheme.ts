@@ -24,15 +24,12 @@ export const useTheme = () => {
       val = DEFAULT_PRIMARY;
       ElMessage({
         type: "success",
-        message: `主题颜色已重置为 ${DEFAULT_PRIMARY}`,
+        message: `主题颜色已重置为 ${DEFAULT_PRIMARY}`
       });
     }
     globalStore.setThemeConfig({ ...themeConfig.value, primary: val });
     // 为了兼容暗黑模式下主题颜色也正常，以下方法计算主题颜色 由深到浅 的具体颜色
-    document.documentElement.style.setProperty(
-      "--el-color-primary",
-      themeConfig.value.primary
-    );
+    document.documentElement.style.setProperty("--el-color-primary", themeConfig.value.primary);
     document.documentElement.style.setProperty(
       "--el-color-primary-dark-2",
       themeConfig.value.isDark
@@ -67,6 +64,6 @@ export const useTheme = () => {
   return {
     switchDark,
     changePrimary,
-    changeGreyOrWeak,
+    changeGreyOrWeak
   };
 };

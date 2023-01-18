@@ -9,6 +9,8 @@ import { globalRouter } from "@/router/modules/globalRouter";
 import { initDynamicRouter } from "@/router/modules/dynamicRouter";
 import NProgress from "@/config/nprogress";
 
+import { removeWatermark, setWaterMark } from "@/utils/watermark";
+
 /**
  * @description 动态路由参数配置简介
  * @param path ==> 菜单路径
@@ -56,6 +58,14 @@ router.beforeEach(async (to, from, next) => {
   if (!authStore.authMenuListGet.length) {
     await initDynamicRouter();
     return next({ ...to, replace: true });
+  }
+  // 是否添加水印
+  if (globalStore.isWatermark) {
+    if (to.path === LOGIN_URL) {
+      removeWatermark();
+    } else {
+      setWaterMark("hahaha", "哈哈哈");
+    }
   }
 
   // 5.正常访问页面

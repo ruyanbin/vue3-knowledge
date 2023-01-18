@@ -1,77 +1,77 @@
 <template>
-  <div :class="['editor-box', disabled ? 'editor-disabled' : '']">
-    <Toolbar class="editor-toolbar" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" v-if="!hideToolBar" />
-    <Editor
-      :style="{ height }"
-      class="editor-content'"
-      v-model="valueHtml"
-      :defaultConfig="editorConfig"
-      :mode="mode"
-      @on-created="handleCreated"
-      @on-blur="handleBlur"
-    />
-  </div>
+	<div :class="['editor-box', disabled ? 'editor-disabled' : '']">
+		<Toolbar class="editor-toolbar" :editor="editorRef" :defaultConfig="toolbarConfig" :mode="mode" v-if="!hideToolBar" />
+		<Editor
+			:style="{ height }"
+			class="editor-content'"
+			v-model="valueHtml"
+			:defaultConfig="editorConfig"
+			:mode="mode"
+			@on-created="handleCreated"
+			@on-blur="handleBlur"
+		/>
+	</div>
 </template>
 
 <script lang="ts" setup>
 // shallowRef 浅层 ref 的内部值将会原样存储和暴露，并且不会被深层递归地转为响应式。只有对 .value 的访问是响应式的。
-import { nextTick, computed, shallowRef, onBeforeUnmount } from "vue";
+import { nextTick, computed, shallowRef, onBeforeUnmount } from 'vue';
 
-import { IToolbarConfig, IEditorConfig } from "@wangeditor/editor";
-import { Editor, Toolbar } from "@wangeditor/editor-for-vue";
-import "@wangeditor/editor/dist/css/style.css";
+import { IToolbarConfig, IEditorConfig } from '@wangeditor/editor';
+import { Editor, Toolbar } from '@wangeditor/editor-for-vue';
+import '@wangeditor/editor/dist/css/style.css';
 // 富文本 DOM 元素
 const editorRef = shallowRef();
 
 // 实列化编辑器
 const handleCreated = (editor: any) => {
-  editorRef.value = editor;
+	editorRef.value = editor;
 };
 
 // 接收父组件参数，并设置默认值
 interface RichEditorProps {
-  value: string; // 富文本值 ==> 必传
-  toolbarConfig?: Partial<IToolbarConfig>; // 工具栏配置 ==> 非必传（默认为空）
-  editorConfig?: Partial<IEditorConfig>; // 编辑器配置 ==> 非必传（默认为空）
-  height?: string; // 富文本高度 ==> 非必传（默认为 500px）
-  mode?: "default" | "simple"; // 富文本模式 ==> 非必传（默认为 default）
-  hideToolBar?: boolean; // 是否隐藏工具栏 ==> 非必传（默认为false）
-  disabled?: boolean; // 是否禁用编辑器 ==> 非必传（默认为false）
+	value: string; // 富文本值 ==> 必传
+	toolbarConfig?: Partial<IToolbarConfig>; // 工具栏配置 ==> 非必传（默认为空）
+	editorConfig?: Partial<IEditorConfig>; // 编辑器配置 ==> 非必传（默认为空）
+	height?: string; // 富文本高度 ==> 非必传（默认为 500px）
+	mode?: 'default' | 'simple'; // 富文本模式 ==> 非必传（默认为 default）
+	hideToolBar?: boolean; // 是否隐藏工具栏 ==> 非必传（默认为false）
+	disabled?: boolean; // 是否禁用编辑器 ==> 非必传（默认为false）
 }
 const props = withDefaults(defineProps<RichEditorProps>(), {
-  toolbarConfig: () => {
-    return {
-      excludeKeys: []
-    };
-  },
-  editorConfig: () => {
-    return {
-      placeholder: "请输入内容...",
-      MENU_CONF: {}
-    };
-  },
-  height: "500px",
-  mode: "default",
-  hideToolBar: false,
-  disabled: false
+	toolbarConfig: () => {
+		return {
+			excludeKeys: [],
+		};
+	},
+	editorConfig: () => {
+		return {
+			placeholder: '请输入内容...',
+			MENU_CONF: {},
+		};
+	},
+	height: '500px',
+	mode: 'default',
+	hideToolBar: false,
+	disabled: false,
 });
 // 判断当前富文本编辑器是否禁用
 if (props.disabled) nextTick(() => editorRef.value.disable());
 // 富文本的内容监听，触发父组件改变，实现双向数据绑定
 type EmitProps = {
-  (e: "update:value", val: string): void;
-  (e: "check-validate"): void;
+	(e: 'update:value', val: string): void;
+	(e: 'check-validate'): void;
 };
 const emit = defineEmits<EmitProps>();
 const valueHtml = computed({
-  get() {
-    return props.value;
-  },
-  set(val: string) {
-    // 防止富文本内容为空时，校验失败
-    if (editorRef.value.isEmpty()) val = "";
-    emit("update:value", val);
-  }
+	get() {
+		return props.value;
+	},
+	set(val: string) {
+		// 防止富文本内容为空时，校验失败
+		if (editorRef.value.isEmpty()) val = '';
+		emit('update:value', val);
+	},
 });
 
 /**
@@ -80,23 +80,22 @@ const valueHtml = computed({
  * @param insertFn 上传成功后的回调函数（插入到富文本编辑器中）
  * */
 type InsertFnTypeImg = (url: string, alt?: string, href?: string) => void;
-props.editorConfig.MENU_CONF!["uploadImage"] = {
-  async customUpload(file: File, insertFn: InsertFnTypeImg) {
-    if (!uploadImgValidate(file)) return;
-    let formData = new FormData();
-    formData.append("file", file);
-    try {
-      // const { data } = await uploadImg(formData);
-      // insertFn(data.fileUrl);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+props.editorConfig.MENU_CONF!['uploadImage'] = {
+	async customUpload(file: File, insertFn: InsertFnTypeImg) {
+		if (!uploadImgValidate(file)) return;
+		let formData = new FormData();
+		formData.append('file', file);
+		try {
+			// const { data } = await uploadImg(formData);
+			// insertFn(data.fileUrl);
+		} catch (error) {
+			console.log(error);
+		}
+	},
 };
 // 图片上传前判断
 const uploadImgValidate = (file: File): boolean => {
-  console.log(file);
-  return true;
+	return true;
 };
 /**
  * @description 视频自定义上传
@@ -104,64 +103,64 @@ const uploadImgValidate = (file: File): boolean => {
  * @param insertFn 上传成功后的回调函数（插入到富文本编辑器中）
  * */
 type InsertFnTypeVideo = (url: string, poster?: string) => void;
-props.editorConfig.MENU_CONF!["uploadVideo"] = {
-  async customUpload(file: File, insertFn: InsertFnTypeVideo) {
-    if (!uploadVideoValidate(file)) return;
-    let formData = new FormData();
-    formData.append("file", file);
-    try {
-      // const { data } = await uploadVideo(formData);
-      // insertFn(data.fileUrl);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+props.editorConfig.MENU_CONF!['uploadVideo'] = {
+	async customUpload(file: File, insertFn: InsertFnTypeVideo) {
+		if (!uploadVideoValidate(file)) return;
+		let formData = new FormData();
+		formData.append('file', file);
+		try {
+			// const { data } = await uploadVideo(formData);
+			// insertFn(data.fileUrl);
+		} catch (error) {
+			console.log(error);
+		}
+	},
 };
 
 // 视频上传前判断
 const uploadVideoValidate = (file: File): boolean => {
-  console.log(file);
-  return true;
+	console.log(file);
+	return true;
 };
 // 编辑框失去焦点时触发
 const handleBlur = () => {
-  emit("check-validate");
+	emit('check-validate');
 };
 
 // 组件销毁时，也及时销毁编辑器
 onBeforeUnmount(() => {
-  if (!editorRef.value) return;
-  editorRef.value.destroy();
+	if (!editorRef.value) return;
+	editorRef.value.destroy();
 });
 
 defineExpose({
-  editor: editorRef
+	editor: editorRef,
 });
 </script>
 <style lang="scss" scoped>
 /* 富文本组件校验失败样式 */
 .is-error {
-  .editor-box {
-    border-color: var(--el-color-danger);
-  }
+	.editor-box {
+		border-color: var(--el-color-danger);
+	}
 }
 
 /* 富文本组件禁用样式 */
 .editor-disabled {
-  cursor: not-allowed !important;
+	cursor: not-allowed !important;
 }
 
 /* 富文本组件样式 */
 .editor-box {
-  /* 防止富文本编辑器全屏时 tabs组件 在其层级之上 */
-  z-index: 2;
-  width: 100%;
-  border: 1px solid #cccccc;
-  .editor-toolbar {
-    border-bottom: 1px solid #cccccc;
-  }
-  .editor-content {
-    overflow-y: hidden;
-  }
+	/* 防止富文本编辑器全屏时 tabs组件 在其层级之上 */
+	z-index: 2;
+	width: 100%;
+	border: 1px solid #cccccc;
+	.editor-toolbar {
+		border-bottom: 1px solid #cccccc;
+	}
+	.editor-content {
+		overflow-y: hidden;
+	}
 }
 </style>

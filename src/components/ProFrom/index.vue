@@ -36,24 +36,24 @@ interface columnsItem {
     disabled?: string;
   };
 }
-interface ProFromProps {
-  form: any;
-  columns: columnsItem[]; // 列配置项
-  requestApi?: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
-  dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数
-}
-// 接受父组件参数，配置默认值
-const props = withDefaults(defineProps<ProFromProps>(), {
-  // 表单整体配置项
-  form: {
-    inline: false,
-    labelPosition: "right",
-    labelWidth: "80px",
-    size: "default",
-    disabled: false,
-    labelSuffix: " :"
-  }
-});
+// interface ProFromProps {
+//   form: any;
+//   columns: columnsItem[]; // 列配置项
+//   requestApi?: (params: any) => Promise<any>; // 请求表格数据的api ==> 必传
+//   dataCallback?: (data: any) => any; // 返回数据的回调函数，可以对数
+// }
+// // 接受父组件参数，配置默认值
+// const props = withDefaults(defineProps<ProFromProps>(), {
+//   // 表单整体配置项
+//   form: {
+//     inline: false,
+//     labelPosition: "right",
+//     labelWidth: "80px",
+//     size: "default",
+//     disabled: false,
+//     labelSuffix: " :"
+//   }
+// });
 const options = ref({
   // 表单整体配置项
   form: {

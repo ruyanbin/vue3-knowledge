@@ -94,6 +94,10 @@
       <span>页脚</span>
       <el-switch v-model="themeConfig.footer" />
     </div>
+    <div class="theme-item">
+      <span>水印</span>
+      <el-switch @change="WatermarkChange" v-model="Watermark" />
+    </div>
   </el-drawer>
 </template>
 
@@ -107,11 +111,16 @@ import { DEFAULT_PRIMARY } from "@/config/config";
 const { changePrimary, changeGreyOrWeak } = useTheme();
 const globalStore = GlobalStore();
 const themeConfig = computed(() => globalStore.themeConfig);
+const Watermark = computed(() => globalStore.isWatermark);
+
 // 切换布局方式
 const changeLayout = (val: string) => {
   globalStore.setThemeConfig({ ...themeConfig.value, layout: val });
 };
-
+const WatermarkChange = (val: boolean) => {
+  console.log(val, "WatermarkChange");
+  globalStore.setisWatermark(val);
+};
 // 预定义主题颜色
 const colorList = [
   DEFAULT_PRIMARY,

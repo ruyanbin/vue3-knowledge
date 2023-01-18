@@ -46,7 +46,14 @@
         >
         </el-table-column>
         <!-- expand 支持 tsx 语法 && 作用域插槽 (tsx > slot) -->
-        <el-table-column v-bind="item" :align="item.align ?? 'center'" min-width="10%" show-overflow-tooltip v-if="item.type == 'expand'" v-slot="scope">
+        <el-table-column
+          v-bind="item"
+          :align="item.align ?? 'center'"
+          min-width="10%"
+          show-overflow-tooltip
+          v-if="item.type == 'expand'"
+          v-slot="scope"
+        >
           <component :is="item.render" :row="scope.row" v-if="item.render"> </component>
           <slot :name="item.type" :row="scope.row" v-else></slot>
         </el-table-column>

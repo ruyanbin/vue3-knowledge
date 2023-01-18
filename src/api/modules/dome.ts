@@ -1,5 +1,4 @@
 import http from "@/api";
-import { Login } from "@/api/interface/index";
 export const loginApi = () => {
   return http.get(
     `/api/parameter/query`,

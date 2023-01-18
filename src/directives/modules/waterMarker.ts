@@ -15,6 +15,8 @@ const addWaterMarker: Directive = (str: string, parentNode: any, font: any, text
   can.width = 205;
   can.height = 140;
   can.style.display = "none";
+  can.style.position = "absolute";
+  can.style.zIndex = "100000";
   let cans = can.getContext("2d") as CanvasRenderingContext2D;
   cans.rotate((-20 * Math.PI) / 180);
   cans.font = font || "16px Microsoft JhengHei";

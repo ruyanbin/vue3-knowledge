@@ -1,80 +1,114 @@
 <!-- 纵向布局 -->
 <template>
-  <el-container class="layout">
-    <el-aside>
-      <div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
-        <div class="logo flx-center">
-          <img src="@/assets/images/logo.png" alt="logo" />
-          <span v-show="!isCollapse">{{ title }}</span>
-        </div>
-        <el-scrollbar>
-          <el-menu
-            :default-active="activeMenu"
-            :router="false"
-            :collapse="isCollapse"
-            :collapse-transition="false"
-            :unique-opened="true"
-            background-color="#191a20"
-            text-color="#bdbdc0"
-            active-text-color="#ffffff"
-          >
-            <SubMenu :menuList="menuList" />
-          </el-menu>
-        </el-scrollbar>
-      </div>
-    </el-aside>
-    <el-container>
-      <el-header>
-        <ToolBarLeft />
-        <ToolBarRight />
-      </el-header>
+	<el-container class="layout">
+		<el-aside v-if="!isPhone">
+			<div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
+				<div class="logo flx-center">
+					<img src="@/assets/images/logo.png" alt="logo" />
+					<span v-show="!isCollapse">{{ title }}</span>
+				</div>
+				<el-scrollbar>
+					<el-menu
+						:default-active="activeMenu"
+						:router="false"
+						:collapse="isCollapse"
+						:collapse-transition="false"
+						:unique-opened="true"
+						background-color="#191a20"
+						text-color="#bdbdc0"
+						active-text-color="#ffffff"
+					>
+						<SubMenu :menuList="menuList" />
+					</el-menu>
+				</el-scrollbar>
+			</div>
+		</el-aside>
+		<el-drawer v-else v-model="isDrawer" :direction="direction" :size="'210px'" :before-close="handleClose">
+			<template #header>
+				<div class="logo flx-center">
+					<img src="@/assets/images/logo.png" alt="logo" />
+					<span>{{ title }}</span>
+				</div>
+			</template>
+			<div class="menu" :style="{ width: '210px' }">
+				<el-scrollbar>
+					<el-menu
+						:default-active="activeMenu"
+						:router="false"
+						:collapse="isCollapse"
+						:collapse-transition="false"
+						:unique-opened="true"
+						background-color="#191a20"
+						text-color="#bdbdc0"
+						active-text-color="#ffffff"
+					>
+						<SubMenu :menuList="menuList" />
+					</el-menu>
+				</el-scrollbar>
+			</div>
+		</el-drawer>
+		<el-container>
+			<el-header>
+				<ToolBarLeft />
+				<ToolBarRight />
+			</el-header>
 
-      <Main />
-    </el-container>
-  </el-container>
+			<Main />
+		</el-container>
+	</el-container>
 </template>
 
 <script setup lang="ts" name="layoutVertical">
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { GlobalStore } from "@/stores";
-import { AuthStore } from "@/stores/modules/auth";
-import Main from "@/layouts/components/Main/index.vue";
-import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
-import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
-import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
-
+import { computed, ref } from 'vue';
+import { useRoute } from 'vue-router';
+import { GlobalStore } from '@/stores';
+import { AuthStore } from '@/stores/modules/auth';
+import Main from '@/layouts/components/Main/index.vue';
+import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue';
+import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue';
+import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
+import mittBus from '@/utils/mittBus';
 const route = useRoute();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
 const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
+const isPhone = computed(() => globalStore.themeConfig.isPhone);
 const title = computed(() => globalStore.title);
+///
+const direction = ref('ltr');
+const isDrawer = ref<Boolean>(false);
+mittBus.on('isDrawerMenu', (all) => {
+	isDrawer.value = all as boolean;
+});
+const handleClose = () => {
+	isDrawer.value = false;
+};
 </script>
 
 <style scoped lang="scss">
-@import "./index.scss";
+@import './index.scss';
 </style>
 
 <style lang="scss">
 .vertical {
-  .el-menu,
-  .el-menu--popup {
-    .el-menu-item {
-      &.is-active {
-        background: #060708;
-        &::before {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          width: 4px;
-          content: "";
-          background: var(--el-color-primary);
-        }
-      }
-    }
-  }
+	.el-menu,
+	.el-menu--popup {
+		.el-menu-item {
+			&.is-active {
+				background: #060708;
+				&::before {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					width: 4px;
+					content: '';
+					background: var(--el-color-primary);
+				}
+			}
+		}
+	}
 }
 </style>

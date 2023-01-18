@@ -251,3 +251,17 @@ export function handleRowAccordingToProp(row: { [key: string]: any }, prop: stri
   });
   return row;
 }
+/**
+ * * 生成一个不重复的ID echart
+ * @param { Number } randomLength
+ */
+export const getUUID = (randomLength = 10) => {
+  return Number(Math.random().toString().substring(2, randomLength) + Date.now()).toString(36);
+};
+/**
+ * * 判断是否是预览页
+ * @returns boolean
+ */
+export const isPreview = () => {
+  return document.location.hash.includes("preview");
+};

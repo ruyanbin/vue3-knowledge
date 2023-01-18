@@ -1,8 +1,10 @@
 /dist/*
 .local
 /node_modules/**
+/mock/**
 
 **/*.svg
 **/*.sh
 
 /public/*
+

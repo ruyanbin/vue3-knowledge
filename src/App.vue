@@ -1,6 +1,6 @@
 <template>
   <el-config-provider :locale="i18nLocale" :button="config" :size="assemblySize">
-    <router-view />
+    <router-view></router-view>
   </el-config-provider>
 </template>
 <script setup lang="ts">
@@ -9,6 +9,7 @@ import { GlobalStore } from "@/stores";
 import { getBrowserLang } from "@/utils/util"; // 获取浏览器默认语言
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 import en from "element-plus/es/locale/lang/en";
+
 const globalStore = GlobalStore();
 // 配置element按钮文字中间是否有空格
 const config = reactive({
@@ -23,25 +24,4 @@ const i18nLocale = computed(() => {
 // 配置全局组件大小 (small/default(medium)/large)
 const assemblySize = computed((): string => globalStore.assemblySize);
 </script>
-<style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-</style>
+<style lang="scss"></style>

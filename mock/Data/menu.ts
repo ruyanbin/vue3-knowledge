@@ -1,4 +1,5 @@
 export const list = [
+	// 首页
   {
     component: "/home/index",
     name: "home",
@@ -13,6 +14,94 @@ export const list = [
       title: "首页"
     }
   },
+	//  vue api
+	 {
+    path: "",
+    name: "vue",
+    meta: {
+      icon: "TrendCharts",
+      title: "vue api",
+      isLink: "",
+      isHide: false,
+      isFull: false,
+      isAffix: false,
+      isKeepAlive: true
+    },
+    children: [
+      {
+        path: "/vueapiIndex",
+        name: "vueapiIndex",
+        component: "/vueapi/index",
+        meta: {
+          icon: "Menu",
+          title: "vue api 测试",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+  	 {
+        path: "/routerParameter",
+        name: "routerParameter",
+        component: "/vueapi/routerParameter",
+        meta: {
+          icon: "Menu",
+          title: "vue 路由传参",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+			{
+        path: "/vuedetail",
+        name: "vuedetail",
+        component: "/vueapi/vuedetail",
+        meta: {
+          icon: "Menu",
+          title: "vue 详情",
+          isLink: "",
+          isHide: true,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+				{
+        path: "/params/:id",
+        name: "params",
+        component: "/vueapi/params",
+        meta: {
+          icon: "Menu",
+          title: "vue-params 详情",
+          isLink: "",
+          isHide: true,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        },
+			},
+			{
+        path: "/transfer/component",
+        name: "transfercomponent",
+        component: "/vueapi/component/index",
+        meta: {
+          icon: "Menu",
+          title: "组件传参",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+    ]
+		
+  },
+	// 表哥
   {
     name: "proTable",
     path: "/proTable",
@@ -42,6 +131,7 @@ export const list = [
       }
     ]
   },
+	//系统管理
   {
     name: "sys",
     path: "/sys",
@@ -99,6 +189,7 @@ export const list = [
       }
     ]
   },
+	// from
   {
     path: "/From",
     name: "From",
@@ -129,6 +220,7 @@ export const list = [
       }
     ]
   },
+	// 组件
   {
     path: "/assembly",
     name: "assembly",
@@ -143,6 +235,20 @@ export const list = [
       isKeepAlive: true
     },
     children: [
+			      {
+        path: "/assembly/splitPane",
+        name: "splitPane",
+        component: "/assembly/splitPane/index",
+        meta: {
+          icon: "Menu",
+          title: "切割面板",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
       {
         path: "/assembly/guide",
         name: "guide",
@@ -215,6 +321,7 @@ export const list = [
       }
     ]
   },
+	// 指令
   {
     path: "/directives",
     name: "directives",
@@ -300,5 +407,180 @@ export const list = [
         }
       }
     ]
-  }
+  },
+	//echart
+  {
+    path: "/echarts",
+    name: "echarts",
+    redirect: "/echarts/waterChart",
+    meta: {
+      icon: "TrendCharts",
+      title: "Echarts",
+      isLink: "",
+      isHide: false,
+      isFull: false,
+      isAffix: false,
+      isKeepAlive: true
+    },
+    children: [
+      {
+        path: "/echarts/waterChart",
+        name: "waterChart",
+        component: "/echarts/waterChart/index",
+        meta: {
+          icon: "Menu",
+          title: "水型图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+      {
+        path: "/echarts/columnChart",
+        name: "columnChart",
+        component: "/echarts/columnChart/index",
+        meta: {
+          icon: "Menu",
+          title: "柱状图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+      {
+        path: "/echarts/lineChart",
+        name: "lineChart",
+        component: "/echarts/lineChart/index",
+        meta: {
+          icon: "Menu",
+          title: "折线图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+      {
+        path: "/echarts/pieChart",
+        name: "pieChart",
+        component: "/echarts/pieChart/index",
+        meta: {
+          icon: "Menu",
+          title: "饼图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+      {
+        path: "/echarts/radarChart",
+        name: "radarChart",
+        component: "/echarts/radarChart/index",
+        meta: {
+          icon: "Menu",
+          title: "雷达图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+      {
+        path: "/echarts/nestedChart",
+        name: "nestedChart",
+        component: "/echarts/nestedChart/index",
+        meta: {
+          icon: "Menu",
+          title: "嵌套环形图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+      {
+        path: "/echarts/treeChart",
+        name: "treeChart",
+        component: "/echarts/treeChart/index",
+        meta: {
+          icon: "Menu",
+          title: "树图 ",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      }
+    ]
+  },
+	//地图
+  {
+    path: "/map",
+    name: "map",
+    meta: {
+      icon: "TrendCharts",
+      title: "地图",
+      isLink: "",
+      isHide: false,
+      isFull: false,
+      isAffix: false,
+      isKeepAlive: true
+    },
+    children: [
+      {
+        path: "/gaud",
+        name: "gaud",
+        meta: {
+          icon: "TrendCharts",
+          title: "高德地图",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        },
+        children: [
+          {
+            path: "/map/gaud",
+            name: "gaudmapbasic",
+            component: "/map/gaud/basic",
+            meta: {
+              icon: "Menu",
+              title: "基础实例",
+              isLink: "",
+              isHide: false,
+              isFull: false,
+              isAffix: false,
+              isKeepAlive: true
+            }
+          },
+          {
+            path: "/map/searchMap",
+            name: "searchMap",
+            component: "/map/gaud/searchMap",
+            meta: {
+              icon: "Menu",
+              title: "查询",
+              isLink: "",
+              isHide: false,
+              isFull: false,
+              isAffix: false,
+              isKeepAlive: true
+            }
+          },
+        ]
+      }
+    ]
+  },
+  
 ];

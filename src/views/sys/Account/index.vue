@@ -104,14 +104,14 @@ const columns: ColumnProps[] = [
   { type: "selection", fixed: "left", width: 80 },
   { type: "index", label: "#", width: 80 },
   // { type: "expand", label: "Expand", width: 100 },
-	{
-	  prop: "account",
-	  label: "账号",
-	  search: { el: "input" },
-	  render: scope => {
-	    return scope.row.account;
-	  }
-	},
+  {
+    prop: "account",
+    label: "账号",
+    search: { el: "input" },
+    render: scope => {
+      return scope.row.account;
+    }
+  },
   {
     prop: "username",
     label: "用户姓名",
@@ -124,8 +124,8 @@ const columns: ColumnProps[] = [
     prop: "gender",
     label: "性别",
     enum: [
-      { label: "男", value: '1' },
-      { label: "女", value: '2' }
+      { label: "男", value: "1" },
+      { label: "女", value: "2" }
     ],
     fieldNames: { label: "label", value: "value" },
     search: { el: "select" }

@@ -38,7 +38,7 @@ export const AuthStore = defineStore({
     // getAuthMenuList
     async getAuthMenuList() {
       const { data } = await getMenulist({ id: "11" });
-			console.log(data,'data')
+      console.log(data, "data");
       this.authMenuList = data as any;
     },
     // setRouteName

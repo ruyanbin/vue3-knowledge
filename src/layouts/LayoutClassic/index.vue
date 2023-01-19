@@ -1,49 +1,49 @@
 <template>
-  <el-container class="layout">
-    <el-header>
-      <div class="header-lf">
-        <div class="logo flx-center">
-          <img src="@/assets/images/logo.png" alt="logo" />
-          <span>{{ title }}</span>
-        </div>
-        <ToolBarLeft />
-      </div>
-      <ToolBarRight />
-    </el-header>
-    <el-container class="classic-content">
-      <el-aside>
-        <div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
-          <el-scrollbar>
-            <el-menu
-              :default-active="activeMenu"
-              :router="false"
-              :collapse="isCollapse"
-              :collapse-transition="false"
-              :unique-opened="true"
-              background-color="#ffffff"
-              text-color="#303133"
-            >
-              <SubMenu :menuList="menuList" />
-            </el-menu>
-          </el-scrollbar>
-        </div>
-      </el-aside>
-      <el-container class="classic-main">
-        <Main />
-      </el-container>
-    </el-container>
-  </el-container>
+	<el-container class="layout">
+		<el-header>
+			<div class="header-lf">
+				<div class="logo flx-center">
+					<img src="@/assets/images/logo.png" alt="logo" />
+					<span>{{ title }}</span>
+				</div>
+				<ToolBarLeft />
+			</div>
+			<ToolBarRight />
+		</el-header>
+		<el-container class="classic-content">
+			<el-aside>
+				<div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
+					<el-scrollbar>
+						<el-menu
+							:default-active="activeMenu"
+							:router="false"
+							:collapse="isCollapse"
+							:collapse-transition="false"
+							:unique-opened="true"
+							background-color="#ffffff"
+							text-color="#303133"
+						>
+							<SubMenu :menuList="menuList" />
+						</el-menu>
+					</el-scrollbar>
+				</div>
+			</el-aside>
+			<el-container class="classic-main">
+				<Main />
+			</el-container>
+		</el-container>
+	</el-container>
 </template>
 
 <script lang="ts" setup>
-import { computed } from "vue";
-import { useRoute } from "vue-router";
-import { GlobalStore } from "@/stores";
-import { AuthStore } from "@/stores/modules/auth";
-import Main from "@/layouts/components/Main/index.vue";
-import SubMenu from "@/layouts/components/Menu/SubMenu.vue";
-import ToolBarLeft from "@/layouts/components/Header/ToolBarLeft.vue";
-import ToolBarRight from "@/layouts/components/Header/ToolBarRight.vue";
+import { computed } from 'vue';
+import { useRoute } from 'vue-router';
+import { GlobalStore } from '@/stores';
+import { AuthStore } from '@/stores/modules/auth';
+import Main from '@/layouts/components/Main/index.vue';
+import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
+import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue';
+import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue';
 const route = useRoute();
 const authStore = AuthStore();
 const globalStore = GlobalStore();
@@ -53,41 +53,41 @@ const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const title = computed(() => globalStore.title);
 </script>
 <style lang="scss" scoped>
-@import "./index.scss";
+@import './index.scss';
 </style>
 <style lang="scss" scoped>
 .classic {
-  .el-icon {
-    color: #fff;
-  }
-  .classic-content {
-    height: calc(100% - 55px); // 减去头部高度
-    .classic-main {
-      display: flex;
-      flex-direction: column;
-    }
-  }
-  .el-menu,
-  .el-menu--popup {
-    .el-menu-item {
-      &.is-active {
-        background: var(--el-color-primary-light-9);
-        &::before {
-          position: absolute;
-          top: 0;
-          bottom: 0;
-          left: 0;
-          width: 4px;
-          content: "";
-          background: var(--el-color-primary);
-        }
-      }
-    }
-  }
+	.el-icon {
+		color: #fff;
+	}
+	.classic-content {
+		height: calc(100% - 55px); // 减去头部高度
+		.classic-main {
+			display: flex;
+			flex-direction: column;
+		}
+	}
+	.el-menu,
+	.el-menu--popup {
+		.el-menu-item {
+			&.is-active {
+				background: var(--el-color-primary-light-9);
+				&::before {
+					position: absolute;
+					top: 0;
+					bottom: 0;
+					left: 0;
+					width: 4px;
+					content: '';
+					background: var(--el-color-primary);
+				}
+			}
+		}
+	}
 
-  // guide
-  #driver-highlighted-element-stage {
-    background-color: #606266 !important;
-  }
+	// guide
+	#driver-highlighted-element-stage {
+		background-color: #606266 !important;
+	}
 }
 </style>

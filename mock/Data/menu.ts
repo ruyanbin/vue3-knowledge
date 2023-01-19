@@ -16,7 +16,7 @@ export const list = [
   },
 	//  vue api
 	 {
-    path: "",
+    path: "/vue",
     name: "vue",
     meta: {
       icon: "TrendCharts",
@@ -28,6 +28,77 @@ export const list = [
       isKeepAlive: true
     },
     children: [
+			 {path:"",
+        name: "setup",
+        meta: {
+          icon: "Menu",
+          title: "组合式 API",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+				children:[
+		  		{
+            path: "/CombinedApi/Core",
+            name: "Core",
+            component: "/vueapi/CombinedApi/Core",
+            meta: {
+              icon: "Menu",
+              title: "核心",
+              isLink: "",
+              isHide: false,
+              isFull: false,
+              isAffix: false,
+              isKeepAlive: true
+            }
+          },
+					{
+					path: "/setup",
+					name: "setup",
+					component: "/vueapi/CombinedApi/setup",
+						meta: {
+							icon: "Menu",
+							title: "setup",
+							isLink: "",
+							isHide: false,
+							isFull: false,
+							isAffix: false,
+							isKeepAlive: true
+						}
+					},
+					{
+						path: "/Tools",
+						name: "Tools",
+						component: "/vueapi/CombinedApi/Tools",
+						meta: {
+							icon: "Menu",
+							title: "工具",
+							isLink: "",
+							isHide: false,
+							isFull: false,
+							isAffix: false,
+							isKeepAlive: true
+						}
+					},
+					{
+						path: "/Advanced",
+						name: "Advanced",
+						component: "/vueapi/CombinedApi/Advanced",
+						meta: {
+							icon: "Menu",
+							title: "进阶",
+							isLink: "",
+							isHide: false,
+							isFull: false,
+							isAffix: false,
+							isKeepAlive: true
+						}
+					},
+				]
+      },
+		
       {
         path: "/vueapiIndex",
         name: "vueapiIndex",

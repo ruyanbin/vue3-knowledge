@@ -189,7 +189,6 @@ searchColumns.forEach((column) => {
 		searchInitParam.value[column.search.key ?? handleProp(column.prop!)] = column.search?.defaultValue;
 	}
 });
-console.log(searchColumns, 'searchColumns');
 // 列设置 ==> 过滤掉不需要设置显隐的列
 const colRef = ref();
 const colSetting = tableColumns.value!.filter((item) => {

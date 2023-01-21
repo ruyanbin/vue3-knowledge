@@ -23,36 +23,11 @@
 				</el-scrollbar>
 			</div>
 		</el-aside>
-		<el-drawer v-else v-model="isDrawer" :direction="direction" :size="'210px'" :before-close="handleClose">
-			<template #header>
-				<div class="logo flx-center">
-					<img src="@/assets/images/logo.png" alt="logo" />
-					<span>{{ title }}</span>
-				</div>
-			</template>
-			<div class="menu" :style="{ width: '210px' }">
-				<el-scrollbar>
-					<el-menu
-						:default-active="activeMenu"
-						:router="false"
-						:collapse="isCollapse"
-						:collapse-transition="false"
-						:unique-opened="true"
-						background-color="#191a20"
-						text-color="#bdbdc0"
-						active-text-color="#ffffff"
-					>
-						<SubMenu :menuList="menuList" />
-					</el-menu>
-				</el-scrollbar>
-			</div>
-		</el-drawer>
 		<el-container>
 			<el-header>
 				<ToolBarLeft />
 				<ToolBarRight />
 			</el-header>
-
 			<Main />
 		</el-container>
 	</el-container>
@@ -76,15 +51,6 @@ const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const isPhone = computed(() => globalStore.themeConfig.isPhone);
 const title = computed(() => globalStore.title);
-///
-const direction = ref('ltr');
-const isDrawer = ref<Boolean>(false);
-mittBus.on('isDrawerMenu', (all) => {
-	isDrawer.value = all as boolean;
-});
-const handleClose = () => {
-	isDrawer.value = false;
-};
 </script>
 
 <style scoped lang="scss">

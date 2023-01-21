@@ -16,6 +16,7 @@ const themeConfig = computed(() => globalStore.themeConfig);
 const isPhone = computed(() => globalStore.themeConfig.isPhone);
 const isDrawer = ref(false);
 const collapse = () => {
+	console.log(isPhone, 'isPhone');
 	if (isPhone.value) {
 		mittBus.emit('isDrawerMenu', true);
 	} else {
@@ -28,7 +29,7 @@ const collapse = () => {
 </script>
 <style scoped lang="scss">
 .collapse-icon {
-	margin-right: 20px;
+	// margin-right: 20px;
 	font-size: 22px;
 	cursor: pointer;
 }

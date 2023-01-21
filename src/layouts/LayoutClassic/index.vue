@@ -11,7 +11,7 @@
 			<ToolBarRight />
 		</el-header>
 		<el-container class="classic-content">
-			<el-aside>
+			<el-aside v-if="!isPhone">
 				<div class="menu" :style="{ width: isCollapse ? '65px' : '210px' }">
 					<el-scrollbar>
 						<el-menu
@@ -28,6 +28,7 @@
 					</el-scrollbar>
 				</div>
 			</el-aside>
+
 			<el-container class="classic-main">
 				<Main />
 			</el-container>
@@ -49,6 +50,7 @@ const authStore = AuthStore();
 const globalStore = GlobalStore();
 const activeMenu = computed(() => route.path);
 const menuList = computed(() => authStore.showMenuListGet);
+const isPhone = computed(() => globalStore.themeConfig.isPhone);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const title = computed(() => globalStore.title);
 </script>

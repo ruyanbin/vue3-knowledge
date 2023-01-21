@@ -119,7 +119,6 @@ props.editorConfig.MENU_CONF!['uploadVideo'] = {
 
 // 视频上传前判断
 const uploadVideoValidate = (file: File): boolean => {
-	console.log(file);
 	return true;
 };
 // 编辑框失去焦点时触发

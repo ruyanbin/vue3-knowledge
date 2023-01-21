@@ -56,33 +56,32 @@
 		}
 	}
 }
-@media screen and (max-width: 900px) {
-	.el-aside {
-		display: none;
-	}
-	.logo {
-		img {
-			width: 1rem;
-			height: 1rem;
-		}
-	}
-	:deep(.el-drawer__body) {
-		padding: 0 !important;
-
-		background-color: rgb(25, 26, 32);
-	}
-	:deep(.el-drawer__header) {
-		border: none;
-		background-color: rgb(25, 26, 32);
-	}
-	.el-drawer .el-drawer__header span {
-		color: #fff !important;
-	}
-	:deep(.el-menu) {
-		border: none;
-		color: #fff;
-	}
-	.menu {
-		height: 100%;
-	}
-}
+// @media screen and (max-width: 900px) {
+// 	.el-aside {
+// 		display: none;
+// 	}
+// 	.logo {
+// 		img {
+// 			width: 1rem;
+// 			height: 1rem;
+// 		}
+// 	}
+// 	:deep(.el-drawer__body) {
+// 		padding: 0 !important;
+// 		background-color: rgb(25, 26, 32);
+// 	}
+// 	:deep(.el-drawer__header) {
+// 		border: none;
+// 		background-color: rgb(25, 26, 32);
+// 	}
+// 	.el-drawer .el-drawer__header span {
+// 		color: #fff !important;
+// 	}
+// 	:deep(.el-menu) {
+// 		border: none;
+// 		color: #fff;
+// 	}
+// 	.menu {
+// 		height: 100%;
+// 	}
+// }

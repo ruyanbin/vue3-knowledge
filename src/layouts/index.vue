@@ -1,6 +1,7 @@
 <template>
 	<component v-resize :is="LayoutComponents[themeConfig.layout]" />
 	<ThemeDrawer />
+	<MenuDrawer />
 </template>
 
 <script lang="ts" setup name="layout">
@@ -11,6 +12,7 @@ import LayoutVertical from './LayoutVertical/index.vue';
 import LayoutClassic from './LayoutClassic/index.vue';
 import LayoutTransverse from './LayoutTransverse/index.vue';
 import LayoutColumns from './LayoutColumns/index.vue';
+import MenuDrawer from '@/layouts/components/MenuDrawer/index.vue';
 import mittBus, { emitter } from '@/utils/mittBus';
 const LayoutComponents: { [key: string]: any } = {
 	vertical: LayoutVertical,
@@ -41,5 +43,8 @@ emitter.on('resize', ({ detail }) => {
 .layout {
 	width: 100%;
 	height: 100%;
+}
+.el-drawer__body {
+	padding: 0;
 }
 </style>

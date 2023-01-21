@@ -1,6 +1,6 @@
 <template>
 	<el-container class="layout">
-		<div class="aside-split">
+		<div v-if="!isPhone" class="aside-split">
 			<div class="logo flx-center">
 				<img src="@/assets/images/logo.png" alt="logo" />
 			</div>
@@ -23,7 +23,7 @@
 				</div>
 			</el-scrollbar>
 		</div>
-		<el-aside :class="{ 'not-aside': !subMenu.length }" :style="{ width: isCollapse ? '65px' : '210px' }">
+		<el-aside v-show="!isPhone" :class="{ 'not-aside': !subMenu.length }" :style="{ width: isCollapse ? '65px' : '210px' }">
 			<div class="logo flx-center">
 				<span v-show="subMenu.length">{{ isCollapse ? 'v' : title }}</span>
 			</div>
@@ -40,6 +40,7 @@
 				</el-menu>
 			</el-scrollbar>
 		</el-aside>
+
 		<el-container>
 			<el-header>
 				<ToolBarLeft />
@@ -68,6 +69,7 @@ const activeMenu = computed(() => route.path);
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const title = computed(() => globalStore.title);
+const isPhone = computed(() => globalStore.themeConfig.isPhone);
 const subMenu = ref<Menu.MenuOptions[]>([]);
 const splitActive = ref<string>('');
 watch(

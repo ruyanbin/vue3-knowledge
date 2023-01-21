@@ -96,6 +96,20 @@ export const list = [
 							isKeepAlive: true
 						}
 					},
+					{
+						path: "/Life",
+						name: "Life",
+						component: "/vueapi/CombinedApi/Life",
+						meta: {
+							icon: "Menu",
+							title: "生命周期",
+							isLink: "",
+							isHide: false,
+							isFull: false,
+							isAffix: false,
+							isKeepAlive: false
+						}
+					},
 				]
       },
 		

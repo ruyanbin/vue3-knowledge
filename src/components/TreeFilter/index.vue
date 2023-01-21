@@ -57,7 +57,6 @@ onBeforeMount(async () => {
 	// 重新接收一下默认值
 	if (props.multiple) selected.value = Array.isArray(props.defaultValue) ? props.defaultValue : [props.defaultValue];
 	else selected.value = typeof props.defaultValue === 'string' ? props.defaultValue : '';
-	console.log(selected.value, 'selected'); // 有数据就直接赋值，没有数据就执行请求函数
 	if (props.data?.length) {
 		treeData.value = props.data;
 		treeAllData.value = props.data;

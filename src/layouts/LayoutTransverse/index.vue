@@ -6,6 +6,7 @@
 				<span>{{ title }}</span>
 			</div>
 			<el-menu
+				v-if="!isPhone"
 				mode="horizontal"
 				:default-active="activeMenu"
 				:router="false"
@@ -58,7 +59,7 @@ const activeMenu = computed(() => route.path);
 const menuList = computed(() => authStore.showMenuListGet);
 const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
 const title = computed(() => globalStore.title);
-
+const isPhone = computed(() => globalStore.themeConfig.isPhone);
 const handleClickMenu = (subItem: Menu.MenuOptions) => {
 	if (subItem.meta.isLink) return window.open(subItem.meta.isLink, '_blank');
 	router.push(subItem.path);

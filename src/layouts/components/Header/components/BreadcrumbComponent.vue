@@ -2,7 +2,11 @@
 	<el-breadcrumb :separator-icon="ArrowRight">
 		<transition-group name="breadcrumb" mode="out-in">
 			<!-- 首页面包屑不要可以直接删除 🙅‍♀️ -->
-			<el-breadcrumb-item :to="{ path: HOME_URL }" :key="HOME_URL" v-if="breadcrumbList[0].meta.title !== '首页'">
+			<el-breadcrumb-item
+				:to="{ path: HOME_URL }"
+				:key="HOME_URL"
+				v-if="!breadcrumbList || breadcrumbList[0].meta.title !== '首页'"
+			>
 				<div class="breadcrumb-item">
 					<el-icon class="breadcrumb-icon" v-if="themeConfig.breadcrumbIcon">
 						<HomeFilled />
@@ -37,7 +41,7 @@ const themeConfig = computed(() => globalStore.themeConfig);
 const breadcrumbList = computed(() => authStore.breadcrumbListGet[route.path]);
 </script>
 <style scoped lang="scss">
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 900px) {
 	.el-breadcrumb {
 		display: none;
 	}

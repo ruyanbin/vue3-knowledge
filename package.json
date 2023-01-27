@@ -47,7 +47,8 @@
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.3",
     "vuedraggable": "^4.1.0",
-    "wangeditor": "^4.7.15"
+    "wangeditor": "^4.7.15",
+    "webpack-bundle-analyzer": "^4.7.0"
   },
   "devDependencies": {
     "@iconify-json/ic": "^1.1.10",
@@ -62,6 +63,7 @@
     "@vue/eslint-config-typescript": "^9.1.0",
     "@vuemap/unplugin-resolver": "^1.0.4",
     "axios": "^1.2.2",
+    "compression-webpack-plugin": "^10.0.0",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^4.0.0",
@@ -69,7 +71,8 @@
     "prettier": "^2.4.1",
     "sass": "^1.32.7",
     "sass-loader": "^12.0.0",
-    "typescript": "~4.5.5"
+    "typescript": "~4.5.5",
+    "uglifyjs-webpack-plugin": "^2.2.0"
   },
   "browserslist": [
     "> 1%",

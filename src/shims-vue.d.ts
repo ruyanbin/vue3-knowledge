@@ -6,3 +6,9 @@ declare module '*.vue' {
 }
 declare module '@vuemap/vue-amap';
 declare module 'element-resize-detector';
+declare module '*.vue' {
+	import type { CSSProperties } from 'vue';
+	interface CSSProperties {
+		[key: `--${string}`]: string;
+	}
+}

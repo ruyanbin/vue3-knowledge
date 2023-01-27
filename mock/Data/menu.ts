@@ -189,7 +189,7 @@ export const list = [
 	// 表哥
   {
     name: "proTable",
-    path: "/proTable",
+    path: "",
     meta: {
       icon: "MessageBox",
       isAffix: false,
@@ -219,7 +219,7 @@ export const list = [
 	//系统管理
   {
     name: "sys",
-    path: "/sys",
+    path: "",
     meta: {
       icon: "MessageBox",
       isAffix: false,
@@ -276,7 +276,7 @@ export const list = [
   },
 	// from
   {
-    path: "/From",
+    path: "",
     name: "From",
     redirect: "/From/index",
     meta: {
@@ -307,7 +307,7 @@ export const list = [
   },
 	// 组件
   {
-    path: "/assembly",
+    path: "",
     name: "assembly",
     redirect: "/assembly/guide",
     meta: {
@@ -320,6 +320,20 @@ export const list = [
       isKeepAlive: true
     },
     children: [
+			{
+        path: "/assembly/SeamlessScroll",
+        name: "SeamlessScroll",
+        component: "/assembly/SeamlessScroll/index",
+        meta: {
+          icon: "Menu",
+          title: "无缝滚动组件",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
 			      {
         path: "/assembly/splitPane",
         name: "splitPane",
@@ -408,7 +422,7 @@ export const list = [
   },
 	// 指令
   {
-    path: "/directives",
+    path: "",
     name: "directives",
     redirect: "/directives/copyDirect",
     meta: {
@@ -495,7 +509,7 @@ export const list = [
   },
 	//echart
   {
-    path: "/echarts",
+    path: "",
     name: "echarts",
     redirect: "/echarts/waterChart",
     meta: {
@@ -610,7 +624,7 @@ export const list = [
   },
 	//地图
   {
-    path: "/map",
+    path: "",
     name: "map",
     meta: {
       icon: "TrendCharts",

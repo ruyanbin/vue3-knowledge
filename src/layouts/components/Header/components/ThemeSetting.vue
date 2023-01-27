@@ -1,7 +1,8 @@
 <template>
 	<div class="theme-setting">
 		<el-icon size="22" @click="openDrawer">
-			<IconSetting />
+			<!-- <IconSetting /> -->
+			<Setting />
 		</el-icon>
 	</div>
 </template>

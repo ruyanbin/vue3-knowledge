@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, onUnmounted, onUpdated, ref } from 'vue';
+import { onBeforeMount, onMounted, onUnmounted, onUpdated, ref } from 'vue';
 
 const tableData = [
 	{
@@ -50,8 +50,82 @@ const tableData = [
 			这个钩子在服务器端渲染期间不会被调用。`,
 		Warning: ``,
 		Code: `import { onMounted, onUnmounted } from 'vue'let intervalId
-onMounted(() => {intervalId = setInterval(() => {})})
-onUnmounted(() => clearInterval(intervalId))`,
+				onMounted(() => {intervalId = setInterval(() => {})})
+				onUnmounted(() => clearInterval(intervalId))`,
+	},
+	{
+		api: 'onBeforeMount()',
+		Description: '注册一个钩子，在组件被挂载之前被调用。',
+		type: 'function onBeforeMount(callback: () => void): void void',
+		detail: `当这个钩子被调用时，组件已经完成了其响应式状态的设置，但还没有创建 DOM 节点。它即将首次执行 DOM 渲染过程。
+			这个钩子在服务器端渲染期间不会被调用。`,
+		Warning: ``,
+		Code: ``,
+	},
+	{
+		api: 'onBeforeUpdate()',
+		Description: '注册一个钩子，在组件即将因为响应式状态变更而更新其 DOM 树之前调用。',
+		type: 'function onBeforeUpdate(callback: () => void): void void',
+		detail: `这个钩子可以用来在 Vue 更新 DOM 之前访问 DOM 状态。在这个钩子中更改状态也是安全的。
+			这个钩子在服务器端渲染期间不会被调用。`,
+		Warning: ``,
+		Code: ``,
+	},
+	{
+		api: 'onBeforeUnmount()',
+		Description: '注册一个钩子，在组件实例被卸载之前调用。',
+		type: 'function onBeforeUnmount(callback: () => void): void void',
+		detail: `当这个钩子被调用时，组件实例依然还保有全部的功能 这个钩子在服务器端渲染期间不会被调用。`,
+		Warning: ``,
+		Code: ``,
+	},
+	{
+		api: 'onErrorCaptured()',
+		Description: '注册一个钩子，在捕获了后代组件传递的错误时调用。',
+		type: 'function onErrorCaptured(callback: ErrorCapturedHook): void ;type ErrorCapturedHook = (err: unknown,instance: ComponentPublicInstance | null,info: string) => boolean | void',
+		detail: `这个钩子带有三个实参：错误对象、触发该错误的组件实例，以及一个说明错误来源类型的信息字符串。
+		  默认情况下，所有的错误都会被发送到应用级的 app.config.errorHandler (前提是这个函数已经定义)，这样这些错误都能在一个统一的地方报告给分析服务。 `,
+		Warning: ``,
+		Code: ``,
+	},
+	{
+		api: 'onActivated()',
+		Description:
+			'注册一个回调函数，若组件实例是 <KeepAlive> 缓存树的一部分，当组件被插入到 DOM 中时调用。这个钩子在服务器端渲染期间不会被调用',
+		type: 'function onActivated(callback: () => void): void',
+		detail: ` `,
+		Warning: ``,
+		Code: ``,
+	},
+	{
+		api: 'onDeactivated()',
+		Description:
+			'注册一个回调函数，若组件实例是 <KeepAlive> 缓存树的一部分，当组件从 DOM 中被移除时调用。这个钩子在服务器端渲染期间不会被调用',
+		type: 'function onDeactivated(callback: () => void): void',
+		detail: ` `,
+		Warning: ``,
+		Code: ``,
+	},
+	{
+		api: 'onServerPrefetch()ssr',
+		Description: '注册一个异步函数，在组件实例在服务器上被渲染之前调用。',
+		type: 'function onServerPrefetch(callback: () => Promise<any>): void',
+		detail: ` 如果这个钩子返回了一个 Promise，服务端渲染会在渲染该组件前等待该 Promise 完成。
+这个钩子仅会在服务端渲染中执行，可以用于执行一些仅存在于服务端的数据抓取过程。`,
+		Warning: ``,
+		Code: `const data = ref(null)
+					onServerPrefetch(async () => {
+						// 组件作为初始请求的一部分被渲染
+						// 在服务器上预抓取数据，因为它比在客户端上更快。
+						data.value = await fetchOnServer(/* ... */)
+					})
+					onMounted(async () => {
+						if (!data.value) {
+							// 如果数据在挂载时为空值，这意味着该组件
+							// 是在客户端动态渲染的。将转而执行
+							// 另一个客户端侧的抓取请求
+							data.value = await fetchOnClient(/* ... */)
+						}`,
 	},
 ];
 interface User {
@@ -71,26 +145,29 @@ const tableRowClassName = ({ row, rowIndex }: { row: User; rowIndex: number }) =
 	return '';
 };
 const count = ref(0);
+
+//onBeforeMount()
+onBeforeMount(() => {
+	console.log('onBeforeMount');
+});
 // onMounted
-console.log('onMounted');
 const el = ref();
 let intervalId: number | undefined;
 onMounted(() => {
 	el.value; // <div>
-	console.log(el.value, 'el.value');
+	console.log(el.value, 'onMounted');
 	intervalId = setInterval(() => {
 		// ...
 	});
 });
 //onUpdated
-console.log('onUpdated');
 onUpdated(() => {
+	console.log('onUpdated');
 	// 文本内容应该与当前的 `count.value` 一致
 	console.log(document.getElementById('count').textContent);
 });
-console.log('onUnmounted');
 onUnmounted(() => {
-	console.log('onUnmounted---1');
+	console.log('onUnmounted');
 	clearInterval(intervalId);
 });
 </script>

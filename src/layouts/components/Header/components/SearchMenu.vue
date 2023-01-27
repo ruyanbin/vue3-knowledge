@@ -1,7 +1,8 @@
 <template>
 	<div class="layout-search-dialog">
 		<el-icon size="22" @click="handleOpen">
-			<fangdajing />
+			<!-- <fangdajing /> -->
+			<Search />
 		</el-icon>
 		<el-dialog @click="closeSearch" v-model="isShowSearch" width="300px" destroy-on-close :modal="false" fullscreen>
 			<!-- :show-close="false" -->
@@ -59,7 +60,6 @@ const filterNodeMethod = (queryString: string) => {
 	};
 };
 const handleOpen = () => {
-	console.log(1234);
 	isShowSearch.value = true;
 	searchMenu.value = '';
 	nextTick(() => {

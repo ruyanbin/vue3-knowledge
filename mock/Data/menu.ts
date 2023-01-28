@@ -320,6 +320,35 @@ export const list = [
       isKeepAlive: true
     },
     children: [
+			
+				{
+        path: "/assembly/countTo",
+        name: "countTo",
+        component: "/assembly/countTo/index",
+        meta: {
+          icon: "Menu",
+          title: "数字动画",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
+			{
+        path: "/assembly/TypeIt",
+        name: "TypeIt",
+        component: "/assembly/TypeIt/index",
+        meta: {
+          icon: "Menu",
+          title: "打字机组件",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: true
+        }
+      },
 			{
         path: "/assembly/SeamlessScroll",
         name: "SeamlessScroll",
@@ -334,7 +363,7 @@ export const list = [
           isKeepAlive: true
         }
       },
-			      {
+			{
         path: "/assembly/splitPane",
         name: "splitPane",
         component: "/assembly/splitPane/index",

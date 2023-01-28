@@ -1,23 +1,14 @@
 /**
  * @desc AnimationFrame简单兼容hack
  */
-// window.webkitRequestAnimationFrame ||
-// window.mozRequestAnimationFrame ||
-// window.oRequestAnimationFrame ||
-// window.msRequestAnimationFrame ||
 export const animationFrame = () => {
-	// 清除requestAnimationFrame 动画
 	window.cancelAnimationFrame = (() => {
 		return (
-			//  window.cancelAnimationFrame ||
+			window.cancelAnimationFrame ||
 			// window.webkitCancelAnimationFrame ||
 			// window.mozCancelAnimationFrame ||
 			// window.oCancelAnimationFrame ||
 			// window.msCancelAnimationFrame ||
-			// function (id) {
-			//   return window.clearTimeout(id);
-			// }
-			window.cancelAnimationFrame ||
 			function (id) {
 				return window.clearTimeout(id);
 			}
@@ -26,12 +17,17 @@ export const animationFrame = () => {
 	window.requestAnimationFrame = (function () {
 		return (
 			window.requestAnimationFrame ||
+			// window.webkitRequestAnimationFrame ||
+			// window.mozRequestAnimationFrame ||
+			// window.oRequestAnimationFrame ||
+			// window.msRequestAnimationFrame ||
 			function (callback) {
 				return window.setTimeout(callback, 1000 / 60);
 			}
 		);
 	})();
 };
+
 /**
  * @desc 判断数组是否相等
  * @return {Boolean}
@@ -46,6 +42,7 @@ export const arrayEqual = (arr1: Array<any>, arr2: Array<any>) => {
 	}
 	return true;
 };
+
 /**
  * @desc 深浅合并拷贝
  */

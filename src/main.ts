@@ -18,16 +18,20 @@ import '@/assets/style/element.scss';
 import '@/assets/style/global.scss';
 import '@/assets/style/common.scss';
 import '@/assets/style/vuestyle.scss';
-
+//
+import dataV from '@jiaminghi/data-view';
 // mock
 import '../mock/index';
 // custom directives
 import directives from '@/directives/index';
-
+// 引入图表（所有图标见 icon 目录下的 demo_index.html）
+import './assets/icon/iconfont.css';
+// 可视化数据大图
+import '@/views/Visualization/style/style.scss';
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
-
+app.use(dataV);
 app.use(directives);
 app.use(ElementPlus);
 

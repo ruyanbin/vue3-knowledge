@@ -6,6 +6,8 @@ declare module '*.vue' {
 }
 declare module '@vuemap/vue-amap';
 declare module 'element-resize-detector';
+declare module '@jiaminghi/data-view';
+
 declare module '*.vue' {
 	import type { CSSProperties } from 'vue';
 	interface CSSProperties {

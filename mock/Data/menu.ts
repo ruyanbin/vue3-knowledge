@@ -14,6 +14,65 @@ export const list = [
       title: "首页"
     }
   },
+	// 可视化
+	{
+		"path": "/Visualization",
+		"name": "Visualization",
+		"component": "/Visualization/index",
+		"meta": {
+			"icon": "Histogram",
+			"title": "数据大屏",
+			"isLink": "",
+			"isHide": false,
+			"isFull": true,
+			"isAffix": false,
+			"isKeepAlive": true
+		}
+	},
+	//  layout
+	 {
+				path:"",
+    name: "layout",
+    meta: {
+      icon: "TrendCharts",
+      title: "layout",
+      isLink: "",
+      isHide: false,
+      isFull: false,
+      isAffix: false,
+      isKeepAlive: true
+    },
+    children: [
+			 {
+				name: "flex",
+        component: "/layout/flex",
+        path: "/layout/flex",
+        meta: {
+          icon: "Menu",
+          title: "弹性盒布局",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+      },
+				 {
+				name: "BFC",
+        component: "/layout/BFC",
+        path: "/layout/BFC",
+        meta: {
+          icon: "Menu",
+          title: "BFC",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+      },
+    ]
+  },
 	//  vue api
 	 {
     path: "/vue",
@@ -184,9 +243,8 @@ export const list = [
         }
       },
     ]
-		
   },
-	// 表哥
+	// table
   {
     name: "proTable",
     path: "",
@@ -335,6 +393,7 @@ export const list = [
           isKeepAlive: true
         }
       },
+	
 			{
         path: "/assembly/TypeIt",
         name: "TypeIt",

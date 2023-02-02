@@ -104,10 +104,10 @@ if (isProduction) {
 
 	externals = {
 		// from后的 : 使用全局暴露的对象名,具体看包暴露哪个
-		vue: 'Vue',
-		'vue-router': 'VueRouter',
-		pinia: 'paina',
-		axios: 'axios',
+		// vue: vue,
+		// 'vue-router': VueRouter,
+		// // pinia: pinia,
+		// axios: 'axios',
 	};
 }
 module.exports = defineConfig({

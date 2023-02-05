@@ -43,7 +43,21 @@ export const list = [
       isKeepAlive: true
     },
     children: [
-			 {
+			{
+				name: "grid",
+        component: "/layout/grid",
+        path: "/layout/grid",
+        meta: {
+          icon: "Menu",
+          title: "grid布局",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+      },
+			{
 				name: "flex",
         component: "/layout/flex",
         path: "/layout/flex",
@@ -135,7 +149,7 @@ export const list = [
         path: "/Design/prototype",
         meta: {
           icon: "Menu",
-          title: "构造函数模式",
+      		title: "原型模式",
           isLink: "",
           isHide: false,
           isFull: false,

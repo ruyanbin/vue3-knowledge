@@ -28,12 +28,16 @@ import directives from '@/directives/index';
 import './assets/icon/iconfont.css';
 // 可视化数据大图
 import '@/views/Visualization/style/style.scss';
+//引入markdown
+import plugins from '@/plugins/main/index';
+
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
 app.use(dataV);
 app.use(directives);
 app.use(ElementPlus);
+app.use(plugins);
 
 app.use(I18n);
 // 统一注册Icon图标

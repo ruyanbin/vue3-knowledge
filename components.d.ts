@@ -11,6 +11,7 @@ declare module '@vue/runtime-core' {
     404: typeof import('./src/components/ErrorMessage/404.vue')['default']
     500: typeof import('./src/components/ErrorMessage/500.vue')['default']
     ColSetting: typeof import('./src/components/ProTable/components/ColSetting.vue')['default']
+    EchartCanvas: typeof import('./src/components/echartCanvas/index.vue')['default']
     ElAlert: typeof import('element-plus/es')['ElAlert']
     ElAside: typeof import('element-plus/es')['ElAside']
     ElAutocomplete: typeof import('element-plus/es')['ElAutocomplete']

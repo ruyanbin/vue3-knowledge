@@ -21,7 +21,7 @@
 
 				<!--  -->
 				<div class="body-box">
-					<div class="content-box">
+					<div class="content-box2">
 						<div>
 							<dv-border-box-12>
 								<center-left1 />

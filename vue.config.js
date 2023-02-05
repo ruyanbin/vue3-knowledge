@@ -96,7 +96,6 @@ const isProductionPluginsList = [
 		threshold: 10240, // 只有在10kb以上才压缩
 	}),
 ];
-console.log(isProduction, 'isProduction', process.env.NODE_ENV, ' process.env.NODE_ENV');
 // 如果是生产环境
 if (isProduction) {
 	// 压缩 混淆 取出注释 去除console

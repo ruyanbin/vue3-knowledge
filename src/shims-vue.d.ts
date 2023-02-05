@@ -7,7 +7,11 @@ declare module '*.vue' {
 declare module '@vuemap/vue-amap';
 declare module 'element-resize-detector';
 declare module '@jiaminghi/data-view';
-
+declare module '@types/three';
+// 使用markdown
+declare module '@kangc/v-md-editor';
+declare module '@kangc/v-md-editor/lib/theme/github.js';
+declare module '@kangc/v-md-editor/lib/theme/vuepress.js';
 declare module '*.vue' {
 	import type { CSSProperties } from 'vue';
 	interface CSSProperties {

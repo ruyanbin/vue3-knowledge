@@ -14,7 +14,7 @@
 				<component :is="subItem.meta.icon"></component>
 			</el-icon>
 			<template #title>
-				<span>{{ subItem.meta.title }}</span>
+				<span class="sle" :title="subItem.meta.title">{{ subItem.meta.title }}</span>
 			</template>
 		</el-menu-item>
 	</template>

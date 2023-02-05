@@ -31,7 +31,7 @@ export const list = [
 	},
 	//  layout
 	 {
-				path:"",
+	  path:"",
     name: "layout",
     meta: {
       icon: "TrendCharts",
@@ -71,6 +71,135 @@ export const list = [
           isKeepAlive: false
         },
       },
+    ]
+  },
+		//  设计模式
+	 {
+	  path:"",
+    name: "Design",
+    meta: {
+      icon: "TrendCharts",
+      title: "设计模式",
+      isLink: "",
+      isHide: false,
+      isFull: false,
+      isAffix: false,
+      isKeepAlive: true
+    },
+    children: [
+			{
+				name: "markdown",
+        component: "/Design/markdown",
+        path: "/Design/markdown",
+        meta: {
+          icon: "Menu",
+          title: "markdown编辑器",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+      },
+			{
+				name: "Factory",
+        component: "/Design/Factory",
+        path: "/Design/Factory",
+        meta: {
+          icon: "Menu",
+          title: "工厂模式",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+      },
+			{
+				name: "Structure",
+        component: "/Design/Structure",
+        path: "/Design/Structure",
+        meta: {
+          icon: "Menu",
+          title: "构造函数模式",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+			},
+			{
+				name: "prototype",
+        component: "/Design/prototype",
+        path: "/Design/prototype",
+        meta: {
+          icon: "Menu",
+          title: "构造函数模式",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+			},
+	    { 
+				name: "prototypenew",
+        component: "/Design/prototypenew",
+        path: "/Design/prototypenew",
+        meta: {
+          icon: "Menu",
+          title: "构造函数+原型的js混合模式（推荐）",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+			},
+			{ 
+				name: "Dynamic",
+        component: "/Design/Dynamic",
+        path: "/Design/Dynamic",
+        meta: {
+          icon: "Menu",
+          title: "构造函数+原型的动态原型模式",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+			},
+			{ 
+				name: "Single",
+        component: "/Design/Single",
+        path: "/Design/Single",
+        meta: {
+          icon: "Menu",
+          title: "单例模式",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+			},
+			{ 
+				name: "PublishSubscribe",
+        component: "/Design/PublishSubscribe",
+        path: "/Design/PublishSubscribe",
+        meta: {
+          icon: "Menu",
+          title: "发布订阅者模式",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+			},
+			
     ]
   },
 	//  vue api

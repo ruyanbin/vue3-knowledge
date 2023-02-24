@@ -8,7 +8,7 @@ import { staticRouter, errorRouter } from '@/router/modules/staticRouter';
 import { globalRouter } from '@/router/modules/globalRouter';
 import { initDynamicRouter } from '@/router/modules/dynamicRouter';
 import NProgress from '@/config/nprogress';
-
+import CancelToken from '@/api/CancelToken';
 import { removeWatermark, setWaterMark } from '@/utils/watermark';
 
 /**
@@ -41,6 +41,8 @@ const router = createRouter({
  * @description 路由拦截 beforeEach
  * */
 router.beforeEach(async (to, from, next) => {
+	// 路由跳转要清除之前所有的请求缓存
+	CancelToken.clearPending()
 	// 1.NProgress 开始
 	NProgress.start();
 

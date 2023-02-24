@@ -7,6 +7,7 @@ import { ElMessage } from 'element-plus';
 import { GlobalStore } from '@/stores';
 import { LOGIN_URL } from '@/config/config';
 import router from '@/router';
+import CancelToken from './CancelToken';
 
 /**
  * pinia 错误使用说明示例
@@ -38,6 +39,10 @@ class RequestHttp {
 		this.service.interceptors.request.use(
 			// (config: AxiosRequestConfig) => {
 			(config: any) => {
+				// 请求响应之前，检查一下是否已经有盖请求了，有则取消掉盖请求
+				CancelToken.removePending(config)
+				// 把当前请求添加进去
+				CancelToken.addPending(config)
 				const globalStore = GlobalStore();
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				// config.headers!.noLoading || showFullScreenLoading();

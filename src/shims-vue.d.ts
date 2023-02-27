@@ -15,7 +15,7 @@ declare module '@kangc/v-md-editor/lib/theme/vuepress.js';
 declare module '@kangc/v-md-editor/lib/plugins/copy-code/index';
 declare module 'prismjs';
 // 使用vanta
-declare module 'vanta/src/vanta.waves'
+declare module 'vanta/src/vanta.waves';
 declare module '*.vue' {
 	import type { CSSProperties } from 'vue';
 	interface CSSProperties {

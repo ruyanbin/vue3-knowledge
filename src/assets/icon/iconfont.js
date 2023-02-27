@@ -1,5 +1,5 @@
 !(function (l) {
-	var o,
+	let o,
 		h,
 		t,
 		i,

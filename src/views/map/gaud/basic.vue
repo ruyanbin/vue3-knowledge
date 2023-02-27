@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import TwoMap from './components/basic.vue';
+import { ref } from 'vue'
+import TwoMap from './components/basic.vue'
 </script>
 <style lang="scss" scoped></style>

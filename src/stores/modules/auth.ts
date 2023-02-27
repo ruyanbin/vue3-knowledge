@@ -1,9 +1,9 @@
-import { defineStore } from 'pinia';
-import { AuthState } from '@/stores/interface';
-import { getKeepAliveRouterName, getShowMenuList, getAllBreadcrumbList, getFlatArr } from '@/utils/util';
-import { getMenulist } from '@/api/modules/menu';
-import { GlobalStore } from '@/stores';
-import piniaPersistConfig from '@/config/piniaPersist';
+import { defineStore } from 'pinia'
+import { AuthState } from '@/stores/interface'
+import { getKeepAliveRouterName, getShowMenuList, getAllBreadcrumbList, getFlatArr } from '@/utils/util'
+import { getMenulist } from '@/api/modules/menu'
+import { GlobalStore } from '@/stores'
+import piniaPersistConfig from '@/config/piniaPersist'
 // AuthStore
 export const AuthStore = defineStore({
 	id: 'AuthState',
@@ -37,14 +37,14 @@ export const AuthStore = defineStore({
 		},
 		// getAuthMenuList
 		async getAuthMenuList() {
-			const { data } = await getMenulist({ id: '11' });
-			console.log(data, 'data');
-			this.authMenuList = data as any;
+			const { data } = await getMenulist({ id: '11' })
+			console.log(data, 'data')
+			this.authMenuList = data as any
 		},
 		// setRouteName
 		async setRouteName(name: string) {
-			this.routeName = name;
+			this.routeName = name
 		},
 	},
 	persist: piniaPersistConfig('AuthState', ['authButtonList', 'routeName']),
-});
+})

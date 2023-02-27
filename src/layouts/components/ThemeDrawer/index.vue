@@ -1,6 +1,6 @@
 <template>
 	<!-- 布局切换 -->
-	<el-drawer v-model="drawerVisible" title="布局设置" size="300px">
+	<el-drawer ref="drawerRef" v-model="drawerVisible" :before-close="handleClose" title="布局设置" size="300px">
 		<el-divider class="divider" content-position="center">
 			<el-icon><Notification /></el-icon>
 			布局切换
@@ -102,25 +102,25 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue';
-import { GlobalStore } from '@/stores';
-import { useTheme } from '@/hooks/useTheme';
-import mittBus from '@/utils/mittBus';
-import SwitchDark from '@/components/SwitchDark/index.vue';
-import { DEFAULT_PRIMARY } from '@/config/config';
-const { changePrimary, changeGreyOrWeak } = useTheme();
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
-const Watermark = computed(() => globalStore.isWatermark);
-
+import { ref, computed, watch } from 'vue'
+import { GlobalStore } from '@/stores'
+import { useTheme } from '@/hooks/useTheme'
+import mittBus from '@/utils/mittBus'
+import SwitchDark from '@/components/SwitchDark/index.vue'
+import { DEFAULT_PRIMARY } from '@/config/config'
+import { clippingParents } from '@popperjs/core'
+const { changePrimary, changeGreyOrWeak } = useTheme()
+let globalStore = GlobalStore()
+let themeConfig = computed(() => globalStore.themeConfig)
+let Watermark = computed(() => globalStore.isWatermark)
+const drawerRef = ref(null)
 // 切换布局方式
 const changeLayout = (val: string) => {
-	globalStore.setThemeConfig({ ...themeConfig.value, layout: val });
-};
+	globalStore.setThemeConfig({ ...themeConfig.value, layout: val })
+}
 const WatermarkChange = (val: boolean) => {
-	console.log(val, 'WatermarkChange');
-	globalStore.setisWatermark(val);
-};
+	globalStore.setisWatermark(val)
+}
 // 预定义主题颜色
 const colorList = [
 	DEFAULT_PRIMARY,
@@ -133,19 +133,24 @@ const colorList = [
 	'#fd726d',
 	'#f39c12',
 	'#9b59b6',
-];
+]
 // 监听布局变化，在 body 上添加相对应的 layout class
 watch(
 	() => themeConfig.value.layout,
 	() => {
-		const body = document.body as HTMLElement;
-		body.setAttribute('class', themeConfig.value.layout);
+		const body = document.body as HTMLElement
+		body.setAttribute('class', themeConfig.value.layout)
 	},
 	{ immediate: true }
-);
+)
 // 打开主题设置
-const drawerVisible = ref(false);
-mittBus.on('openThemeDrawer', () => (drawerVisible.value = true));
+let drawerVisible = ref(false)
+mittBus.on('openThemeDrawer', () => (drawerVisible.value = true))
+const handleClose = () => {
+	console.log(2)
+	console.log(drawerRef.value, 'ref')
+	drawerVisible.value = false
+}
 </script>
 <style scoped lang="scss">
 @import './index.scss';

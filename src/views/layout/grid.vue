@@ -159,7 +159,7 @@ const data = [
 			},
 		],
 	},
-];
+]
 const item1 = `::: tip css代码
 
 	.grid1 {
@@ -176,7 +176,7 @@ const item1 = `::: tip css代码
 		}
 	}
 
-:::`;
+:::`
 const ic = `::: tip css代码
 
 	.ic1 {grid-area: header;}
@@ -201,7 +201,7 @@ const ic = `::: tip css代码
 		}
 	}
 
-:::`;
+:::`
 </script>
 <style lang="scss" scoped>
 .grid1 {

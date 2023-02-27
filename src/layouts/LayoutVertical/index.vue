@@ -34,23 +34,23 @@
 </template>
 
 <script setup lang="ts" name="layoutVertical">
-import { computed, ref } from 'vue';
-import { useRoute } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { AuthStore } from '@/stores/modules/auth';
-import Main from '@/layouts/components/Main/index.vue';
-import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue';
-import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue';
-import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
-import mittBus from '@/utils/mittBus';
-const route = useRoute();
-const authStore = AuthStore();
-const globalStore = GlobalStore();
-const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path));
-const menuList = computed(() => authStore.showMenuListGet);
-const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
-const isPhone = computed(() => globalStore.themeConfig.isPhone);
-const title = computed(() => globalStore.title);
+import { computed, ref } from 'vue'
+import { useRoute } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { AuthStore } from '@/stores/modules/auth'
+import Main from '@/layouts/components/Main/index.vue'
+import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue'
+import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue'
+import SubMenu from '@/layouts/components/Menu/SubMenu.vue'
+import mittBus from '@/utils/mittBus'
+const route = useRoute()
+const authStore = AuthStore()
+const globalStore = GlobalStore()
+const activeMenu = computed(() => (route.meta.activeMenu ? route.meta.activeMenu : route.path))
+const menuList = computed(() => authStore.showMenuListGet)
+const isCollapse = computed(() => globalStore.themeConfig.isCollapse)
+const isPhone = computed(() => globalStore.themeConfig.isPhone)
+const title = computed(() => globalStore.title)
 </script>
 
 <style scoped lang="scss">

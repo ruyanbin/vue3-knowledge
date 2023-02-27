@@ -43,20 +43,20 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue';
-import { formatTime } from '@/hooks/view/useTimeRex';
-import useDraw from '@/hooks/view/useDraw';
-import { WEEK, title, subtitle, moduleInfo } from './utils/index';
-import CenterLeft1 from './components/centerLeft1/index.vue';
+import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue'
+import { formatTime } from '@/hooks/view/useTimeRex'
+import useDraw from '@/hooks/view/useDraw'
+import { WEEK, title, subtitle, moduleInfo } from './utils/index'
+import CenterLeft1 from './components/centerLeft1/index.vue'
 export default defineComponent({
 	components: {
 		CenterLeft1,
 	},
 	setup() {
 		// * 颜色
-		const decorationColors = ['#568aea', '#000000'];
+		const decorationColors = ['#568aea', '#000000']
 		// * 适配处理
-		const { appRef, calcRate, windowDraw, unWindowDraw } = useDraw();
+		const { appRef, calcRate, windowDraw, unWindowDraw } = useDraw()
 
 		// * 时间内容
 		const timeInfo = reactive({
@@ -64,28 +64,28 @@ export default defineComponent({
 			dateDay: '',
 			dateYear: '',
 			dateWeek: '',
-		});
+		})
 		// todo 处理时间监听
 		const handleTime = () => {
-			clearInterval(timeInfo.setInterval);
+			clearInterval(timeInfo.setInterval)
 			timeInfo.setInterval = window.setInterval(() => {
-				const date = new Date();
-				timeInfo.dateDay = formatTime(date, 'HH: mm: ss');
-				timeInfo.dateYear = formatTime(date, 'yyyy-MM-dd');
-				timeInfo.dateWeek = WEEK[date.getDay()];
-			}, 1000);
-		};
+				const date = new Date()
+				timeInfo.dateDay = formatTime(date, 'HH: mm: ss')
+				timeInfo.dateYear = formatTime(date, 'yyyy-MM-dd')
+				timeInfo.dateWeek = WEEK[date.getDay()]
+			}, 1000)
+		}
 		onUnmounted(() => {
-			unWindowDraw();
-			clearInterval(timeInfo.setInterval);
-		});
+			unWindowDraw()
+			clearInterval(timeInfo.setInterval)
+		})
 		//生命周期
 		onMounted(() => {
-			handleTime();
+			handleTime()
 			// todo 屏幕适应
-			windowDraw();
-			calcRate();
-		});
+			windowDraw()
+			calcRate()
+		})
 		return {
 			timeInfo,
 			appRef,
@@ -93,9 +93,9 @@ export default defineComponent({
 			subtitle,
 			moduleInfo,
 			decorationColors,
-		};
+		}
 	},
-});
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

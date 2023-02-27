@@ -1,13 +1,13 @@
-import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios';
-import { showFullScreenLoading, tryHideFullScreenLoading } from '@/config/serviceLoading';
-import { ResultData } from '@/api/interface';
-import { ResultEnum } from '@/enums/httpEnum';
-import { checkStatus } from './helper/checkStatus';
-import { ElMessage } from 'element-plus';
-import { GlobalStore } from '@/stores';
-import { LOGIN_URL } from '@/config/config';
-import router from '@/router';
-import CancelToken from './CancelToken';
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { showFullScreenLoading, tryHideFullScreenLoading } from '@/config/serviceLoading'
+import { ResultData } from '@/api/interface'
+import { ResultEnum } from '@/enums/httpEnum'
+import { checkStatus } from './helper/checkStatus'
+import { ElMessage } from 'element-plus'
+import { GlobalStore } from '@/stores'
+import { LOGIN_URL } from '@/config/config'
+import router from '@/router'
+import CancelToken from './CancelToken'
 
 /**
  * pinia 错误使用说明示例
@@ -23,13 +23,13 @@ const config = {
 	timeout: ResultEnum.TIMEOUT as number,
 	// 跨域时候允许携带凭证
 	withCredentials: true,
-};
+}
 
 class RequestHttp {
-	service: AxiosInstance;
+	service: AxiosInstance
 	public constructor(config: AxiosRequestConfig) {
 		// 实例化axios
-		this.service = axios.create(config);
+		this.service = axios.create(config)
 
 		/**
 		 * @description 请求拦截器
@@ -40,23 +40,23 @@ class RequestHttp {
 			// (config: AxiosRequestConfig) => {
 			(config: any) => {
 				// 请求响应之前，检查一下是否已经有盖请求了，有则取消掉盖请求
-				CancelToken.removePending(config);
+				CancelToken.removePending(config)
 				// 把当前请求添加进去
-				CancelToken.addPending(config);
-				const globalStore = GlobalStore();
+				CancelToken.addPending(config)
+				const globalStore = GlobalStore()
 				// * 如果当前请求不需要显示 loading,在 api 服务中通过指定的第三个参数: { headers: { noLoading: true } }来控制不显示loading，参见loginApi
 				// config.headers!.noLoading || showFullScreenLoading();
-				showFullScreenLoading();
-				const token: string = globalStore.token;
+				showFullScreenLoading()
+				const token: string = globalStore.token
 				return {
 					...config,
 					headers: { ...config.headers, 'x-access-token': token },
-				};
+				}
 			},
 			(error: AxiosError) => {
-				return Promise.reject(error);
+				return Promise.reject(error)
 			}
-		);
+		)
 
 		/**
 		 * @description 响应拦截器
@@ -64,55 +64,55 @@ class RequestHttp {
 		 */
 		this.service.interceptors.response.use(
 			(response: AxiosResponse) => {
-				const { data } = response;
-				const globalStore = GlobalStore();
+				const { data } = response
+				const globalStore = GlobalStore()
 				// * 在请求结束后，并关闭请求 loading
-				tryHideFullScreenLoading();
+				tryHideFullScreenLoading()
 				// * 登陆失效（code == 599）
 				if (data.code == ResultEnum.OVERDUE) {
-					ElMessage.error(data.msg);
-					globalStore.setToken('');
-					router.replace(LOGIN_URL);
-					return Promise.reject(data);
+					ElMessage.error(data.msg)
+					globalStore.setToken('')
+					router.replace(LOGIN_URL)
+					return Promise.reject(data)
 				}
 				// * 全局错误信息拦截（防止下载文件得时候返回数据流，没有code，直接报错）
 				if (data.code && data.code !== ResultEnum.SUCCESS) {
-					ElMessage.error(data.msg);
-					return Promise.reject(data);
+					ElMessage.error(data.msg)
+					return Promise.reject(data)
 				}
 				// * 成功请求（在页面上除非特殊情况，否则不用处理失败逻辑）
-				return data;
+				return data
 			},
 			async (error: AxiosError) => {
-				const { response } = error;
-				tryHideFullScreenLoading();
+				const { response } = error
+				tryHideFullScreenLoading()
 				// 请求超时单独判断，因为请求超时没有 response
-				if (error.message.indexOf('timeout') !== -1) ElMessage.error('请求超时！请您稍后重试');
+				if (error.message.indexOf('timeout') !== -1) ElMessage.error('请求超时！请您稍后重试')
 				// 根据响应的错误状态码，做不同的处理
-				if (response) checkStatus(response.status);
+				if (response) checkStatus(response.status)
 				// 服务器结果都没有返回(可能服务器错误可能客户端断网)，断网处理:可以跳转到断网页面
-				if (!window.navigator.onLine) router.replace('/500');
-				return Promise.reject(error);
+				if (!window.navigator.onLine) router.replace('/500')
+				return Promise.reject(error)
 			}
-		);
+		)
 	}
 
 	// * 常用请求方法封装
 	get<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-		return this.service.get(url, { params, ..._object });
+		return this.service.get(url, { params, ..._object })
 	}
 	post<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-		return this.service.post(url, params, _object);
+		return this.service.post(url, params, _object)
 	}
 	put<T>(url: string, params?: object, _object = {}): Promise<ResultData<T>> {
-		return this.service.put(url, params, _object);
+		return this.service.put(url, params, _object)
 	}
 	delete<T>(url: string, params?: any, _object = {}): Promise<ResultData<T>> {
-		return this.service.delete(url, { params, ..._object });
+		return this.service.delete(url, { params, ..._object })
 	}
 	download(url: string, params?: object, _object = {}): Promise<BlobPart> {
-		return this.service.post(url, params, _object);
+		return this.service.post(url, params, _object)
 	}
 }
 
-export default new RequestHttp(config);
+export default new RequestHttp(config)

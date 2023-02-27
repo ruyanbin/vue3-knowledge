@@ -1,5 +1,5 @@
-import { RouteRecordRaw } from 'vue-router';
-import { HOME_URL, LOGIN_URL } from '@/config/config';
+import { RouteRecordRaw } from 'vue-router'
+import { HOME_URL, LOGIN_URL } from '@/config/config'
 export const staticRouter: RouteRecordRaw[] = [
 	{
 		path: '/',
@@ -30,7 +30,7 @@ export const staticRouter: RouteRecordRaw[] = [
 			},
 		],
 	},
-];
+]
 // * errorRouter(错误页面路由)
 // */
 export const errorRouter = [
@@ -58,7 +58,7 @@ export const errorRouter = [
 			title: '500页面',
 		},
 	},
-];
+]
 
 /**
  * notFoundRouter(找不到路由)
@@ -67,4 +67,4 @@ export const notFoundRouter = {
 	path: '/:pathMatch(.*)*',
 	name: 'notFound',
 	redirect: { name: '404' },
-};
+}

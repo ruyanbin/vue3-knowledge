@@ -1,21 +1,21 @@
-import { defineComponent, ref, watch, shallowReactive } from 'vue';
+import { defineComponent, ref, watch, shallowReactive } from 'vue'
 // 声明类型
 const PropsType = {
 	cdata: {
 		type: Object,
 		require: true,
 	},
-} as const;
+} as const
 
 type optionsType = {
-	color: string[];
-	tooltip: any;
-	toolbox: any;
-	calculable: boolean;
-	legend: any;
-	series: any[];
-};
-import EchartsCanvas from '@/components/echartCanvas/index.vue';
+	color: string[]
+	tooltip: any
+	toolbox: any
+	calculable: boolean
+	legend: any
+	series: any[]
+}
+import EchartsCanvas from '@/components/echartCanvas/index.vue'
 // 定义主体
 export default defineComponent({
 	components: { EchartsCanvas },
@@ -23,7 +23,7 @@ export default defineComponent({
 
 	setup(props) {
 		// 定义 ref
-		const chartRef = ref();
+		const chartRef = ref()
 		// 配置项
 		let options = shallowReactive<optionsType>({
 			color: [],
@@ -32,7 +32,7 @@ export default defineComponent({
 			calculable: false,
 			legend: null,
 			series: [],
-		});
+		})
 		watch(
 			() => props.cdata,
 			(val: any) => {
@@ -80,28 +80,28 @@ export default defineComponent({
 							data: val.seriesData,
 						},
 					],
-				};
+				}
 
 				// 手动触发更新
 				if (chartRef.value && chartRef.value.initChart()) {
 					// 通过初始化参数打入数据
-					chartRef.value.initChart(options);
+					chartRef.value.initChart(options)
 				}
 			},
 			{
 				immediate: true,
 				deep: true,
 			}
-		);
+		)
 
 		return () => {
-			const height = '220px';
-			const width = '260px';
+			const height = '220px'
+			const width = '260px'
 			return (
 				<div>
 					<EchartsCanvas ref={chartRef} options={options} height={height} width={width} />
 				</div>
-			);
-		};
+			)
+		}
 	},
-});
+})

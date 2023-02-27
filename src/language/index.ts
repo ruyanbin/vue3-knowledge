@@ -1,6 +1,6 @@
-import { createI18n } from 'vue-i18n';
-import zh from './modules/zh';
-import en from './modules/en';
+import { createI18n } from 'vue-i18n'
+import zh from './modules/zh'
+import en from './modules/en'
 const i18n = createI18n({
 	legacy: false, // 如果要支持 compositionAPI，此项必须设置为 false
 	locale: 'zh', // 设置语言类型
@@ -9,6 +9,6 @@ const i18n = createI18n({
 		zh,
 		en,
 	},
-});
+})
 
-export default i18n;
+export default i18n

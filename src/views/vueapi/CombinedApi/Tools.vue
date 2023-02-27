@@ -12,8 +12,8 @@
 </template>
 
 <script lang="ts" setup>
-import { ChatLineRound } from '@element-plus/icons-vue';
-import { isRef, reactive, readonly, Ref, toRef, toRefs, unref } from 'vue';
+import { ChatLineRound } from '@element-plus/icons-vue'
+import { isRef, reactive, readonly, Ref, toRef, toRefs, unref } from 'vue'
 
 const tableData = [
 	{
@@ -85,76 +85,76 @@ const tableData = [
 		Code: `检查传入的值是否为只读对象。只读对象的属性可以更改，但他们不能通过传入的对象直接赋值。<br/>
 			通过 readonly() 和 shallowReadonly() 创建的代理都是只读的，因为他们是没有 set 函数的 computed() ref。`,
 	},
-];
+]
 interface User {
-	api: string;
-	Description: string;
-	Code: string;
-	type?: string;
+	api: string
+	Description: string
+	Code: string
+	type?: string
 }
 const tableRowClassName = ({ row, rowIndex }: { row: User; rowIndex: number }) => {
 	if (rowIndex === 1) {
-		return 'warning-row';
+		return 'warning-row'
 	} else if (rowIndex === 3) {
-		return 'success-row';
+		return 'success-row'
 	}
-	return '';
-};
+	return ''
+}
 // isRef()
-let foo: unknown;
-console.log(isRef(foo), 'isRef---类型判断');
+let foo: unknown
+console.log(isRef(foo), 'isRef---类型判断')
 if (isRef(foo)) {
 	// foo 的类型被收窄为了 Ref<unknown>
-	foo.value;
+	foo.value
 }
 //unref()
 function useFoo(x: number | Ref<number>) {
-	const unwrapped = unref(x);
-	console.log(unwrapped, 'unwrapped-------unref');
+	const unwrapped = unref(x)
+	console.log(unwrapped, 'unwrapped-------unref')
 	// unwrapped 现在保证为 number 类型
 }
-useFoo(1);
+useFoo(1)
 //toRef
-console.log('toRef');
-const state = reactive({ foo: 1, bar: 2 });
-const fooRef = toRef(state, 'foo');
+console.log('toRef')
+const state = reactive({ foo: 1, bar: 2 })
+const fooRef = toRef(state, 'foo')
 // 更改该 ref 会更新源属性
-fooRef.value++;
-console.log(state.foo); // 2
+fooRef.value++
+console.log(state.foo) // 2
 // 更改源属性也会更新该 ref
-state.foo++;
-console.log(fooRef.value); //
+state.foo++
+console.log(fooRef.value) //
 // torefs
-console.log('toRefs');
+console.log('toRefs')
 const states = reactive({
 	foo: 1,
 	bar: 2,
-});
+})
 
-const stateAsRefs = toRefs(states);
+const stateAsRefs = toRefs(states)
 // 这个 ref 和源属性已经“链接上了”
-states.foo++;
-console.log(stateAsRefs.foo.value); // 2
+states.foo++
+console.log(stateAsRefs.foo.value) // 2
 
-stateAsRefs.foo.value++;
-console.log(state.foo); // 3
+stateAsRefs.foo.value++
+console.log(state.foo) // 3
 // isProxy()
-console.log('isProxy'); // 3
-const a = ref(1);
+console.log('isProxy') // 3
+const a = ref(1)
 const b = reactive({
 	a: 1,
-});
-console.log(isProxy(a), 'ref-------isProxy');
-console.log(isProxy(b), 'reactive-------isProxy');
-console.log('isReactive');
-console.log(isReactive(b), 'reactive-------isReactive');
-console.log(isReactive(a), 'ref-------isReactive');
+})
+console.log(isProxy(a), 'ref-------isProxy')
+console.log(isProxy(b), 'reactive-------isProxy')
+console.log('isReactive')
+console.log(isReactive(b), 'reactive-------isReactive')
+console.log(isReactive(a), 'ref-------isReactive')
 //isReadonly
 const c = readonly({
 	a: 222,
-});
-console.log(isReadonly(c), 'isReadonly----readonly');
-console.log(isReadonly(a), 'isReadonly----ref');
+})
+console.log(isReadonly(c), 'isReadonly----readonly')
+console.log(isReadonly(a), 'isReadonly----ref')
 </script>
 <style lang="scss" scoped>
 .el-table .warning-row {

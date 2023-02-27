@@ -1,20 +1,20 @@
-import { customRef } from 'vue';
+import { customRef } from 'vue'
 
 export function useDebouncedRef(value: any, delay = 200) {
-	let timeout: number | undefined;
+	let timeout: number | undefined
 	return customRef((track, trigger) => {
 		return {
 			get() {
-				track();
-				return value;
+				track()
+				return value
 			},
 			set(newValue) {
-				clearTimeout(timeout);
+				clearTimeout(timeout)
 				timeout = setTimeout(() => {
-					value = newValue;
-					trigger();
-				}, delay);
+					value = newValue
+					trigger()
+				}, delay)
 			},
-		};
-	});
+		}
+	})
 }

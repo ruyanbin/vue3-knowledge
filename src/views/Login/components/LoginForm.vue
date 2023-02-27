@@ -20,77 +20,77 @@
 	</el-form>
 </template>
 <script lang="ts" setup>
-import { reactive, ref } from 'vue';
-import { ElMessage, FormInstance, FormRules } from 'element-plus';
-import { User, Lock } from '@element-plus/icons-vue';
-import { ElNotification } from 'element-plus';
-import { getTimeState } from '@/utils/util';
-import { HOME_URL } from '@/config/config';
-import { useRouter } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { TabsStore } from '@/stores/modules/tabs';
-import { loginApi } from '@/api/modules/login';
-import { initDynamicRouter } from '@/router/modules/dynamicRouter';
-import { useInterval } from '@/hooks/useInterval';
+import { reactive, ref } from 'vue'
+import { ElMessage, FormInstance, FormRules } from 'element-plus'
+import { User, Lock } from '@element-plus/icons-vue'
+import { ElNotification } from 'element-plus'
+import { getTimeState } from '@/utils/util'
+import { HOME_URL } from '@/config/config'
+import { useRouter } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { TabsStore } from '@/stores/modules/tabs'
+import { loginApi } from '@/api/modules/login'
+import { initDynamicRouter } from '@/router/modules/dynamicRouter'
+import { useInterval } from '@/hooks/useInterval'
 
-import { clippingParents } from '@popperjs/core';
-const { counter, start } = useInterval();
-const formSize = ref('default');
-const ruleFormRef = ref<FormInstance>();
+import { clippingParents } from '@popperjs/core'
+const { counter, start } = useInterval()
+const formSize = ref('default')
+const ruleFormRef = ref<FormInstance>()
 
 const ruleForm = reactive({
 	username: '',
 	password: '',
 	verificationCode: '',
-});
+})
 const rules = reactive<FormRules>({
 	username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
 	password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 	verificationCode: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
-});
+})
 //
-const router = useRouter();
-const tabsStore = TabsStore();
-const globalStore = GlobalStore();
+const router = useRouter()
+const tabsStore = TabsStore()
+const globalStore = GlobalStore()
 const submitForm = async (formEl: FormInstance | undefined) => {
-	if (!formEl) return;
+	if (!formEl) return
 	formEl.validate((valid) => {
 		if (valid) {
-			login();
+			login()
 		} else {
-			console.log('error submit!');
-			return false;
+			console.log('error submit!')
+			return false
 		}
-	});
-};
+	})
+}
 // 发送验证码
 
 const send = () => {
-	if (!ruleForm.username) return ElMessage.error('请输入账号');
-	start(60);
-	ElMessage.success('验证码发送成功');
-};
+	if (!ruleForm.username) return ElMessage.error('请输入账号')
+	start(60)
+	ElMessage.success('验证码发送成功')
+}
 // 登录
 const login = async () => {
-	const res = await loginApi(ruleForm);
-	console.log(res, 'res');
+	const res = await loginApi(ruleForm)
+	console.log(res, 'res')
 	if (res.data?.token) {
-		globalStore.setToken(res.data?.token);
-		await initDynamicRouter();
-		globalStore.setUserInfo(JSON.stringify(ruleForm));
+		globalStore.setToken(res.data?.token)
+		await initDynamicRouter()
+		globalStore.setUserInfo(JSON.stringify(ruleForm))
 		ElNotification({
 			title: getTimeState(),
 			message: '欢迎登录 vue3-Admin',
 			type: 'success',
 			duration: 3000,
-		});
+		})
 		// 3.清除上个账号的 tab 信息
-		tabsStore.closeMultipleTab();
-		router.push(HOME_URL);
+		tabsStore.closeMultipleTab()
+		router.push(HOME_URL)
 	}
-};
+}
 const resetForm = (formEl: FormInstance | undefined) => {
-	if (!formEl) return;
-	formEl.resetFields();
-};
+	if (!formEl) return
+	formEl.resetFields()
+}
 </script>

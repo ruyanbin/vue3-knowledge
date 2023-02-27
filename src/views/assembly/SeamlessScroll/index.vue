@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, reactive, unref } from 'vue';
-import SeamlessScroll from '@/components/SeamlessScroll';
+import { ref, reactive, unref } from 'vue'
+import SeamlessScroll from '@/components/SeamlessScroll'
 
-const scroll = ref();
+const scroll = ref()
 
 const listData = ref([
 	{
@@ -32,15 +32,15 @@ const listData = ref([
 	{
 		title: '无缝滚动第九行无缝滚动第九行！！！！！！！！！！',
 	},
-]);
+])
 
 const classOption = reactive({
 	direction: 'top',
-});
+})
 
 function changeDirection(val) {
-	(unref(scroll) as any).reset();
-	unref(classOption).direction = val;
+	;(unref(scroll) as any).reset()
+	unref(classOption).direction = val
 }
 </script>
 

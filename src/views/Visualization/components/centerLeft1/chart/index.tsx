@@ -1,8 +1,8 @@
-import { defineComponent, onUnmounted, reactive } from 'vue';
-import Draw from './draw';
+import { defineComponent, onUnmounted, reactive } from 'vue'
+import Draw from './draw'
 export default defineComponent({
 	setup() {
-		let intervalInstance: any = null;
+		let intervalInstance: any = null
 		const cdata = reactive({
 			xData: ['数据1', '数据2', '数据3', '数据4', '数据5', '数据6'],
 			seriesData: [
@@ -13,7 +13,7 @@ export default defineComponent({
 				{ value: 20, name: '数据5' },
 				{ value: 35, name: '数据6' },
 			],
-		});
+		})
 		// intervalInstance = setInterval(() => {
 		// 	const data = cdata.seriesData
 		// 	cdata.seriesData = data.map((e) => {
@@ -22,13 +22,13 @@ export default defineComponent({
 		// }, 1000)
 		onUnmounted(() => {
 			// clearInterval(intervalInstance)
-		});
+		})
 		return () => {
 			return (
 				<div>
 					<Draw cdata={cdata} />
 				</div>
-			);
-		};
+			)
+		}
 	},
-});
+})

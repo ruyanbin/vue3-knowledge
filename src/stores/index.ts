@@ -1,10 +1,10 @@
-import { defineStore, createPinia } from 'pinia';
-import { GlobalState, ThemeConfigProps } from './interface';
-import { DEFAULT_PRIMARY } from '@/config/config';
-import piniaPersistConfig from '@/config/piniaPersist';
-import piniaPluginPersistedstate from 'pinia-plugin-persistedstate';
+import { defineStore, createPinia } from 'pinia'
+import { GlobalState, ThemeConfigProps } from './interface'
+import { DEFAULT_PRIMARY } from '@/config/config'
+import piniaPersistConfig from '@/config/piniaPersist'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 
-import { removeWatermark, setWaterMark } from '@/utils/watermark';
+import { removeWatermark, setWaterMark } from '@/utils/watermark'
 // defineStore 调用后返回一个函数，调用该函数获得 Store 实体
 export const GlobalStore = defineStore({
 	// id: 必须的，在所有 Store 中唯一
@@ -57,44 +57,44 @@ export const GlobalStore = defineStore({
 	actions: {
 		// setToken
 		setToken(token: string) {
-			this.token = token;
+			this.token = token
 		},
 		// setUserInfo
 		setUserInfo(userInfo: any) {
-			this.userInfo = userInfo;
+			this.userInfo = userInfo
 		},
 		// 更新 isWatermark
 		setisWatermark(isWatermark: boolean) {
-			this.isWatermark = isWatermark;
+			this.isWatermark = isWatermark
 			if (this.isWatermark) {
-				setWaterMark(this.Watermark, this.Watermark);
+				setWaterMark(this.Watermark, this.Watermark)
 			} else {
-				removeWatermark();
+				removeWatermark()
 			}
 		},
 		// setAssemblySizeSize
 		setAssemblySizeSize(assemblySize: string) {
-			this.assemblySize = assemblySize;
+			this.assemblySize = assemblySize
 		},
 		// updateLanguage
 		updateLanguage(language: string) {
-			this.language = language;
+			this.language = language
 		},
 		// setThemeConfig
 		setThemeConfig(themeConfig: ThemeConfigProps) {
-			this.themeConfig = themeConfig;
+			this.themeConfig = themeConfig
 		},
 		setisPhone(isPhone: boolean) {
-			this.themeConfig.isPhone = isPhone;
+			this.themeConfig.isPhone = isPhone
 		},
 		setisCollapse(isCollapse: boolean) {
-			this.themeConfig.isCollapse = isCollapse;
+			this.themeConfig.isCollapse = isCollapse
 		},
 	},
 	persist: piniaPersistConfig('GlobalState'),
-});
+})
 // piniaPersist(持久化)
-const pinia = createPinia();
-pinia.use(piniaPluginPersistedstate);
+const pinia = createPinia()
+pinia.use(piniaPluginPersistedstate)
 
-export default pinia;
+export default pinia

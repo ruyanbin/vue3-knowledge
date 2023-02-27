@@ -14,13 +14,13 @@
 </template>
 
 <script lang="ts" setup>
-import SearchMenu from './components/SearchMenu.vue';
-import FullscreenConfig from './components/FullscreenConfig.vue';
+import SearchMenu from './components/SearchMenu.vue'
+import FullscreenConfig from './components/FullscreenConfig.vue'
 // import Message from "./components/Message.vue";
-import LanguageConfig from './components/LanguageConfig.vue';
-import ThemeSetting from './components/ThemeSetting.vue';
-import AssemblySize from './components/AssemblySize.vue';
-import AvatarUser from './components/AvatarUser.vue';
+import LanguageConfig from './components/LanguageConfig.vue'
+import ThemeSetting from './components/ThemeSetting.vue'
+import AssemblySize from './components/AssemblySize.vue'
+import AvatarUser from './components/AvatarUser.vue'
 </script>
 <style scoped lang="scss">
 .tool-bar-ri {

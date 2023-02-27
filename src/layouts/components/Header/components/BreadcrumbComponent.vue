@@ -28,17 +28,17 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { AuthStore } from '@/stores/modules/auth';
-import { ArrowRight } from '@element-plus/icons-vue';
-import { HOME_URL } from '@/config/config';
-const route = useRoute();
-const authStore = AuthStore();
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
-const breadcrumbList = computed(() => authStore.breadcrumbListGet[route.path]);
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { AuthStore } from '@/stores/modules/auth'
+import { ArrowRight } from '@element-plus/icons-vue'
+import { HOME_URL } from '@/config/config'
+const route = useRoute()
+const authStore = AuthStore()
+const globalStore = GlobalStore()
+const themeConfig = computed(() => globalStore.themeConfig)
+const breadcrumbList = computed(() => authStore.breadcrumbListGet[route.path])
 </script>
 <style scoped lang="scss">
 @media screen and (max-width: 900px) {

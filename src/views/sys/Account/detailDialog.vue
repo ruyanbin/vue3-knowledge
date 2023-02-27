@@ -52,54 +52,54 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, reactive } from 'vue';
-import { ElMessage, FormInstance, FormRules } from 'element-plus';
+import { ref, reactive } from 'vue'
+import { ElMessage, FormInstance, FormRules } from 'element-plus'
 interface DrawerProps {
-	title: string;
-	isView: boolean;
-	rowData?: any;
-	api?: (params: any) => Promise<any>;
-	getTableList?: () => Promise<any>;
+	title: string
+	isView: boolean
+	rowData?: any
+	api?: (params: any) => Promise<any>
+	getTableList?: () => Promise<any>
 	// 详情
 }
 
-const dialogVisible = ref(false);
+const dialogVisible = ref(false)
 const dialogProps = ref<DrawerProps>({
 	isView: false,
 	title: '',
-});
+})
 // 接收父组件传过来的参数
 const acceptParams = (params: DrawerProps): void => {
-	dialogProps.value = params;
-	dialogVisible.value = true;
-};
+	dialogProps.value = params
+	dialogVisible.value = true
+}
 defineExpose({
 	acceptParams,
-});
+})
 
-const ruleFormRef = ref<FormInstance>();
+const ruleFormRef = ref<FormInstance>()
 
 const validateEmail = (rule: any, value: any, callback: any) => {
-	let reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/;
+	let reg = /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/
 	if (value === '') {
-		callback(new Error('请输入邮箱'));
+		callback(new Error('请输入邮箱'))
 	} else if (!reg.test(value)) {
-		callback(new Error('请输入正确的邮箱'));
+		callback(new Error('请输入正确的邮箱'))
 	} else {
-		callback();
+		callback()
 	}
-};
+}
 const validateAccount = (rule: any, value: any, callback: any) => {
 	if (!value) {
-		callback(new Error('请输入账号'));
+		callback(new Error('请输入账号'))
 	}
 	// else if (value.length !== 6) {
 	//   callback(new Error("请输入6位账号"));
 	// }
 	else {
-		callback();
+		callback()
 	}
-};
+}
 const rules = reactive<FormRules>({
 	account: [
 		{
@@ -156,27 +156,27 @@ const rules = reactive<FormRules>({
 			trigger: 'blur',
 		},
 	],
-});
+})
 const submitForm = async (formEl: FormInstance | undefined) => {
-	if (!formEl) return;
+	if (!formEl) return
 	await formEl.validate(async (valid, fields) => {
-		if (!valid) return;
+		if (!valid) return
 		try {
-			await dialogProps.value.api!(dialogProps.value.rowData);
+			await dialogProps.value.api!(dialogProps.value.rowData)
 			ElMessage.success({
 				message: `${dialogProps.value.title}用户成功！`,
-			});
-			dialogProps.value.getTableList!();
-			dialogVisible.value = false;
+			})
+			dialogProps.value.getTableList!()
+			dialogVisible.value = false
 		} catch (error) {
-			console.log(error);
+			console.log(error)
 		}
-	});
-};
+	})
+}
 const resetForm = (formEl: FormInstance | undefined) => {
-	if (!formEl) return;
-	formEl.resetFields();
-	dialogVisible.value = false;
-};
+	if (!formEl) return
+	formEl.resetFields()
+	dialogVisible.value = false
+}
 </script>
 <style lang="scss" scoped></style>

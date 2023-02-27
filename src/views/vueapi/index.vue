@@ -51,18 +51,18 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-const str = ref('<router-link to="/index">22</router-link>');
+const str = ref('<router-link to="/index">22</router-link>')
 
-const str1 = ref(`<router-link  :to="{name:'/index',params:'我的'}">22</router-link>`);
+const str1 = ref(`<router-link  :to="{name:'/index',params:'我的'}">22</router-link>`)
 
 const query1 = ref(`router.push({ name: 'guest', query: { id: 1 } });
-`);
+`)
 const query2 = ref(`router.push({ path: 'guest', query: { id: 1 } });
-`);
+`)
 const params1 = ref(`router.push({ name: 'guest', params: { id: 1 } });
-;`);
-const childrentwo = ref(`<childrentwo v-model:title="title" v-model:str="str"></childrentwo>`);
+;`)
+const childrentwo = ref(`<childrentwo v-model:title="title" v-model:str="str"></childrentwo>`)
 </script>
 <style lang="scss" scoped></style>

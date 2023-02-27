@@ -10,6 +10,6 @@
 </template>
 
 <script lang="ts" setup>
-import TypeIt from '@/components/ReTypeit';
+import TypeIt from '@/components/ReTypeit'
 </script>
 <style lang="scss" scoped></style>

@@ -7,11 +7,11 @@ import {
 	AllowedComponentProps,
 	ComponentCustomProps,
 	ExtractPropTypes,
-} from 'vue';
+} from 'vue'
 
 export const withInstall = (component: any) => {
 	component.install = function (Vue: { component: (arg0: any, arg1: any) => void }) {
-		Vue.component(component.name, component);
-	};
-	return component;
-};
+		Vue.component(component.name, component)
+	}
+	return component
+}

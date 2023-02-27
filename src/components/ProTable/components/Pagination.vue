@@ -14,17 +14,17 @@
 
 <script lang="ts" setup>
 interface Pageable {
-	pageNum: number;
-	pageSize: number;
-	total: number;
+	pageNum: number
+	pageSize: number
+	total: number
 }
 
 interface PaginationProps {
-	pageable: Pageable;
-	handleSizeChange: (size: number) => void;
-	handleCurrentChange: (currentPage: number) => void;
+	pageable: Pageable
+	handleSizeChange: (size: number) => void
+	handleCurrentChange: (currentPage: number) => void
 }
 
-defineProps<PaginationProps>();
+defineProps<PaginationProps>()
 </script>
 <style lang="scss" scoped></style>

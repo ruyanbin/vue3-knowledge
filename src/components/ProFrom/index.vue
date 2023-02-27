@@ -19,22 +19,22 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
-let model = ref<any>({});
+let model = ref<any>({})
 interface columnsItem {
 	formItem: {
-		label: string;
-		prop: string;
-		labelWidth?: string;
-		required?: boolean;
-	};
+		label: string
+		prop: string
+		labelWidth?: string
+		required?: boolean
+	}
 	attrs: {
-		typeName: string;
-		clearable?: boolean;
-		placeholder?: string;
-		disabled?: string;
-	};
+		typeName: string
+		clearable?: boolean
+		placeholder?: string
+		disabled?: string
+	}
 }
 // interface ProFromProps {
 //   form: any;
@@ -66,16 +66,16 @@ const options = ref({
 	},
 	// 表单列配置项 (formItem 代表 item 配置项，attrs 代表 输入、选择框 配置项)
 	columns: [],
-});
+})
 // 接收父组件传过来的参数
 const acceptParams = (params: ProFromProps): void => {
-	console.log(params.columns, 'params');
-	options.value.form = params.form;
-	options.value.columns = params.columns;
-};
+	console.log(params.columns, 'params')
+	options.value.form = params.form
+	options.value.columns = params.columns
+}
 defineExpose({
 	acceptParams,
-});
+})
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

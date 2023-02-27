@@ -10,9 +10,9 @@
 </template>
 
 <script setup lang="ts" name="404">
-import { useRouter } from 'vue-router';
-import { HOME_URL } from '@/config/config';
-const router = useRouter();
+import { useRouter } from 'vue-router'
+import { HOME_URL } from '@/config/config'
+const router = useRouter()
 </script>
 
 <style scoped lang="scss">

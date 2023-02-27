@@ -52,50 +52,50 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { AuthStore } from '@/stores/modules/auth';
-import { TABS_WHITE_LIST } from '@/config/config';
-import Main from '@/layouts/components/Main/index.vue';
-import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue';
-import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue';
-import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
-const route = useRoute();
-const router = useRouter();
-const authStore = AuthStore();
-const globalStore = GlobalStore();
-const activeMenu = computed(() => route.path);
-const menuList = computed(() => authStore.showMenuListGet);
-const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
-const title = computed(() => globalStore.title);
-const isPhone = computed(() => globalStore.themeConfig.isPhone);
-const subMenu = ref<Menu.MenuOptions[]>([]);
-const splitActive = ref<string>('');
+import { ref, computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { AuthStore } from '@/stores/modules/auth'
+import { TABS_WHITE_LIST } from '@/config/config'
+import Main from '@/layouts/components/Main/index.vue'
+import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue'
+import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue'
+import SubMenu from '@/layouts/components/Menu/SubMenu.vue'
+const route = useRoute()
+const router = useRouter()
+const authStore = AuthStore()
+const globalStore = GlobalStore()
+const activeMenu = computed(() => route.path)
+const menuList = computed(() => authStore.showMenuListGet)
+const isCollapse = computed(() => globalStore.themeConfig.isCollapse)
+const title = computed(() => globalStore.title)
+const isPhone = computed(() => globalStore.themeConfig.isPhone)
+const subMenu = ref<Menu.MenuOptions[]>([])
+const splitActive = ref<string>('')
 watch(
 	() => [menuList, route],
 	() => {
 		// 当前路由存在 tabs 白名单中 || 当前菜单没有数据直接 return
-		if (TABS_WHITE_LIST.includes(route.path) || !menuList.value.length) return;
-		splitActive.value = route.path;
-		const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path));
+		if (TABS_WHITE_LIST.includes(route.path) || !menuList.value.length) return
+		splitActive.value = route.path
+		const menuItem = menuList.value.filter((item: Menu.MenuOptions) => route.path.includes(item.path))
 		if (menuItem.length) {
-			if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children);
-			subMenu.value = [];
+			if (menuItem[0].children?.length) return (subMenu.value = menuItem[0].children)
+			subMenu.value = []
 		}
 	},
 	{
 		deep: true,
 		immediate: true,
 	}
-);
+)
 // 切换 SubMenu
 const changeSubMenu = (item: Menu.MenuOptions) => {
-	splitActive.value = item.path;
-	if (item.children?.length) return (subMenu.value = item.children);
-	subMenu.value = [];
-	router.push(item.path);
-};
+	splitActive.value = item.path
+	if (item.children?.length) return (subMenu.value = item.children)
+	subMenu.value = []
+	router.push(item.path)
+}
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

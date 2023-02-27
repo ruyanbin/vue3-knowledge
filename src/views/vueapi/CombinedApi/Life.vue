@@ -18,7 +18,7 @@
 </template>
 
 <script lang="ts" setup>
-import { onBeforeMount, onMounted, onUnmounted, onUpdated, ref } from 'vue';
+import { onBeforeMount, onMounted, onUnmounted, onUpdated, ref } from 'vue'
 
 const tableData = [
 	{
@@ -127,48 +127,48 @@ const tableData = [
 							data.value = await fetchOnClient(/* ... */)
 						}`,
 	},
-];
+]
 interface User {
-	api: string;
-	Description: string;
-	type?: string;
-	detail: string;
-	Code: string;
-	Warning?: string;
+	api: string
+	Description: string
+	type?: string
+	detail: string
+	Code: string
+	Warning?: string
 }
 const tableRowClassName = ({ row, rowIndex }: { row: User; rowIndex: number }) => {
 	if (rowIndex === 1) {
-		return 'warning-row';
+		return 'warning-row'
 	} else if (rowIndex === 3) {
-		return 'success-row';
+		return 'success-row'
 	}
-	return '';
-};
-const count = ref(0);
+	return ''
+}
+const count = ref(0)
 
 //onBeforeMount()
 onBeforeMount(() => {
-	console.log('onBeforeMount');
-});
+	console.log('onBeforeMount')
+})
 // onMounted
-const el = ref();
-let intervalId: number | undefined;
+const el = ref()
+let intervalId: number | undefined
 onMounted(() => {
-	el.value; // <div>
-	console.log(el.value, 'onMounted');
+	el.value // <div>
+	console.log(el.value, 'onMounted')
 	intervalId = setInterval(() => {
 		// ...
-	});
-});
+	})
+})
 //onUpdated
 onUpdated(() => {
-	console.log('onUpdated');
+	console.log('onUpdated')
 	// 文本内容应该与当前的 `count.value` 一致
-	console.log(document.getElementById('count').textContent);
-});
+	console.log(document.getElementById('count').textContent)
+})
 onUnmounted(() => {
-	console.log('onUnmounted');
-	clearInterval(intervalId);
-});
+	console.log('onUnmounted')
+	clearInterval(intervalId)
+})
 </script>
 <style lang="scss" scoped></style>

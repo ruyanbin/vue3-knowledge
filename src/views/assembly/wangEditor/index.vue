@@ -19,9 +19,9 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import WangEditor from '@/components/WangEditor/index.vue';
+import { ref } from 'vue'
+import WangEditor from '@/components/WangEditor/index.vue'
 
-const content = ref('');
+const content = ref('')
 </script>
 <style lang="scss" scoped></style>

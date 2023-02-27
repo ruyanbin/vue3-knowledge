@@ -24,17 +24,17 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { LOGIN_URL } from '@/config/config';
-import { resetRouter } from '@/router/index';
-import InfoDialog from './InfoDialog.vue';
-import PasswordDialog from './PasswordDialog.vue';
-import { ElMessageBox, ElMessage } from 'element-plus';
-const router = useRouter();
-const globalStore = GlobalStore();
-const user = JSON.parse(globalStore.userInfo);
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { LOGIN_URL } from '@/config/config'
+import { resetRouter } from '@/router/index'
+import InfoDialog from './InfoDialog.vue'
+import PasswordDialog from './PasswordDialog.vue'
+import { ElMessageBox, ElMessage } from 'element-plus'
+const router = useRouter()
+const globalStore = GlobalStore()
+const user = JSON.parse(globalStore.userInfo)
 // 退出登录
 const logout = () => {
 	ElMessageBox.confirm('您是否确认退出登录?', '温馨提示', {
@@ -42,25 +42,25 @@ const logout = () => {
 		cancelButtonText: '取消',
 		type: 'warning',
 	}).then(() => {
-		resetRouter();
-		globalStore.setToken('');
-		router.replace(LOGIN_URL);
+		resetRouter()
+		globalStore.setToken('')
+		router.replace(LOGIN_URL)
 		ElMessage({
 			type: 'success',
 			message: '退出登录成功！',
-		});
-	});
-};
+		})
+	})
+}
 
 interface DialogExpose {
-	openDialog: () => void;
+	openDialog: () => void
 }
-const infoRef = ref<null | DialogExpose>(null);
-const passwordRef = ref<null | DialogExpose>(null);
+const infoRef = ref<null | DialogExpose>(null)
+const passwordRef = ref<null | DialogExpose>(null)
 // 打开修改密码和个人信息弹窗
 const openDialog = (refName: string) => {
-	if (refName == 'infoRef') infoRef.value?.openDialog();
-	else passwordRef.value?.openDialog();
-};
+	if (refName == 'infoRef') infoRef.value?.openDialog()
+	else passwordRef.value?.openDialog()
+}
 </script>
 <style lang="scss" scoped></style>

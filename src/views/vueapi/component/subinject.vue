@@ -8,12 +8,12 @@
 </template>
 
 <script lang="ts" setup>
-import { useAttrs } from 'vue';
-const attrs = useAttrs();
+import { useAttrs } from 'vue'
+const attrs = useAttrs()
 const attrClick = () => {
-	attrs.onAclick();
-};
+	attrs.onAclick()
+}
 
-const onMsg = inject('msg');
+const onMsg = inject('msg')
 </script>
 <style lang="scss" scoped></style>

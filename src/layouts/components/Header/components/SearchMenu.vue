@@ -29,55 +29,55 @@
 	</div>
 </template>
 <script lang="ts" setup>
-import { getFlatArr } from '@/utils/util';
+import { getFlatArr } from '@/utils/util'
 
-import fangdajing from '~icons/ic/twotone-search';
+import fangdajing from '~icons/ic/twotone-search'
 
-import { Search } from '@element-plus/icons-vue';
-import { ElIcon, ElDialog, ElAutocomplete } from 'element-plus';
-import { computed, ref, nextTick } from 'vue';
-import { useRouter } from 'vue-router';
-import { AuthStore } from '@/stores/modules/auth';
-const router = useRouter();
-const authStore = AuthStore();
+import { Search } from '@element-plus/icons-vue'
+import { ElIcon, ElDialog, ElAutocomplete } from 'element-plus'
+import { computed, ref, nextTick } from 'vue'
+import { useRouter } from 'vue-router'
+import { AuthStore } from '@/stores/modules/auth'
+const router = useRouter()
+const authStore = AuthStore()
 
 // 打开搜索菜单
-const isShowSearch = ref(false);
-const searchMenu = ref('');
-const menuList = computed(() => getFlatArr(authStore.authMenuList));
+const isShowSearch = ref(false)
+const searchMenu = ref('')
+const menuList = computed(() => getFlatArr(authStore.authMenuList))
 // const searchMenuList = ref([]);
-const menuInputRef = ref();
+const menuInputRef = ref()
 const searchMenuList = (queryString: string, cb: any) => {
-	const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value;
-	cb(results);
-};
+	const results = queryString ? menuList.value.filter(filterNodeMethod(queryString)) : menuList.value
+	cb(results)
+}
 const filterNodeMethod = (queryString: string) => {
 	return (restaurant: Menu.MenuOptions) => {
 		return (
 			restaurant.path.toLowerCase().indexOf(queryString.toLowerCase()) > -1 ||
 			restaurant.meta.title.toLowerCase().indexOf(queryString.toLowerCase()) > -1
-		);
-	};
-};
+		)
+	}
+}
 const handleOpen = () => {
-	isShowSearch.value = true;
-	searchMenu.value = '';
+	isShowSearch.value = true
+	searchMenu.value = ''
 	nextTick(() => {
-		console.log(menuInputRef.value, ' menuInputRef.value');
+		console.log(menuInputRef.value, ' menuInputRef.value')
 		setTimeout(() => {
-			menuInputRef.value.focus();
-		});
-	});
-};
+			menuInputRef.value.focus()
+		})
+	})
+}
 const closeSearch = () => {
-	isShowSearch.value = false;
-};
+	isShowSearch.value = false
+}
 const handleClick = (menuItem: Menu.MenuOptions) => {
-	searchMenu.value = '';
-	if (menuItem.meta.isLink) window.open(menuItem.meta.isLink, '_blank');
-	else router.push(menuItem.path);
-	closeSearch();
-};
+	searchMenu.value = ''
+	if (menuItem.meta.isLink) window.open(menuItem.meta.isLink, '_blank')
+	else router.push(menuItem.path)
+	closeSearch()
+}
 </script>
 <style scoped lang="scss">
 /* 菜单搜索样式 */

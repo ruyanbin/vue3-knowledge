@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-import ProFrom from '@/components/ProFrom/index.vue';
-import { onMounted, reactive, ref } from 'vue';
-const proFromRef = ref();
+import ProFrom from '@/components/ProFrom/index.vue'
+import { onMounted, reactive, ref } from 'vue'
+const proFromRef = ref()
 const columns = reactive([
 	{
 		formItem: {
@@ -47,7 +47,7 @@ const columns = reactive([
 			style: 'width:500px',
 		},
 	},
-]);
+])
 const form = reactive({
 	inline: false,
 	labelPosition: 'right',
@@ -55,16 +55,16 @@ const form = reactive({
 	size: 'default',
 	disabled: false,
 	labelSuffix: ' :',
-});
+})
 const init = () => {
 	let params = {
 		form,
 		columns,
-	};
-	proFromRef.value.acceptParams(params);
-};
+	}
+	proFromRef.value.acceptParams(params)
+}
 onMounted(() => {
-	init();
-});
+	init()
+})
 </script>
 <style lang="scss" scoped></style>

@@ -31,8 +31,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, onUnmounted, reactive } from 'vue';
-import chart from './chart/index';
+import { defineComponent, onMounted, onUnmounted, reactive } from 'vue'
+import chart from './chart/index'
 export default defineComponent({
 	name: 'CenterLeft1',
 	components: {
@@ -57,11 +57,11 @@ export default defineComponent({
 				number: 571,
 				text: '未通过数量',
 			},
-		];
+		]
 		// 对应图标
-		const iconFont = ['icon-diagnose', 'icon-monitoring', 'icon-cloudupload', 'icon-clouddownload'];
-		const numberData = reactive<any[]>([]);
-		let intervalInstance = null;
+		const iconFont = ['icon-diagnose', 'icon-monitoring', 'icon-cloudupload', 'icon-clouddownload']
+		const numberData = reactive<any[]>([])
+		let intervalInstance = null
 		const setData = () => {
 			dataArr.forEach((e) => {
 				numberData.push({
@@ -74,27 +74,27 @@ export default defineComponent({
 						},
 					},
 					text: e.text,
-				});
-			});
-		};
+				})
+			})
+		}
 		const changeTiming = () => {
 			intervalInstance = setInterval(() => {
-				changeNumber();
-			}, 2000);
-		};
+				changeNumber()
+			}, 2000)
+		}
 		const changeNumber = () => {
 			numberData.forEach((item, index) => {
-				item.config.number[0] += ++index;
-				item.config = { ...item.config };
-			});
-		};
+				item.config.number[0] += ++index
+				item.config = { ...item.config }
+			})
+		}
 		onMounted(() => {
-			setData();
-			changeTiming();
-		});
-		return { numberData, iconFont };
+			setData()
+			changeTiming()
+		})
+		return { numberData, iconFont }
 	},
-});
+})
 </script>
 <style lang="scss" scoped>
 $box-width: 300px;

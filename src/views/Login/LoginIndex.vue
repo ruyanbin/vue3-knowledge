@@ -18,35 +18,35 @@
 </template>
 <script lang="ts" setup>
 //导入vanta.js和three.js，以及ref等hooks
-import * as THREE from 'three';
-import CLOUDS from 'vanta/src/vanta.waves';
-import TypeIt from '@/components/ReTypeit';
-import { onBeforeUnmount, onMounted, ref } from 'vue';
-import LoginForm from './components/LoginForm.vue';
-const title = ref('vue3-admin');
+import * as THREE from 'three'
+import CLOUDS from 'vanta/src/vanta.waves'
+import TypeIt from '@/components/ReTypeit'
+import { onBeforeUnmount, onMounted, ref } from 'vue'
+import LoginForm from './components/LoginForm.vue'
+const title = ref('vue3-admin')
 //使用ref引用挂载区域
-const loginRef = ref(null);
+const loginRef = ref(null)
 //创建一个全局的变量来使用vanta.js
 
 //  *因为在vue2中，是使用this.vantaEffect来创建指定的3d动画模板的
 //  *但是vue3 setup中是没有this，所以要另外创建一个
 let vantaEffect: {
-	[x: string]: any;
-	destroyed: () => void;
-} | null = null;
+	[x: string]: any
+	destroyed: () => void
+} | null = null
 onMounted(() => {
 	vantaEffect = CLOUDS({
 		el: loginRef.value,
 		THREE: THREE,
 		// 如果需要改变样式写在这里 因为 vantaeffect 没有setOptions 方法
 		color: 0x16212a,
-	});
-});
+	})
+})
 onBeforeUnmount(() => {
 	if (vantaEffect) {
-		vantaEffect.destroy();
+		vantaEffect.destroy()
 	}
-});
+})
 </script>
 <style scoped lang="scss">
 @import './index.scss';

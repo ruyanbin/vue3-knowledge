@@ -89,7 +89,7 @@
 <script lang="ts" setup>
 const refts: Ref<String> = ref(`import type { Ref } from 'vue'
 
-const year: Ref<string | number> = ref('2020')`);
+const year: Ref<string | number> = ref('2020')`)
 </script>
 <style lang="scss" scoped>
 .card-api-item {

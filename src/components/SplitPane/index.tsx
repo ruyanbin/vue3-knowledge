@@ -1,11 +1,11 @@
-import { defineComponent, ref, unref, computed, PropType } from 'vue';
-import resizer from './resizer';
-import './index.css';
+import { defineComponent, ref, unref, computed, PropType } from 'vue'
+import resizer from './resizer'
+import './index.css'
 
 export interface ContextProps {
-	minPercent: number;
-	defaultPercent: number;
-	split: string;
+	minPercent: number
+	defaultPercent: number
+	split: string
 }
 
 /** 切割面板组件 */
@@ -20,73 +20,73 @@ export default defineComponent({
 	},
 	emits: ['resize'],
 	setup(props, ctx) {
-		const active = ref(false);
-		const hasMoved = ref(false);
-		const percent = ref(props.splitSet!.defaultPercent);
-		const type = props.splitSet?.split === 'vertical' ? 'width' : 'height';
-		const resizeType = props.splitSet?.split === 'vertical' ? 'left' : 'top';
+		const active = ref(false)
+		const hasMoved = ref(false)
+		const percent = ref(props.splitSet!.defaultPercent)
+		const type = props.splitSet?.split === 'vertical' ? 'width' : 'height'
+		const resizeType = props.splitSet?.split === 'vertical' ? 'left' : 'top'
 
-		const leftClass = ref(['splitter-pane splitter-paneL', props.splitSet?.split]);
+		const leftClass = ref(['splitter-pane splitter-paneL', props.splitSet?.split])
 
-		const rightClass = ref(['splitter-pane splitter-paneR', props.splitSet?.split]);
+		const rightClass = ref(['splitter-pane splitter-paneR', props.splitSet?.split])
 
 		const cursor = computed(() => {
 			return active.value
 				? props.splitSet?.split === 'vertical'
 					? { cursor: 'col-resize' }
 					: { cursor: 'row-resize' }
-				: { cursor: 'default' };
-		});
+				: { cursor: 'default' }
+		})
 
 		const onClick = (): void => {
 			if (!hasMoved.value) {
-				percent.value = 50;
-				ctx.emit('resize', percent.value);
+				percent.value = 50
+				ctx.emit('resize', percent.value)
 			}
-		};
+		}
 
 		const onMouseDown = (): void => {
-			active.value = true;
-			hasMoved.value = false;
-		};
+			active.value = true
+			hasMoved.value = false
+		}
 
 		const onMouseUp = (): void => {
-			active.value = false;
-		};
+			active.value = false
+		}
 
 		const onMouseMove = (e: any): void => {
 			if (e.buttons === 0 || e.which === 0) {
-				active.value = false;
+				active.value = false
 			}
 
 			if (active.value) {
-				let offset = 0;
-				let target = e.currentTarget;
+				let offset = 0
+				let target = e.currentTarget
 				if (props.splitSet?.split === 'vertical') {
 					while (target) {
-						offset += target.offsetLeft;
-						target = target.offsetParent;
+						offset += target.offsetLeft
+						target = target.offsetParent
 					}
 				} else {
 					while (target) {
-						offset += target.offsetTop;
-						target = target.offsetParent;
+						offset += target.offsetTop
+						target = target.offsetParent
 					}
 				}
 
-				const currentPage = props.splitSet?.split === 'vertical' ? e.pageX : e.pageY;
-				const targetOffset = props.splitSet?.split === 'vertical' ? e.currentTarget.offsetWidth : e.currentTarget.offsetHeight;
-				const percents = Math.floor(((currentPage - offset) / targetOffset) * 10000) / 100;
+				const currentPage = props.splitSet?.split === 'vertical' ? e.pageX : e.pageY
+				const targetOffset = props.splitSet?.split === 'vertical' ? e.currentTarget.offsetWidth : e.currentTarget.offsetHeight
+				const percents = Math.floor(((currentPage - offset) / targetOffset) * 10000) / 100
 
 				if (percents > props.splitSet!.minPercent && percents < 100 - props.splitSet!.minPercent) {
-					percent.value = percents;
+					percent.value = percents
 				}
 
-				ctx.emit('resize', percent.value);
+				ctx.emit('resize', percent.value)
 
-				hasMoved.value = true;
+				hasMoved.value = true
 			}
-		};
+		}
 
 		return () => (
 			<>
@@ -112,6 +112,6 @@ export default defineComponent({
 					<div v-show={unref(active)} class="vue-splitter-container-mask"></div>
 				</div>
 			</>
-		);
+		)
 	},
-});
+})

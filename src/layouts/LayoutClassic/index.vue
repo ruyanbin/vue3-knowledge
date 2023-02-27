@@ -37,22 +37,22 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useRoute } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { AuthStore } from '@/stores/modules/auth';
-import Main from '@/layouts/components/Main/index.vue';
-import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
-import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue';
-import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue';
-const route = useRoute();
-const authStore = AuthStore();
-const globalStore = GlobalStore();
-const activeMenu = computed(() => route.path);
-const menuList = computed(() => authStore.showMenuListGet);
-const isPhone = computed(() => globalStore.themeConfig.isPhone);
-const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
-const title = computed(() => globalStore.title);
+import { computed } from 'vue'
+import { useRoute } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { AuthStore } from '@/stores/modules/auth'
+import Main from '@/layouts/components/Main/index.vue'
+import SubMenu from '@/layouts/components/Menu/SubMenu.vue'
+import ToolBarLeft from '@/layouts/components/Header/ToolBarLeft.vue'
+import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue'
+const route = useRoute()
+const authStore = AuthStore()
+const globalStore = GlobalStore()
+const activeMenu = computed(() => route.path)
+const menuList = computed(() => authStore.showMenuListGet)
+const isPhone = computed(() => globalStore.themeConfig.isPhone)
+const isCollapse = computed(() => globalStore.themeConfig.isCollapse)
+const title = computed(() => globalStore.title)
 </script>
 <style lang="scss" scoped>
 @import './index.scss';

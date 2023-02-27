@@ -15,11 +15,11 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
-});
-const emits = defineEmits(['update:modelValue']);
+})
+const emits = defineEmits(['update:modelValue'])
 const editProps = () => {
-	console.log('向上冒泡');
-	emits('update:modelValue', '22222');
-};
+	console.log('向上冒泡')
+	emits('update:modelValue', '22222')
+}
 </script>
 <style lang="scss" scoped></style>

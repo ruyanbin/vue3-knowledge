@@ -11,8 +11,8 @@
 </template>
 
 <script lang="ts" setup>
-import Driver from 'driver.js';
-import 'driver.js/dist/driver.min.css';
+import Driver from 'driver.js'
+import 'driver.js/dist/driver.min.css'
 
 const guide = () => {
 	const driver: Driver = new Driver({
@@ -21,10 +21,10 @@ const guide = () => {
 		closeBtnText: '关闭',
 		nextBtnText: '下一步',
 		prevBtnText: '上一步',
-	});
-	driver.defineSteps(steps);
-	driver.start();
-};
+	})
+	driver.defineSteps(steps)
+	driver.start()
+}
 const steps: Driver.Step[] = [
 	{
 		element: '#collapseIcon',
@@ -74,7 +74,7 @@ const steps: Driver.Step[] = [
 			position: 'left',
 		},
 	},
-];
+]
 </script>
 <style lang="scss" scoped>
 .el-button {

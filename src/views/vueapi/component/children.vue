@@ -10,21 +10,21 @@
 </template>
 
 <script lang="ts" setup>
-import subinject from './subinject.vue';
+import subinject from './subinject.vue'
 
 const props = defineProps({
 	carr: {
 		type: Function,
 		required: true,
 	},
-});
-const emits = defineEmits(['numclick']);
+})
+const emits = defineEmits(['numclick'])
 const childrenP = (val: string) => {
-	emits('numclick', val);
-};
+	emits('numclick', val)
+}
 const childrenP2 = (val: number) => {
-	console.log('子组件函数');
-	props.carr(val);
-};
+	console.log('子组件函数')
+	props.carr(val)
+}
 </script>
 <style lang="scss" scoped></style>

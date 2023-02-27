@@ -11,18 +11,18 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { GlobalStore } from '@/stores';
-import { Sunny, Moon } from '@element-plus/icons-vue';
-import { useTheme } from '@/hooks/useTheme';
-const globalStore = GlobalStore();
+import { computed } from 'vue'
+import { GlobalStore } from '@/stores'
+import { Sunny, Moon } from '@element-plus/icons-vue'
+import { useTheme } from '@/hooks/useTheme'
+const globalStore = GlobalStore()
 
-const { switchDark } = useTheme();
+const { switchDark } = useTheme()
 
-const themeConfig = computed(() => globalStore.themeConfig);
+const themeConfig = computed(() => globalStore.themeConfig)
 
 const onAddDarkChange = () => {
-	switchDark();
-};
+	switchDark()
+}
 </script>
 <style lang="less" scoped></style>

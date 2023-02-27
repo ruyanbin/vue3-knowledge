@@ -7,14 +7,14 @@
 </template>
 
 <script lang="ts" setup>
-import { onMounted, reactive } from 'vue';
-import { useRoute } from 'vue-router';
-const route = useRoute();
+import { onMounted, reactive } from 'vue'
+import { useRoute } from 'vue-router'
+const route = useRoute()
 const params = reactive({
 	params: route.params,
-});
+})
 onMounted(() => {
-	console.log(route, 'route');
-});
+	console.log(route, 'route')
+})
 </script>
 <style lang="scss" scoped></style>

@@ -15,13 +15,13 @@ const props = defineProps({
 		type: String,
 		required: true,
 	},
-});
-const emits = defineEmits(['update:title', 'update:str']);
+})
+const emits = defineEmits(['update:title', 'update:str'])
 const titleClick = () => {
-	emits('update:title', 'update-----title');
-};
+	emits('update:title', 'update-----title')
+}
 const strClick = () => {
-	emits('update:str', 'update-----str');
-};
+	emits('update:str', 'update-----str')
+}
 </script>
 <style lang="scss" scoped></style>

@@ -1,4 +1,4 @@
-import http from '@/api';
+import http from '@/api'
 export const loginApi = () => {
 	return http.get(
 		`/api/parameter/query`,
@@ -6,5 +6,5 @@ export const loginApi = () => {
 		{
 			headers: { noLoading: true },
 		}
-	); // 正常 post json 请求  ==>  application/json
-};
+	) // 正常 post json 请求  ==>  application/json
+}

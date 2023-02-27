@@ -6,12 +6,12 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { GlobalStore } from '@/stores';
-import CollapseIcon from './components/CollapseIcon.vue';
-import Breadcrumb from './components/BreadcrumbComponent.vue';
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
+import { computed } from 'vue'
+import { GlobalStore } from '@/stores'
+import CollapseIcon from './components/CollapseIcon.vue'
+import Breadcrumb from './components/BreadcrumbComponent.vue'
+const globalStore = GlobalStore()
+const themeConfig = computed(() => globalStore.themeConfig)
 </script>
 <style lang="scss" scoped>
 .tool-bar-lf {

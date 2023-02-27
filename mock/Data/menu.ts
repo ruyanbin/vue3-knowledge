@@ -31,7 +31,7 @@ export const list = [
 	// },
 	//  layout
 	 {
-	  path:"",
+	  path:"/layout",
     name: "layout",
     meta: {
       icon: "TrendCharts",
@@ -89,7 +89,7 @@ export const list = [
   },
 		//  设计模式
 	 {
-	  path:"",
+	  path:"/Design",
     name: "Design",
     meta: {
       icon: "TrendCharts",
@@ -390,7 +390,7 @@ export const list = [
 	// table
   {
     name: "proTable",
-    path: "",
+    path: "/proTable",
     meta: {
       icon: "MessageBox",
       isAffix: false,
@@ -420,7 +420,7 @@ export const list = [
 	//系统管理
   {
     name: "sys",
-    path: "",
+    path: "/sys",
     meta: {
       icon: "MessageBox",
       isAffix: false,
@@ -477,7 +477,7 @@ export const list = [
   },
 	// from
   {
-    path: "",
+    path: "/From",
     name: "From",
     redirect: "/From/index",
     meta: {
@@ -508,7 +508,7 @@ export const list = [
   },
 	// 组件
   {
-    path: "",
+    path: "/assembly",
     name: "assembly",
     redirect: "/assembly/guide",
     meta: {
@@ -653,7 +653,7 @@ export const list = [
   },
 	// 指令
   {
-    path: "",
+    path: "/directives",
     name: "directives",
     redirect: "/directives/copyDirect",
     meta: {
@@ -740,7 +740,7 @@ export const list = [
   },
 	//echart
   {
-    path: "",
+    path: "/echarts",
     name: "echarts",
     redirect: "/echarts/waterChart",
     meta: {
@@ -855,7 +855,7 @@ export const list = [
   },
 	//地图
   {
-    path: "",
+    path: "/map",
     name: "map",
     meta: {
       icon: "TrendCharts",

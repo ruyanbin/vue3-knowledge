@@ -43,27 +43,27 @@
 </template>
 
 <script lang="ts" setup>
-import { computed } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { AuthStore } from '@/stores/modules/auth';
-import Main from '@/layouts/components/Main/index.vue';
-import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue';
-import SubMenu from '@/layouts/components/Menu/SubMenu.vue';
-const route = useRoute();
-const router = useRouter();
+import { computed } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { AuthStore } from '@/stores/modules/auth'
+import Main from '@/layouts/components/Main/index.vue'
+import ToolBarRight from '@/layouts/components/Header/ToolBarRight.vue'
+import SubMenu from '@/layouts/components/Menu/SubMenu.vue'
+const route = useRoute()
+const router = useRouter()
 
-const authStore = AuthStore();
-const globalStore = GlobalStore();
-const activeMenu = computed(() => route.path);
-const menuList = computed(() => authStore.showMenuListGet);
-const isCollapse = computed(() => globalStore.themeConfig.isCollapse);
-const title = computed(() => globalStore.title);
-const isPhone = computed(() => globalStore.themeConfig.isPhone);
+const authStore = AuthStore()
+const globalStore = GlobalStore()
+const activeMenu = computed(() => route.path)
+const menuList = computed(() => authStore.showMenuListGet)
+const isCollapse = computed(() => globalStore.themeConfig.isCollapse)
+const title = computed(() => globalStore.title)
+const isPhone = computed(() => globalStore.themeConfig.isPhone)
 const handleClickMenu = (subItem: Menu.MenuOptions) => {
-	if (subItem.meta.isLink) return window.open(subItem.meta.isLink, '_blank');
-	router.push(subItem.path);
-};
+	if (subItem.meta.isLink) return window.open(subItem.meta.isLink, '_blank')
+	router.push(subItem.path)
+}
 </script>
 <style scoped lang="scss">
 @import './index.scss';

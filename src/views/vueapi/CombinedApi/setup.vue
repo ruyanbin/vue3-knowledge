@@ -53,7 +53,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const setupstr = ref(`
 
@@ -70,7 +70,7 @@ export default {
     console.log(this.count) // 0
   }
 }
-`);
+`)
 </script>
 <style lang="scss" scoped>
 .card-api-item {

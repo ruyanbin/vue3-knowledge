@@ -3,9 +3,9 @@
 </template>
 
 <script lang="ts" setup>
-import AMapLoader from '@amap/amap-jsapi-loader';
-import { onMounted, reactive, ref, shallowRef } from 'vue';
-const map: any = shallowRef(null);
+import AMapLoader from '@amap/amap-jsapi-loader'
+import { onMounted, reactive, ref, shallowRef } from 'vue'
+const map: any = shallowRef(null)
 
 const initMap = () => {
 	AMapLoader.load({
@@ -19,21 +19,21 @@ const initMap = () => {
 			visible: true, //是否可见
 			opacity: 1, //透明度
 			zIndex: 0, //叠加层级
-		});
+		})
 		map.value = new AMap.Map('twomapcontainer', {
 			//设置地图容器id
 			viewMode: '2d', //是否为3D地图模式
 			zoom: 15, //初始化地图级别
 			layers: [layer],
 			// center: [105.602725, 37.076636], //初始化地图中心点位置
-		});
-	});
-};
+		})
+	})
+}
 
 //------------
 onMounted(() => {
-	initMap();
-});
+	initMap()
+})
 </script>
 <style lang="scss" scoped>
 #twomapcontainer {

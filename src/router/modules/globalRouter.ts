@@ -1,5 +1,5 @@
-import { RouteRecordRaw } from 'vue-router';
-import { HOME_URL, LOGIN_URL } from '@/config/config';
+import { RouteRecordRaw } from 'vue-router'
+import { HOME_URL, LOGIN_URL } from '@/config/config'
 export const globalRouter: RouteRecordRaw[] = [
 	{
 		path: '/layout',
@@ -55,4 +55,4 @@ export const globalRouter: RouteRecordRaw[] = [
 			},
 		],
 	},
-];
+]

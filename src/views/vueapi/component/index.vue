@@ -13,29 +13,29 @@
 </template>
 
 <script lang="ts" setup>
-import { provide, ref } from 'vue';
-import childrenVue from './children.vue';
-import childVue from './child.vue';
-import childrentwo from './childrentwo.vue';
-const num = ref(112312);
-const num2 = ref<Number>(112312);
-const valuestr = ref('v-model 传输');
-const childrenParent = ref();
-const title = ref('title');
+import { provide, ref } from 'vue'
+import childrenVue from './children.vue'
+import childVue from './child.vue'
+import childrentwo from './childrentwo.vue'
+const num = ref(112312)
+const num2 = ref<Number>(112312)
+const valuestr = ref('v-model 传输')
+const childrenParent = ref()
+const title = ref('title')
 // $attrs
-const time = ref(new Date());
+const time = ref(new Date())
 const aclick = () => {
-	console.log('22222');
-};
-const str = ref('str');
-provide('msg', 'msg');
+	console.log('22222')
+}
+const str = ref('str')
+provide('msg', 'msg')
 const numclick = (val: any) => {
-	childrenParent.value = val;
-};
+	childrenParent.value = val
+}
 
 function fatherFun(n: number) {
-	console.log('父组件函数,接收到子组件的值为：', n);
-	num2.value = n;
+	console.log('父组件函数,接收到子组件的值为：', n)
+	num2.value = n
 }
 </script>
 <style lang="scss" scoped></style>

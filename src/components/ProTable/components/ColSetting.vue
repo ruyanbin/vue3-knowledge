@@ -21,16 +21,16 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { ColumnProps } from '@/components/ProTable/interface';
-defineProps<{ colSetting: ColumnProps[] }>();
-const drawerVisible = ref<boolean>(false);
+import { ref } from 'vue'
+import { ColumnProps } from '@/components/ProTable/interface'
+defineProps<{ colSetting: ColumnProps[] }>()
+const drawerVisible = ref<boolean>(false)
 // 打开列设置
 const openColSetting = () => {
-	drawerVisible.value = true;
-};
+	drawerVisible.value = true
+}
 defineExpose({
 	openColSetting,
-});
+})
 </script>
 <style lang="scss" scoped></style>

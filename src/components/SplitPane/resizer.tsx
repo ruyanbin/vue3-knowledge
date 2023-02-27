@@ -1,5 +1,5 @@
-import { defineComponent, computed, unref } from 'vue';
-import './resizer.css';
+import { defineComponent, computed, unref } from 'vue'
+import './resizer.css'
 
 export default defineComponent({
 	name: 'Resizer',
@@ -15,9 +15,9 @@ export default defineComponent({
 	},
 	setup(props) {
 		const classes = computed(() => {
-			return ['splitter-pane-resizer', props.split, props.className].join(' ');
-		});
+			return ['splitter-pane-resizer', props.split, props.className].join(' ')
+		})
 
-		return () => <div class={unref(classes)}></div>;
+		return () => <div class={unref(classes)}></div>
 	},
-});
+})

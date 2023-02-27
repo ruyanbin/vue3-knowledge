@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import * as echarts from 'echarts';
-import { useEcharts } from '@/hooks/useEcharts';
-const echartsRef = ref<HTMLElement>();
+import { ref, onMounted } from 'vue'
+import * as echarts from 'echarts'
+import { useEcharts } from '@/hooks/useEcharts'
+const echartsRef = ref<HTMLElement>()
 onMounted(() => {
-	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement);
+	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement)
 	let option: echarts.EChartsOption = {
 		tooltip: {
 			trigger: 'item',
@@ -88,8 +88,8 @@ onMounted(() => {
 				],
 			},
 		],
-	};
-	useEcharts(myChart, option);
-});
+	}
+	useEcharts(myChart, option)
+})
 </script>
 <style lang="scss" scoped></style>

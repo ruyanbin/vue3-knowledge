@@ -3,12 +3,12 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, onMounted } from 'vue';
-import * as echarts from 'echarts';
-import { useEcharts } from '@/hooks/useEcharts';
-const echartsRef = ref<HTMLElement>();
+import { ref, onMounted } from 'vue'
+import * as echarts from 'echarts'
+import { useEcharts } from '@/hooks/useEcharts'
+const echartsRef = ref<HTMLElement>()
 onMounted(() => {
-	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement);
+	let myChart: echarts.ECharts = echarts.init(echartsRef.value as HTMLElement)
 	let option: echarts.EChartsOption = {
 		title: {
 			text: 'Stacked Area Chart',
@@ -104,8 +104,8 @@ onMounted(() => {
 				data: [820, 932, 901, 934, 1290, 1330, 1320],
 			},
 		],
-	};
-	useEcharts(myChart, option);
-});
+	}
+	useEcharts(myChart, option)
+})
 </script>
 <style lang="s" scoped></style>

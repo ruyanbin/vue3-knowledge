@@ -17,48 +17,48 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, computed, watch } from 'vue';
-import { useRoute, useRouter } from 'vue-router';
-import { GlobalStore } from '@/stores';
-import { TabsStore } from '@/stores/modules/tabs';
-import { TabsPaneContext } from 'element-plus';
-import MoreButton from './components/MoreButton.vue';
-import { HomeFilled } from '@element-plus/icons-vue';
-const route = useRoute();
-const router = useRouter();
-const tabStore = TabsStore();
-const globalStore = GlobalStore();
-const tabsMenuValue = ref(route.path);
-const tabsMenuList = computed(() => tabStore.tabsMenuList);
-const themeConfig = computed(() => globalStore.themeConfig);
+import { ref, computed, watch } from 'vue'
+import { useRoute, useRouter } from 'vue-router'
+import { GlobalStore } from '@/stores'
+import { TabsStore } from '@/stores/modules/tabs'
+import { TabsPaneContext } from 'element-plus'
+import MoreButton from './components/MoreButton.vue'
+import { HomeFilled } from '@element-plus/icons-vue'
+const route = useRoute()
+const router = useRouter()
+const tabStore = TabsStore()
+const globalStore = GlobalStore()
+const tabsMenuValue = ref(route.path)
+const tabsMenuList = computed(() => tabStore.tabsMenuList)
+const themeConfig = computed(() => globalStore.themeConfig)
 // 监听路由的变化（防止浏览器后退/前进不变化 tabsMenuValue）
 watch(
 	() => route.path,
 	() => {
-		tabsMenuValue.value = route.path;
-		console.log(route, 'route');
+		tabsMenuValue.value = route.path
+		console.log(route, 'route')
 		const tabsParams = {
 			icon: route.meta.icon as string,
 			title: route.meta.title as string,
 			path: route.path,
 			close: !route.meta.isAffix,
-		};
-		tabStore.addTabs(tabsParams);
+		}
+		tabStore.addTabs(tabsParams)
 	},
 	{
 		immediate: true,
 	}
-);
+)
 // Tab Click
 const tabClick = (tabItem: TabsPaneContext) => {
-	let path = tabItem.props.name as string;
-	router.push(path);
-};
+	let path = tabItem.props.name as string
+	router.push(path)
+}
 
 // Remove Tab
 const tabRemove = (activeTabPath: string) => {
-	tabStore.removeTabs(activeTabPath, activeTabPath == route.path);
-};
+	tabStore.removeTabs(activeTabPath, activeTabPath == route.path)
+}
 </script>
 <style scoped lang="scss">
 @import './index.scss';

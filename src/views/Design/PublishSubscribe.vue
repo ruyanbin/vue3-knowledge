@@ -13,7 +13,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const text = ref(`::: tip 定义
   订阅者（Subscriber）把自己想订阅的事件 注册（Subscribe）到调度中心（Event Channel）
@@ -29,7 +29,7 @@ off 方法 - 可以根据event事件类型取消订阅(取消订阅)
 :::
 
 
-`);
+`)
 const jsstr: string = `
 
 	/**
@@ -86,10 +86,10 @@ const jsstr: string = `
 		});
 	}
 }
-`;
+`
 const handleCopyCodeSuccess = (code: any) => {
-	console.log(code);
-};
+	console.log(code)
+}
 </script>
 <style lang="scss" scoped>
 .overflow-auto {

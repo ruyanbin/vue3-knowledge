@@ -5,6 +5,6 @@
 </template>
 
 <script lang="ts" setup>
-const text = ref('');
+const text = ref('')
 </script>
 <style lang="scss" scoped></style>

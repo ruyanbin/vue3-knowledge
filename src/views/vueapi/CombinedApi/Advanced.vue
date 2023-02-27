@@ -132,22 +132,22 @@ const tableData = [
 		Advantages: '',
 		Code: ``,
 	},
-];
+]
 interface User {
-	api: string;
-	Description: string;
-	Code: string;
-	Different?: string;
-	Advantages?: string;
+	api: string
+	Description: string
+	Code: string
+	Different?: string
+	Advantages?: string
 }
 const tableRowClassName = ({ row, rowIndex }: { row: User; rowIndex: number }) => {
 	if (rowIndex === 1) {
-		return 'warning-row';
+		return 'warning-row'
 	} else if (rowIndex === 3) {
-		return 'success-row';
+		return 'success-row'
 	}
-	return '';
-};
+	return ''
+}
 //
 </script>
 <style lang="scss" scoped></style>

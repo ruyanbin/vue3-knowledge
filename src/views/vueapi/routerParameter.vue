@@ -15,20 +15,20 @@
 </template>
 
 <script lang="ts" setup>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-const input = ref('');
-const router = useRouter();
+import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+const input = ref('')
+const router = useRouter()
 const query = () => {
-	router.push({ path: '/vuedetail', query: { input: input.value } });
-};
+	router.push({ path: '/vuedetail', query: { input: input.value } })
+}
 const queryName = () => {
-	router.push({ name: 'vuedetail', query: { input: input.value } });
-};
+	router.push({ name: 'vuedetail', query: { input: input.value } })
+}
 const paramsName = () => {
 	// router.push({ name: 'vuedetail', params: { input: input.value } });
-	router.push({ name: 'params', params: { id: 'posva' } });
-};
+	router.push({ name: 'params', params: { id: 'posva' } })
+}
 </script>
 <style lang="scss" scoped>
 .router-link-active {

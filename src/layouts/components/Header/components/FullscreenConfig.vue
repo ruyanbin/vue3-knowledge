@@ -8,11 +8,11 @@
 </template>
 
 <script lang="ts" setup>
-import IconTwotoneZoomOutMap from '~icons/ic/twotone-zoom-out-map';
-import IconTwotoneZoomInMap from '~icons/ic/twotone-zoom-in-map';
+import IconTwotoneZoomOutMap from '~icons/ic/twotone-zoom-out-map'
+import IconTwotoneZoomInMap from '~icons/ic/twotone-zoom-in-map'
 
-import { useFullscreen } from '@vueuse/core';
-const { toggle, isFullscreen } = useFullscreen();
+import { useFullscreen } from '@vueuse/core'
+const { toggle, isFullscreen } = useFullscreen()
 </script>
 <style lang="scss" scoped>
 .fullscreen {

@@ -27,48 +27,48 @@
 </template>
 
 <script setup lang="ts">
-import { computed, inject, ref } from 'vue';
-import { ElMessage } from 'element-plus';
-import { HOME_URL } from '@/config/config';
-import { GlobalStore } from '@/stores';
-import { TabsStore } from '@/stores/modules/tabs';
-import { useRoute, useRouter } from 'vue-router';
-import { Refresh, FullScreen, CircleClose, Remove, FolderDelete, ArrowDown } from '@element-plus/icons-vue';
-const route = useRoute();
-const router = useRouter();
-const tabStore = TabsStore();
-const globalStore = GlobalStore();
-const themeConfig = computed(() => globalStore.themeConfig);
-const reload = inject('refresh', Function, true);
+import { computed, inject, ref } from 'vue'
+import { ElMessage } from 'element-plus'
+import { HOME_URL } from '@/config/config'
+import { GlobalStore } from '@/stores'
+import { TabsStore } from '@/stores/modules/tabs'
+import { useRoute, useRouter } from 'vue-router'
+import { Refresh, FullScreen, CircleClose, Remove, FolderDelete, ArrowDown } from '@element-plus/icons-vue'
+const route = useRoute()
+const router = useRouter()
+const tabStore = TabsStore()
+const globalStore = GlobalStore()
+const themeConfig = computed(() => globalStore.themeConfig)
+const reload = inject('refresh', Function, true)
 
 // refresh current page
 const refresh = () => {
-	ElMessage({ type: 'success', message: '刷新当前页面 🚀' });
+	ElMessage({ type: 'success', message: '刷新当前页面 🚀' })
 	// reload.value
-	console.log(reload, 'reload');
-	reload();
-};
+	console.log(reload, 'reload')
+	reload()
+}
 // maximize current page
 const maximize = () => {
-	globalStore.setThemeConfig({ ...themeConfig.value, maximize: true });
-};
+	globalStore.setThemeConfig({ ...themeConfig.value, maximize: true })
+}
 
 // Close Current
 const closeCurrentTab = () => {
-	if (route.meta.isAffix) return;
-	tabStore.removeTabs(route.path);
-};
+	if (route.meta.isAffix) return
+	tabStore.removeTabs(route.path)
+}
 
 // Close Other
 const closeOtherTab = () => {
-	tabStore.closeMultipleTab(route.path);
-};
+	tabStore.closeMultipleTab(route.path)
+}
 
 // Close All
 const closeAllTab = () => {
-	tabStore.closeMultipleTab();
-	router.push(HOME_URL);
-};
+	tabStore.closeMultipleTab()
+	router.push(HOME_URL)
+}
 </script>
 
 <style scoped lang="scss">

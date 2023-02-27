@@ -8,28 +8,28 @@
 </template>
 
 <script lang="ts" setup>
-import { isProxy, isRef, nextTick, onMounted, reactive, ref, unref } from 'vue';
-import { getMenulist } from './api';
+import { isProxy, isRef, nextTick, onMounted, reactive, ref, unref } from 'vue'
+import { getMenulist } from './api'
 const state = reactive({
 	data: [],
-});
-const num = ref(0);
-const tableData: any[] = reactive([]);
-console.log(isRef(tableData), 'tableData');
-console.log(isProxy(tableData), 'tableData---reactive');
-console.log(unref(tableData), 'tableData---unref');
-console.log(unref(num), 'tableData---unref--ref');
+})
+const num = ref(0)
+const tableData: any[] = reactive([])
+console.log(isRef(tableData), 'tableData')
+console.log(isProxy(tableData), 'tableData---reactive')
+console.log(unref(tableData), 'tableData---unref')
+console.log(unref(num), 'tableData---unref--ref')
 
 const getlist = async () => {
-	const res: any = await getMenulist({});
+	const res: any = await getMenulist({})
 
-	state.data = res.data.datalist;
-	console.log(state.data, 'tableData');
-};
+	state.data = res.data.datalist
+	console.log(state.data, 'tableData')
+}
 onMounted(() => {
 	nextTick(() => {
-		getlist();
-	});
-});
+		getlist()
+	})
+})
 </script>
 <style lang="scss" scoped></style>

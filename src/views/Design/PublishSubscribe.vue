@@ -8,13 +8,12 @@
 			</template>
 			<v-md-editor :model-value="text" mode="preview"></v-md-editor>
 			<v-md-editor :model-value="jsstr" mode="preview"></v-md-editor>
-
 		</el-card>
-
 	</div>
 </template>
 
-<script lang='ts' setup>import { ref } from 'vue';
+<script lang="ts" setup>
+import { ref } from 'vue';
 
 const text = ref(`::: tip 定义
   订阅者（Subscriber）把自己想订阅的事件 注册（Subscribe）到调度中心（Event Channel）
@@ -30,7 +29,7 @@ off 方法 - 可以根据event事件类型取消订阅(取消订阅)
 :::
 
 
-`)
+`);
 const jsstr: string = `
 
 	/**
@@ -87,12 +86,12 @@ const jsstr: string = `
 		});
 	}
 }
-`
+`;
 const handleCopyCodeSuccess = (code: any) => {
 	console.log(code);
-}
+};
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 .overflow-auto {
 	height: 100%;
 	width: 100%;

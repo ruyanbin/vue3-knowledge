@@ -15,20 +15,20 @@ export const list = [
     }
   },
 	// 可视化
-	{
-		"path": "/Visualization",
-		"name": "Visualization",
-		"component": "/Visualization/index",
-		"meta": {
-			"icon": "Histogram",
-			"title": "数据大屏",
-			"isLink": "",
-			"isHide": false,
-			"isFull": true,
-			"isAffix": false,
-			"isKeepAlive": true
-		}
-	},
+	// {
+	// 	"path": "/Visualization",
+	// 	"name": "Visualization",
+	// 	"component": "/Visualization/index",
+	// 	"meta": {
+	// 		"icon": "Histogram",
+	// 		"title": "数据大屏",
+	// 		"isLink": "",
+	// 		"isHide": false,
+	// 		"isFull": true,
+	// 		"isAffix": false,
+	// 		"isKeepAlive": true
+	// 	}
+	// },
 	//  layout
 	 {
 	  path:"",

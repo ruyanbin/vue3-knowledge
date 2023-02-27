@@ -30,78 +30,73 @@
 	</div>
 </template>
 
-<script lang='ts' >
-import { defineComponent, onMounted, onUnmounted, reactive } from 'vue'
-import chart from "./chart/index"
+<script lang="ts">
+import { defineComponent, onMounted, onUnmounted, reactive } from 'vue';
+import chart from './chart/index';
 export default defineComponent({
-	name: "CenterLeft1",
+	name: 'CenterLeft1',
 	components: {
-		chart
+		chart,
 	},
 	setup() {
 		// 下层数据
 		const dataArr = [
 			{
 				number: 150,
-				text: '今日构建总量'
+				text: '今日构建总量',
 			},
 			{
 				number: 144,
-				text: '总共完成数量'
+				text: '总共完成数量',
 			},
 			{
 				number: 361,
-				text: '正在编译数量'
+				text: '正在编译数量',
 			},
 			{
 				number: 571,
-				text: '未通过数量'
-			}
-		]
+				text: '未通过数量',
+			},
+		];
 		// 对应图标
-		const iconFont = [
-			'icon-diagnose',
-			'icon-monitoring',
-			'icon-cloudupload',
-			'icon-clouddownload'
-		]
-		const numberData = reactive<any[]>([])
-		let intervalInstance = null
+		const iconFont = ['icon-diagnose', 'icon-monitoring', 'icon-cloudupload', 'icon-clouddownload'];
+		const numberData = reactive<any[]>([]);
+		let intervalInstance = null;
 		const setData = () => {
-			dataArr.forEach(e => {
+			dataArr.forEach((e) => {
 				numberData.push({
 					config: {
 						number: [e.number],
 						toFixed: 1,
 						content: '{nt}',
 						style: {
-							fontSize: 24
-						}
+							fontSize: 24,
+						},
 					},
-					text: e.text
-				})
-			})
-		}
+					text: e.text,
+				});
+			});
+		};
 		const changeTiming = () => {
 			intervalInstance = setInterval(() => {
-				changeNumber()
-			}, 2000)
-		}
+				changeNumber();
+			}, 2000);
+		};
 		const changeNumber = () => {
 			numberData.forEach((item, index) => {
-				item.config.number[0] += ++index
-				item.config = { ...item.config }
-			})
-		}
+				item.config.number[0] += ++index;
+				item.config = { ...item.config };
+			});
+		};
 		onMounted(() => {
-			setData()
-			changeTiming()
-		})
-		return { numberData, iconFont }
-	}
-})
+			setData();
+			changeTiming();
+		});
+		return { numberData, iconFont };
+	},
+});
 </script>
-<style lang='scss' scoped>
+<style lang="scss" scoped>
 $box-width: 300px;
 $box-height: 410px;
 
@@ -135,7 +130,7 @@ $box-height: 410px;
 
 	.bottom-data {
 		.item-box {
-			&>div {
+			& > div {
 				padding-right: 5px;
 			}
 

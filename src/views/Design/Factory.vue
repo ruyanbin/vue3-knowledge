@@ -8,11 +8,10 @@
 
 		<v-md-editor :model-value="Example" mode="preview"></v-md-editor>
 		<v-md-editor :model-value="text" mode="preview"></v-md-editor>
-
 	</el-card>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { reactive, ref } from 'vue';
 const text = ref(`::: tip 说明
 根据不同的输入返回不同类的实例，一般用来创建同一类对象
@@ -25,7 +24,7 @@ const text = ref(`::: tip 说明
 ::: tip 说明工厂模式与模板方法模式的主要区别是：
 工厂模式主要关注产品实例的创建，对创建流程封闭起来；
 模板方法模式 主要专注的是为固定的算法骨架提供某些步骤的实现；
-:::`)
+:::`);
 const Example = ref(`
 	var lev=function(){
 		return "嘿哈";
@@ -74,9 +73,6 @@ const Example = ref(`
 			console.log(this.type + this.message)
 			}
 		}
-`)
-
+`);
 </script>
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

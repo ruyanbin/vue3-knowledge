@@ -40,7 +40,6 @@
 			</div>
 		</div>
 	</div>
-
 </template>
 
 <script lang="ts">
@@ -48,10 +47,10 @@ import { defineComponent, ref, reactive, onMounted, onUnmounted } from 'vue';
 import { formatTime } from '@/hooks/view/useTimeRex';
 import useDraw from '@/hooks/view/useDraw';
 import { WEEK, title, subtitle, moduleInfo } from './utils/index';
-import CenterLeft1 from './components/centerLeft1/index.vue'
+import CenterLeft1 from './components/centerLeft1/index.vue';
 export default defineComponent({
 	components: {
-		CenterLeft1
+		CenterLeft1,
 	},
 	setup() {
 		// * 颜色
@@ -68,7 +67,7 @@ export default defineComponent({
 		});
 		// todo 处理时间监听
 		const handleTime = () => {
-			clearInterval(timeInfo.setInterval)
+			clearInterval(timeInfo.setInterval);
 			timeInfo.setInterval = window.setInterval(() => {
 				const date = new Date();
 				timeInfo.dateDay = formatTime(date, 'HH: mm: ss');
@@ -77,16 +76,16 @@ export default defineComponent({
 			}, 1000);
 		};
 		onUnmounted(() => {
-			unWindowDraw()
-			clearInterval(timeInfo.setInterval)
-		})
+			unWindowDraw();
+			clearInterval(timeInfo.setInterval);
+		});
 		//生命周期
 		onMounted(() => {
-			handleTime()
+			handleTime();
 			// todo 屏幕适应
-			windowDraw()
-			calcRate()
-		})
+			windowDraw();
+			calcRate();
+		});
 		return {
 			timeInfo,
 			appRef,

@@ -42,7 +42,7 @@ const router = createRouter({
  * */
 router.beforeEach(async (to, from, next) => {
 	// 路由跳转要清除之前所有的请求缓存
-	CancelToken.clearPending()
+	CancelToken.clearPending();
 	// 1.NProgress 开始
 	NProgress.start();
 

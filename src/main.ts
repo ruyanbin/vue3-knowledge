@@ -19,7 +19,7 @@ import '@/assets/style/global.scss';
 import '@/assets/style/common.scss';
 import '@/assets/style/vuestyle.scss';
 //
-import dataV from '@jiaminghi/data-view';
+// import dataV from '@jiaminghi/data-view';
 // mock
 import '../mock/index';
 // custom directives
@@ -34,7 +34,7 @@ import plugins from '@/plugins/main/index';
 const app = createApp(App);
 app.use(router);
 app.use(pinia);
-app.use(dataV);
+// app.use(dataV);
 app.use(directives);
 app.use(ElementPlus);
 app.use(plugins);

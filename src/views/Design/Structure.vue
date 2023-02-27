@@ -7,11 +7,10 @@
 		</template>
 		<v-md-editor :model-value="Example" mode="preview"></v-md-editor>
 		<v-md-editor :model-value="text" mode="preview"></v-md-editor>
-
 	</el-card>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { ref } from 'vue';
 
 const text = ref(`::: tip 说明：
@@ -19,7 +18,7 @@ const text = ref(`::: tip 说明：
 		2.同工厂模式一样，虽然属性的值可以为方法，仍建议该方法定义在函数之外
 		3.不推荐使用，但需要了解
 :::
-`)
+`);
 const Example = `
 
 		var lev = function () {
@@ -32,9 +31,6 @@ const Example = `
 		};
 		var x = Parent()
 
-`
-
+`;
 </script>
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

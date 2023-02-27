@@ -8,11 +8,10 @@
 		<v-md-editor :model-value="Example" mode="preview"></v-md-editor>
 		<v-md-editor :model-value="text" mode="preview"></v-md-editor>
 		<v-md-editor :model-value="Expand" mode="preview"></v-md-editor>
-
 	</el-card>
 </template>
 
-<script lang='ts' setup>
+<script lang="ts" setup>
 import { ref } from 'vue';
 
 const text = ref(`::: tip 说明:	
@@ -20,7 +19,7 @@ const text = ref(`::: tip 说明:
 		2.利用prototype属性对属性进行定义	
 		3.用同一个原型new出来的实例，拥有相同的原型上的属性和方法。
 		4.用构造函数创建函数时不可以使用箭头函数。
-`)
+`);
 const Example = `
 
 		function Person () {
@@ -36,12 +35,10 @@ const Example = `
 		person2.sayName();                                        // marry
 		console.log(person1.sayName === person2.sayName);         // true
 
-`
+`;
 const Expand = ref(`::: tip 拓展
 用构造函数创建函数时不可以使用箭头函数。
 :::
-`)
+`);
 </script>
-<style lang='scss' scoped>
-
-</style>
+<style lang="scss" scoped></style>

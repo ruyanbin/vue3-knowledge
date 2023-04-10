@@ -87,6 +87,65 @@ export const list = [
       },
     ]
   },
+	{
+	  path:"/typescript",
+    name: "typescript",
+    meta: {
+      icon: "TrendCharts",
+      title: "ts 学习",
+      isLink: "",
+      isHide: false,
+      isFull: false,
+      isAffix: false,
+      isKeepAlive: true
+    },
+    children: [
+			{
+				name: "typescriptIndex",
+        component: "/typescript/basics/index",
+        path: "/typescript/basics/index",
+        meta: {
+          icon: "Menu",
+          title: "ts 基础语法",
+          isLink: "",
+          isHide: false,
+          isFull: false,
+          isAffix: false,
+          isKeepAlive: false
+        },
+      },
+    ]
+  },
+		//  css
+		{
+			path:"/css",
+			name: "css",
+			meta: {
+				icon: "TrendCharts",
+				title: "css 总结",
+				isLink: "",
+				isHide: false,
+				isFull: false,
+				isAffix: false,
+				isKeepAlive: true
+			},
+			children: [
+				{
+					name: "position",
+					component: "/css/position",
+					path: "/css/position",
+					meta: {
+						icon: "Menu",
+						title: "定位",
+						isLink: "",
+						isHide: false,
+						isFull: false,
+						isAffix: false,
+						isKeepAlive: false
+					},
+				},
+			]
+		},
 		//  设计模式
 	 {
 	  path:"/Design",

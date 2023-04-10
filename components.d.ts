@@ -69,6 +69,7 @@ declare module '@vue/runtime-core' {
     SwitchDark: typeof import('./src/components/SwitchDark/index.vue')['default']
     TableColumn: typeof import('./src/components/ProTable/components/TableColumn.vue')['default']
     TreeFilter: typeof import('./src/components/TreeFilter/index.vue')['default']
+    Uicomponent: typeof import('./src/components/uicomponent/index.vue')['default']
     WangEditor: typeof import('./src/components/WangEditor/index.vue')['default']
   }
 }
